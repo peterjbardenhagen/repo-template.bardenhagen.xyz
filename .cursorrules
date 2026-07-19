@@ -1,0 +1,59 @@
+// Cursor AI Rules — https://cursor.com
+// These rules configure how Cursor's AI behaves in this project.
+
+// TL;DR: Read AGENTS.md first, follow agentic SDLC protocol, commit frequently.
+
+@rules = [
+  // Always read project context first
+  (file == "AGENTS.md") => "Must read AGENTS.md at session start for master agent instructions",
+  (file == "AI_CONTEXT.md") => "Read for fast project orientation",
+  (file == "CLAUDE.md") => "Claude-specific configuration for this project",
+  
+  // Agentic SDLC workflow
+  (action == "start_session") => {
+    "instructions": [
+      "Read AGENTS.md, AI_CONTEXT.md, and .cursorrules",
+      "Run git pull --ff-only to sync with origin"
+    ]
+  },
+  
+  (action == "before_commit") => {
+    "instructions": [
+      "Run linter and fix any issues",
+      "Run tests to verify nothing is broken",
+      "Use conventional commit format: type(scope): description"
+    ]
+  },
+  
+  // Code quality
+  (language == "javascript" || language == "typescript") => {
+    "style": "Use modern ES2022+ features",
+    "format": "Follow .prettierrc configuration",
+    "testing": "Write tests alongside implementation code"
+  },
+  
+  (language == "csharp") => {
+    "style": "Use C# 12+ features, file-scoped namespaces",
+    "testing": "Write xUnit tests alongside implementation"
+  },
+  
+  (language == "python") => {
+    "style": "Use Python 3.11+ features, type hints",
+    "testing": "Write pytest tests alongside implementation"
+  },
+  
+  // Documentation
+  (action == "create_new_file") => {
+    "public_api_docs": "Document all public functions, classes, and exports"
+  },
+  
+  (action == "architectural_decision") => {
+    "record_adr": "Create an ADR in docs/decisions/ for significant architectural choices"
+  },
+  
+  // Security
+  (pattern == "*secret*" || pattern == "*password*" || pattern == "*token*" || pattern == "*key*") => {
+    "warning": "Never commit secrets, passwords, tokens, or API keys",
+    "action": "Add to .env.example instead, ensure .env is in .gitignore"
+  }
+]

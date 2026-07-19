@@ -1,0 +1,9 @@
+# Set addAssignees to 'true' to add reviewers
+addAssignees: false
+
+# Usernames or team names of reviewers
+reviewers:
+  - peterjbardenhagen
+
+# Number of reviewers to add (0 to add all)
+numberOfReviewers: 1

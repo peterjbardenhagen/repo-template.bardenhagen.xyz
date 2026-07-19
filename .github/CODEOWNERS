@@ -1,0 +1,27 @@
+# CODEOWNERS — Code ownership and review routing
+# Each line is a file pattern followed by one or more owners.
+# The owners are automatically requested for review when a PR changes those files.
+
+# Default owner for everything
+* @peterjbardenhagen
+
+# Core configuration files
+AGENTS.md @peterjbardenhagen
+CLAUDE.md @peterjbardenhagen
+CODEX.md @peterjbardenhagen
+AI_CONTEXT.md @peterjbardenhagen
+.cursorrules @peterjbardenhagen
+.windsurfrules @peterjbardenhagen
+
+# GitHub configuration
+.github/ @peterjbardenhagen
+
+# Documentation
+docs/*.md @peterjbardenhagen
+docs/decisions/ @peterjbardenhagen
+
+# Rules
+rules/ @peterjbardenhagen
+
+# Scripts
+scripts/ @peterjbardenhagen

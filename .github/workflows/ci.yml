@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up environment
+        run: echo "Set up your language runtime here"
+      - name: Lint
+        run: echo "Add linter command here — e.g., npm run lint"
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up environment
+        run: echo "Set up your language runtime here"
+      - name: Install dependencies
+        run: echo "Add install command here — e.g., npm ci"
+      - name: Run tests
+        run: echo "Add test command here — e.g., npm test"
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up environment
+        run: echo "Set up your language runtime here"
+      - name: Install dependencies
+        run: echo "Add install command here"
+      - name: Build
+        run: echo "Add build command here"

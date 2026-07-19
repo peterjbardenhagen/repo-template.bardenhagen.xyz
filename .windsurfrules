@@ -1,0 +1,13 @@
+// Windsurf AI Rules
+// These rules configure how Windsurf's AI behaves in this project.
+
+1. Read AGENTS.md at session start for master agent instructions
+2. Read AI_CONTEXT.md for quick project orientation
+3. Run git pull --ff-only before making any changes
+4. Follow conventional commit format: type(scope): description
+5. Run tests before considering work done
+6. Write tests alongside implementation code
+7. Document public APIs
+8. Never commit secrets — use .env.example instead
+9. Update CHANGELOG.md with significant changes
+10. Create ADRs in docs/decisions/ for architectural decisions
