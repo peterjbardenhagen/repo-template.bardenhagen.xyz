@@ -1,5 +1,5 @@
 blank_issues_enabled: false
 contact_links:
   - name: Security Issue
-    url: https://github.com/peterjbardenhagen/perfect-repo-template-pjb/security
+    url: https://github.com/peterjbardenhagen/repo-template.bardenhagen.xyz/security
     about: Report a security vulnerability

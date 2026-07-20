@@ -1,57 +1,183 @@
-# Agentic SDLC (Autonomous Development Lifecycle)
+# Agentic AI SDLC Protocol
 
-Operational protocol for running project development as an unattended, self-checkpointing agent loop. This is the core workflow that all AI agents in this repository follow.
+## Overview
 
-## Operating Principles
+The **Agentic AI SDLC** is a multi-agent, file-driven software development lifecycle designed for AI coding agents. It replaces traditional human-centric processes (standups, sprint planning, manual code review) with role-based agent orchestration while keeping humans in the loop for strategic decisions.
 
-- **Single prompt does not survive long runs.** Context windows and rate limits cap any one session. The shell drives the loop; the model is a stateless worker that runs once per iteration.
-- **State lives in files, not in model memory.** Every iteration reads `PROGRESS.md`, does one chunk of work, and writes status back. Between iterations the model forgets everything.
-- **Checkpoint after every phase.** Commit at least at the end of each logical phase. This keeps `git pull --ff-only` able to fast-forward and gives a recoverable history if an iteration goes wrong.
-- **Non-blocking first.** If a task is blocked (missing dependency, needs a human decision, external service), write it to `BLOCKERS.md` and move to the next non-blocking task. Never stall the loop waiting for input.
-- **Pull before working.** Sync from origin at the start of every iteration so the tree is current before changes are made.
-- **No fake completion.** Never mark a phase done that is not actually complete. Blocked or partial work goes to `BLOCKERS.md` with honest scope.
-- **Read context first.** Always read `AGENTS.md`, `CLAUDE.md`, and `AI_CONTEXT.md` at session start.
+## Core Principles
 
-## Loop Contract
+1. **State lives in files, not in model memory** — Every decision, ADR, spec, and progress update is written to a file. AI agents never assume the next session remembers what they did.
+2. **Roles are specialised** — Each agent role has its own rule file (`rules/`) with domain-specific knowledge. An architect doesn't need testing rules and a tester doesn't need architecture rules.
+3. **Handoffs are explicit** — Agents hand work to each other via files and kanban board transitions, not conversation context.
+4. **Pull before push** — Always sync from origin before making changes. Divergence is the enemy of autonomous work.
+5. **Humans review strategy, agents execute tactics** — Strategic decisions (architecture, API design, pricing) go to humans. Implementation, testing, and deployment are agent-owned.
 
-Each iteration performs exactly:
+## The Agentic Workflow
 
-1. `git pull --ff-only origin <default-branch>` — sync; if not fast-forwardable, skip the iteration (do not create merge commits).
-2. Read `AGENTS.md`, `AI_CONTEXT.md`, `PROGRESS.md` and `BLOCKERS.md`.
-3. Pick the next non-blocked task from the plan.
-4. Do the work. Run the relevant checks (linter, tests, build) before considering it done.
-5. Write progress to `PROGRESS.md`. If blocked, append to `BLOCKERS.md`.
-6. `git add -A && git commit -m "<type>(<scope>): <summary>"`.
-7. Push changes.
-8. Sleep the configured interval, then repeat until the time budget or the `PROGRESS.md` DONE marker is reached.
+### Solo Agent Cycle
 
-## State Files
-
-- **`PROGRESS.md`** — Source of truth. Lists plan phases, status per phase (`pending` / `in_progress` / `done`), and the last completed step. The loop stops when it reads a `DONE` marker.
-- **`BLOCKERS.md`** — Tasks that cannot proceed without a human, an external dependency, or a decision out of scope. Re-checked each iteration; cleared when resolved.
-
-## Commit Convention
+A single AI agent follows this loop for autonomous feature development:
 
 ```
-type(scope): description
-
-Types: feat, fix, chore, docs, refactor, test, style, perf, ci, build
+┌──────────────┐    ┌──────────────┐    ┌──────────────┐    ┌──────────────┐    ┌──────────────┐
+│  1. READ     │    │  2. ORIENT   │    │  3. PLAN     │    │  4. EXECUTE  │    │  5. VERIFY   │
+│  CONTEXT     │───▶│              │───▶│              │───▶│              │───▶│              │
+│              │    │              │    │              │    │              │    │              │
+│ AGENTS.md    │    │ git pull     │    │ State        │    │ Code one     │    │ Run tests    │
+│ CLAUDE.md    │    │ Check issues │    │ approach     │    │ change at a  │    │ Run linter   │
+│ AI_CONTEXT.md│    │ Check PRs    │    │ Write ADR?   │    │ time         │    │ Build check  │
+│ .cursorrules │    │ Read docs/   │    │              │    │ Commit with  │    │              │
+└──────────────┘    └──────────────┘    └──────────────┘    │ conventional │    │ Update       │
+       ▲                                                    │ commit       │    │ CHANGELOG.md │
+       └────────────────────────────────────────────────────┴──────────────┘    └──────┬───────┘
+                                                                                       │
+                                                                             ┌─────────▼─────────┐
+                                                                             │  6. DELIVER       │
+                                                                             │                   │
+                                                                             │ Push → PR → Merge │
+                                                                             └───────────────────┘
 ```
 
-## Agent Roles
+### Multi-Agent Handoff Pipeline
 
-This template defines role-based agent skills in `rules/`:
+For complex work, specialised agents hand off through a pipeline:
 
-| Role | File | Focus |
-|------|------|-------|
-| Architect | `rules/01-architect.md` | System design, technology decisions, ADRs |
-| Coder | `rules/02-coder.md` | Feature implementation, bug fixes |
-| Reviewer | `rules/03-reviewer.md` | Code review, quality gates |
-| Tester | `rules/04-tester.md` | Test strategy, automation |
-| DevOps | `rules/05-devops.md` | Infrastructure, CI/CD, deployment |
+```
+Phase 1         Phase 2          Phase 3          Phase 4           Phase 5
+────────        ────────         ────────         ────────          ────────
+ARCHITECT ──▶   CODER ──────▶    REVIEWER ───▶    TESTER ─────▶    DEVOPS
+  Create        Implement         Review           Add/verify        Deploy
+  ADR           feature           code             tests             to prod
+  Design        in small          against          All tests         Monitor
+  API/DTOs      commits           quality gates    must pass         Rollback?
+```
 
-## Related
+Each handoff produces an artifact (ADR, code, PR, test report) that the next agent reads from the filesystem, not from memory.
 
-- `docs/decisions/` — Architecture Decision Records
-- `docs/architecture.md` — System architecture documentation
-- `rules/` — Role-specific agent skill files
+### Agent-to-Agent Communication Protocol
+
+```
+┌───────────────────┐              ┌──────────────────────┐
+│  Source Agent     │              │  Target Agent        │
+│                   │              │                      │
+│  Writes:          │              │  Reads:              │
+│  - ADR file       │──────────────▶  - ADR files         │
+│  - Spec document  │  file-based   │  - Spec docs         │
+│  - PR with desc   │  handoff      │  - Commit messages   │
+│  - Kanban task    │              │  - Kanban task body   │
+│  - Comment thread │              │  - Comment thread     │
+└───────────────────┘              └──────────────────────┘
+                               NO conversation memory
+                               NO what-I-told-you-last-time
+                               EVERYTHING in files
+```
+
+## File Types & Their Purpose
+
+| File Type | Purpose | Written By | Read By |
+|-----------|---------|-----------|---------|
+| ADR (`docs/decisions/`) | Architecture decisions | Architect | All agents, humans |
+| Spec (`docs/specs/`) | Feature specification | Architect | Coder |
+| PR | Code change description | Coder | Reviewer |
+| Test plan | Test strategy | Tester | All agents |
+| CI workflow | Build/test/deploy | DevOps | Everyone |
+| CHANGELOG.md | Release history | All agents | Humans, downstream |
+
+## Vercel vs Non-Vercel Deploy Strategy
+
+### Vercel-Hosted Apps
+
+```
+main ──────────────▶ Vercel auto-deploy to production
+  │
+  ├── feat/feature1 ── PR ──▶ main (squash merge)
+  └── feat/feature2 ── PR ──▶ main
+```
+
+- `main` is **always deployable** — Vercel auto-deploys it
+- Every PR gets a **preview deployment** — review before merging
+- Hotfix: commit directly to `main` (if branch protection allows) or fast PR
+
+### Non-Vercel / Manual Deploy Apps
+
+```
+main ────────────────────────────────────────── (integration branch)
+  │                                             │
+  └── release/v2.1.0 ── QA ──▶ tag v2.1.0 ──▶ deploy
+```
+
+- `main` is always green (tests pass) but not automatically deployed
+- Release branches (`release/v*`) cut from `main` for QA
+- Tags are the actual deployment artifacts
+- Hotfixes go on release branch then cherry-pick to `main`
+
+## AI / ML Project Extensions
+
+For AI/ML projects, extend the lifecycle with:
+
+```
+main
+├── experiment/hyperparam-tuning    # Temp experiments
+├── model/v2-classifier              # Model iterations
+├── data/processed-v3                # Data pipeline changes
+└── notebooks/                       # Research notebooks
+```
+
+### ML-Specific Rules
+
+- **Don't commit model weights** — use DVC or Hugging Face Hub
+- **Don't commit raw data** — use DVC with S3/Cloudflare R2
+- **Do commit experiment configs** — YAML in `configs/experiments/`
+- **Do tag training runs** — `git tag experiment/20260721-lr0.001`
+- **Do track in external system** — W&B / MLflow / Neptune
+- **Notebooks** — use `jupytext` to export `.py` alongside `.ipynb`
+
+## Multi-Agent Orchestration (AgentsOS / Kanban)
+
+When using an orchestration platform like AgentsOS:
+
+1. **Orchestrator decomposes** — A planner agent breaks the goal into kanban tasks
+2. **Specialist agents execute** — Each task picks up its role-appropriate rule file
+3. **Dependencies manage flow** — Tasks auto-promote when parent tasks complete
+4. **Blockers escalate** — Agents raise blockers for human decisions
+5. **Artifacts attach** — Output files (ADRs, PRs, test reports) attach to completed tasks
+
+### Kanban State Flow
+
+```
+triage ──▶ todo ──▶ ready ──▶ running ──▶ done
+                                    │
+                                    └──▶ blocked ──▶ ready (when unblocked)
+```
+
+Orchestrators only decompose and route. They don't implement. Specialists implement. This prevents scope creep and keeps each agent focused on its role.
+
+## Error Recovery
+
+When an agent encounters a failure:
+
+| Error | Recovery |
+|-------|----------|
+| Merge conflict | Auto-resolve (accept theirs), commit, notify |
+| Build failure | Fix, commit, retry (max 3 attempts) |
+| Test failure | Fix or roll back, commit, retry |
+| API rate limit | Backoff and retry with exponential delay |
+| Ambiguous requirement | Write question to file, block on kanban board |
+| Tool/access failure | Report as capability block, escalate to human |
+
+## Template Propagation
+
+This template updates downstream projects:
+
+```bash
+# From the template repo:
+bash scripts/propagate-template.sh /path/to/downstream-repo
+
+# The script copies:
+# - rules/ (new rules added)
+# - Agent config files (AGENTS.md, CLAUDE.md, etc.)
+# - CI/CD workflow improvements
+# - docs/ structure updates
+```
+
+Downstream repos should be rebased onto the template periodically to receive updates without losing their project-specific content.

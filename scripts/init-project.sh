@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ============================================================================
-# init-project.sh — Initialise a new project from Perfect Repo Template
+# init-project.sh — Initialise a new project from Repo Template
 # ============================================================================
 # Usage: ./scripts/init-project.sh <project-name> [project-directory]
 #
@@ -41,7 +41,7 @@ git checkout -b main
 
 # Add all files
 git add -A
-git commit -m "chore: initialise project from perfect-repo-template"
+git commit -m "chore: initialise project from repo-template"
 
 echo ""
 echo "=== Project '$PROJECT_NAME' initialised at $TARGET_DIR ==="

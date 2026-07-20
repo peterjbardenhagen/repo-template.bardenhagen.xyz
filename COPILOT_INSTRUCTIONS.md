@@ -2,7 +2,7 @@
 
 ## Project Context
 
-This project uses the Perfect Repo Template. Refer to `AGENTS.md` for master instructions.
+This project follows the Repo Template conventions. Refer to `AGENTS.md` for master instructions.
 
 ## Code Conventions
 

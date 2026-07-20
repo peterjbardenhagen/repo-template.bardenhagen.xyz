@@ -4,7 +4,7 @@
 
 ## Summary
 
-The Perfect Repo Template is a comprehensive, opinionated starter template for modern software projects that leverages AI agents throughout the Software Development Lifecycle. This is the initial release, consolidating best practices from across Peter Bardenhagen's projects into a single, reusable template.
+The Repo Template is a comprehensive, opinionated starter template for modern software projects that covers naming conventions, git workflows, and the full Agentic AI SDLC lifecycle. This is the initial release, consolidating best practices from across Peter Bardenhagen's projects into a single, reusable template.
 
 ## Key Features
 

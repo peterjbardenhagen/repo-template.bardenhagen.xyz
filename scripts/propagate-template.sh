@@ -18,7 +18,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 TEMPLATE_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
-TEMPLATE_VERSION="1.0.0"
+TEMPLATE_VERSION="2.0.0"
 
 # ============================================================================
 # Configuration — list of downstream repos to propagate to
@@ -244,7 +244,7 @@ propagate_to_repo() {
       git diff --stat
     else
       git add -A
-      git commit -m "chore: sync template updates from perfect-repo-template v${TEMPLATE_VERSION}" \
+      git commit -m "chore: sync template updates from repo-template v${TEMPLATE_VERSION}" \
         -m "Automated propagation from template version ${TEMPLATE_VERSION}." \
         -m "Template files (AI configs, rules, workflows): template overwrites project" \
         -m "Project-specific files (docs, source): project version preserved"
@@ -297,7 +297,7 @@ else
 fi
 
 echo "========================================================"
-echo "  Perfect Repo Template Propagation v${TEMPLATE_VERSION}"
+echo "  Repo Template Propagation v${TEMPLATE_VERSION}"
 echo "  Dry run: ${DRY_RUN}"
 echo "  Date:    $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
 echo "  Repos:   ${#REPOS_TO_PROCESS[@]}"

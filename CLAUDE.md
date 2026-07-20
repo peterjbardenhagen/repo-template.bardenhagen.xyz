@@ -2,11 +2,11 @@
 
 ## Project Overview
 
-This project was generated from the **Perfect Repo Template** — an agentic AI SDLC starter template. See `AGENTS.md` for master agent instructions, `AI_CONTEXT.md` for a quick project summary, and `docs/agentic-sdlc.md` for the autonomous development lifecycle protocol.
+This project was generated from the **Repo Template** (`repo-template.bardenhagen.xyz`). See `AGENTS.md` for master agent instructions, `AI_CONTEXT.md` for a quick project summary, and the README for detailed conventions and the agentic SDLC protocol.
 
 ## Tech Stack
 
-*As generated — replace with your project's actual tech stack:*
+*Replace with your project's actual tech stack:*
 - **Language/Framework:** [e.g., TypeScript/Next.js, C#/.NET, Python/FastAPI]
 - **Runtime:** [e.g., Node.js 20+, .NET 10, Python 3.11+]
 - **Database:** [e.g., PostgreSQL, SQLite, SQL Server]
@@ -48,15 +48,26 @@ docker compose down      # Stop environment
 ## Code Style
 
 - Follow existing patterns in the codebase
+- Use the project's naming conventions (see README)
 - Use meaningful variable/function names
 - Write tests for new functionality
 - Update documentation alongside code changes
 - Commit messages: `type(scope): description`
 
+## Git Workflow
+
+- Default branch is `main` — always green, always deployable
+- Feature branches: `feat/description`, `fix/description`, `chore/description`
+- Always run `git pull --ff-only origin main` before starting work
+- Rebase feature branches on main before PR
+- Squash merge PRs to main
+
 ## AI Agent Protocol
 
 1. Read AGENTS.md, CLAUDE.md, and AI_CONTEXT.md at session start
-2. Pull latest before making changes (`git pull --ff-only`)
-3. Run tests before considering work done
-4. Commit after each logical phase
-5. Update CHANGELOG.md with significant changes
+2. Pull latest before making changes (`git pull --ff-only origin main`)
+3. State approach before writing code
+4. Run tests before considering work done
+5. Commit after each logical phase (conventional commits)
+6. Update CHANGELOG.md with significant changes
+7. Push branch and create PR when done
