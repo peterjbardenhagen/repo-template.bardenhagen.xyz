@@ -133,3 +133,7 @@ This project is based on the **Repo Template** (`repo-template.bardenhagen.xyz`)
 ## Version
 
 This template is versioned. See `CHANGELOG.md` for the current version and release history.
+
+## Available Skills
+
+- **pr-auto-merge**: Automatically resolve merge conflicts, approve, merge, and delete branches for open pull requests. See `.kilo/skills/pr-auto-merge/SKILL.md`.
