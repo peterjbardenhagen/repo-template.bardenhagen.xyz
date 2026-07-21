@@ -1,0 +1,16 @@
+{
+  "name": "Repo safety — no destructive actions",
+  "target": "branch",
+  "enforcement": "active",
+  "conditions": {
+    "ref_name": {
+      "include": ["refs/heads/main", "refs/heads/master"],
+      "exclude": []
+    }
+  },
+  "rules": [
+    { "type": "non_fast_forward" },
+    { "type": "deletion" }
+  ],
+  "bypass_actors": []
+}

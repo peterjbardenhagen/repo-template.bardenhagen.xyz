@@ -1,0 +1,51 @@
+name: Security Scan
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '0 6 * * 1' # weekly, Monday 06:00 UTC
+
+jobs:
+  scan:
+    name: Security scan (fail on High)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build scan image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          load: true
+          tags: security-scan:local
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Run scan
+        run: |
+          echo "Add your scanner here — e.g. trivy, grype, npm audit --json, pip-audit"
+          echo "Write findings to scan-results.json / scan-results.txt"
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-scan-results
+          path: scan-results.*
+          if-no-files-found: ignore
+
+      - name: Summarize
+        if: always()
+        run: |
+          echo "## Security scan results" >> "$GITHUB_STEP_SUMMARY"
+          if [ -f scan-results.txt ]; then cat scan-results.txt >> "$GITHUB_STEP_SUMMARY"; fi
+
+      - name: Fail on High severity
+        run: |
+          if [ -f scan-results.txt ] && grep -qi "high" scan-results.txt; then
+            echo "High severity finding(s) detected — failing the build."
+            exit 1
+          fi
