@@ -165,6 +165,99 @@ When an agent encounters a failure:
 | Ambiguous requirement | Write question to file, block on kanban board |
 | Tool/access failure | Report as capability block, escalate to human |
 
+## Unattended Autonomous Loop
+
+When a human delegates "complete the planned work" with no further check-ins, use this protocol instead of the interactive solo-agent cycle above. It exists so an agent can run for hours without a human in the loop and still be safe and recoverable.
+
+### Operating principles
+
+- **State lives in files, not model memory.** Checkpoint progress to `PROGRESS.md` and blockers to `blockers.md` at the repo root. A new session (or a crashed/restarted one) must be able to resume purely from these files.
+- **Non-blocking first.** When a task can't proceed (missing credential, ambiguous requirement, failing external dependency), write it to `blockers.md` with enough detail for a human to act on later, then move to the next non-blocked task. Never idle waiting on a blocker.
+- **Pull before every iteration.** `git pull --ff-only origin main`. If this fails (diverged history), stop and write to `blockers.md` — do not force-push or reset.
+- **Commit at least every phase.** Small, frequent, conventional commits. A crash mid-loop should lose at most one phase of work.
+- **Auto-merge to keep `main` moving**, gated on CI passing. Do not merge on a red pipeline.
+- **Fix forward.** There is no recovery from a force-push once it lands (the `repo-safety-no-destructive-actions.json` ruleset — see `.github/rulesets/README.md` — blocks force-push and branch deletion on `main`/`master` at the platform level). If something is broken, commit a fix; never rewrite history to hide it.
+
+### Loop contract
+
+Each iteration:
+
+1. `git pull --ff-only origin main`
+2. Read `PROGRESS.md` — resume from the last checkpoint
+3. Pick the next non-blocked task
+4. Execute it (plan → code → test → lint)
+5. Commit with a conventional commit message
+6. Update `PROGRESS.md` (what changed, what's next) and, if applicable, `blockers.md`
+7. Push; if CI passes and the change is safe to land, merge to `main`
+
+### Stop conditions
+
+Stop the loop on any of:
+
+- A `DONE` marker written to `PROGRESS.md`
+- A `STOP` sentinel file present at the repo root
+- A configured time budget elapsed
+- Manual kill by a human
+
+### Launcher
+
+A simple wrapper script drives the loop with exponential backoff on consecutive failures (interval doubles up to a cap, resets on success), so a flaky iteration doesn't hot-loop or burn the whole time budget on retries.
+
+PowerShell (`scripts/start-loop.ps1`):
+
+```powershell
+param(
+    [int]$MaxIntervalSeconds = 3600,
+    [int]$InitialIntervalSeconds = 30
+)
+
+$interval = $InitialIntervalSeconds
+while (-not (Test-Path "STOP")) {
+    if (Select-String -Path "PROGRESS.md" -Pattern "^DONE$" -Quiet -ErrorAction SilentlyContinue) {
+        Write-Host "DONE marker found — stopping."
+        break
+    }
+
+    claude -p "Continue the agentic SDLC loop: read PROGRESS.md, do the next task, checkpoint, commit." --dangerously-skip-permissions
+    if ($LASTEXITCODE -eq 0) {
+        $interval = $InitialIntervalSeconds
+    } else {
+        $interval = [Math]::Min($interval * 2, $MaxIntervalSeconds)
+        Write-Host "Iteration failed — backing off to ${interval}s"
+    }
+
+    Start-Sleep -Seconds $interval
+}
+```
+
+bash mirror (`scripts/start-loop.sh`):
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+
+max_interval=3600
+interval=30
+
+while [ ! -f STOP ]; do
+    if grep -q '^DONE$' PROGRESS.md 2>/dev/null; then
+        echo "DONE marker found — stopping."
+        break
+    fi
+
+    if claude -p "Continue the agentic SDLC loop: read PROGRESS.md, do the next task, checkpoint, commit." --dangerously-skip-permissions; then
+        interval=30
+    else
+        interval=$(( interval * 2 < max_interval ? interval * 2 : max_interval ))
+        echo "Iteration failed — backing off to ${interval}s"
+    fi
+
+    sleep "$interval"
+done
+```
+
+Only use `--dangerously-skip-permissions` in a sandboxed/disposable environment — the whole point of the guardrails above (ruleset, ff-only pulls, fix-forward) is to make that safe.
+
 ## Template Propagation
 
 This template updates downstream projects:

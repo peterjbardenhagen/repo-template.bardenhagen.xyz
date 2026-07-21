@@ -39,7 +39,13 @@ This project is based on the **Repo Template** (`repo-template.bardenhagen.xyz`)
 │   ├── 03-reviewer.md     # Code review agent
 │   ├── 04-tester.md       # Testing agent
 │   └── 05-devops.md       # DevOps agent
+├── .claude/
+│   ├── agents/            # Claude Code subagents (mirror rules/ roles)
+│   ├── skills/            # Claude Code skills (empty by default)
+│   └── settings.json      # Committed permission defaults
+├── .github/rulesets/      # Branch-protection rules-as-code
 ├── .github/workflows/     # CI/CD pipelines
+├── CONTRIBUTING.md        # Human + agent contribution guide
 ├── docs/                  # Documentation
 │   ├── agentic-sdlc.md    # Agentic SDLC protocol
 │   ├── architecture.md    # Architecture documentation
@@ -48,6 +54,39 @@ This project is based on the **Repo Template** (`repo-template.bardenhagen.xyz`)
 ├── seeds/                 # Template seeds for project types
 └── templates/             # Config file templates
 ```
+
+## Anti-Patterns
+
+- **Don't create a parallel implementation.** If similar functionality already exists, extend it. If this repo has a documented history of duplicate/abandoned implementations, it lives in `archive/README.md` — read it before starting new work in a mature area of the codebase.
+- **Don't let docs drift from shipped state.** If a change affects anything user-facing (features, architecture, pricing, roadmap) and this project has a marketing site or public docs, update them in the *same* change — not a follow-up. Documentation drift is worse than a missing feature.
+
+## Architecture Decisions
+
+*Document each major stack/framework choice here with a one-line "why" — a lightweight alternative to a full ADR for decisions that don't need one:*
+
+| Choice | Why |
+|---|---|
+| *[e.g. Postgres over SQLite]* | *[e.g. concurrent writes from day one]* |
+
+## Performance Targets
+
+*Add concrete numeric targets once known — forces "fast enough" into something checkable:*
+
+| Metric | Target |
+|---|---|
+| *[e.g. p95 API latency]* | *[e.g. < 200ms]* |
+
+## Manual Testing Checklist
+
+*Things automated tests don't cover — update as the project grows:*
+
+- [ ] *[e.g. cross-browser check on the checkout flow]*
+
+## Release Process
+
+*Numbered steps per deployable artifact:*
+
+1. *[e.g. bump version, tag, `npm publish`]*
 
 ## Conventions
 
@@ -81,6 +120,15 @@ This project is based on the **Repo Template** (`repo-template.bardenhagen.xyz`)
 | CSS modules | `kebab-case` | `button.module.css` |
 | Config files | `kebab-case` | `tailwind.config.js` |
 | Environment vars | `UPPER_SNAKE` | `DATABASE_URL` |
+
+## Before You Finish
+
+- [ ] Read the relevant READMEs and `docs/` before making assumptions
+- [ ] Followed existing patterns rather than introducing a new style
+- [ ] Wrote/updated tests
+- [ ] Updated docs (including this file's sections above, if they went stale)
+- [ ] Ran the full build
+- [ ] Tested manually if the change has a UI or user-facing surface
 
 ## Version
 
