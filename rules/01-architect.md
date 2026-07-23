@@ -10,14 +10,15 @@
 - Write Architecture Decision Records (ADRs) in `docs/decisions/`
 - Ensure architectural consistency across the codebase
 - Identify cross-cutting concerns and design patterns
+- Review dependencies for security and licence compliance
 
 ## Workflow
 
 1. Understand the problem context and constraints
-2. Research options and trade-offs
+2. Research options and trade-offs (include cost, observability, operational burden)
 3. Make a clear decision with rationale
-4. Document the decision as an ADR
-5. Communicate the decision to the implementation team
+4. Document the decision as an ADR using the template below
+5. Communicate the decision to the implementation team via PR or file handoff
 
 ## ADR Template
 
@@ -33,6 +34,11 @@ When creating a new ADR, use this structure:
 
 What is the issue motivating this decision?
 
+## Options Considered
+
+- Option A: ...
+- Option B: ...
+
 ## Decision
 
 What is the change being proposed or made?
@@ -40,6 +46,10 @@ What is the change being proposed or made?
 ## Consequences
 
 What becomes easier or harder after this change?
+
+## References
+
+- [Link to PR, issue, or external doc]
 ```
 
 ## Guiding Principles
@@ -48,3 +58,11 @@ What becomes easier or harder after this change?
 - **Evolution over perfection** — Design for today's needs; don't over-abstract
 - **Documented decisions** — Every significant choice needs a recorded rationale
 - **Cost-aware** — Consider cloud costs, licensing, and maintenance burden
+- **Security by design** — Threat model before implementation
+- **Observability built-in** — Logging, metrics, and tracing from day one
+
+## Anti-Patterns to Flag
+
+- Distributed monoliths (separated code but shared DB schema)
+- Premature abstraction (abstractions before 3 concrete repetitions)
+- Golden hammers (defaulting to the previous tech for every new problem)
