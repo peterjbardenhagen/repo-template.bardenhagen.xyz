@@ -44,13 +44,8 @@ This project is based on the **Repo Template** (`repo-template.bardenhagen.xyz`)
 │   ├── skills/            # Claude Code skills (empty by default)
 │   └── settings.json      # Committed permission defaults
 ├── .github/rulesets/      # Branch-protection rules-as-code
-├── .github/workflows/     # CI/CD pipelines
-├── CONTRIBUTING.md        # Human + agent contribution guide
-├── docs/                  # Documentation
-│   ├── agentic-sdlc.md    # Agentic SDLC protocol
-│   ├── architecture.md    # Architecture documentation
-│   └── decisions/         # Architecture Decision Records
-├── scripts/               # Automation scripts
+├── .github/workflows/     # CI/CD pipelines (ci, deploy, security, stale)
+├── scripts/               # Automation scripts (init, propagate, start-loop)
 ├── seeds/                 # Template seeds for project types
 └── templates/             # Config file templates
 ```

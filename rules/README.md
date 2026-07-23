@@ -1,31 +1,21 @@
-# Rules — Role-Based Agent Skills
+# Agent Role Rules
 
-This directory contains specialized skill files for different AI agent roles. Each file defines the context, constraints, and workflow for that agent role when operating in this repository.
+This directory contains role-based skill files for AI agents working in this project. Each file provides specialised instructions for a specific agent role.
 
-## How to Use
+## Available Roles
 
-When an agent is assigned a task that maps to a specific role, it should load that role's rule file first, then the general `AGENTS.md`, before starting work.
+| Role | File | Responsibility |
+|------|------|---------------|
+| Architect | `01-architect.md` | System design, ADRs, technology decisions |
+| Coder | `02-coder.md` | Feature implementation, refactoring, bug fixing |
+| Reviewer | `03-reviewer.md` | Code review, quality gates, security review |
+| Tester | `04-tester.md` | Test strategy, test automation, quality metrics |
+| DevOps | `05-devops.md` | CI/CD, infrastructure, deployment, monitoring |
 
-## Roles
+## Usage
 
-| # | Role | File | When to Use |
-|---|------|------|-------------|
-| 01 | Architect | `01-architect.md` | Making architectural decisions, writing ADRs, designing system structure |
-| 02 | Coder | `02-coder.md` | Implementing features, fixing bugs, writing code |
-| 03 | Reviewer | `03-reviewer.md` | Reviewing pull requests, performing code quality checks |
-| 04 | Tester | `04-tester.md` | Writing tests, setting up test infrastructure, QA automation |
-| 05 | DevOps | `05-devops.md` | Setting up CI/CD, managing infrastructure, deployment |
+Agents should read the appropriate role file at session start. Multi-agent workflows hand off between roles using file-based artifacts (ADRs, specs, PRs, test plans).
 
-## Role Hierarchy
+## Adding New Roles
 
-```
-Architect → defines structure
-     ↓
-   Coder → implements
-     ↓
-Reviewer → validates quality
-     ↓
-  Tester → verifies correctness
-     ↓
-  DevOps → deploys & operates
-```
+Create a new file using the numbering convention (`NN-role-name.md`). Update this README when adding a role.

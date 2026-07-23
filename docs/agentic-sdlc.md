@@ -74,14 +74,16 @@ Each handoff produces an artifact (ADR, code, PR, test report) that the next age
 
 ## File Types & Their Purpose
 
-| File Type | Purpose | Written By | Read By |
-|-----------|---------|-----------|---------|
-| ADR (`docs/decisions/`) | Architecture decisions | Architect | All agents, humans |
-| Spec (`docs/specs/`) | Feature specification | Architect | Coder |
-| PR | Code change description | Coder | Reviewer |
-| Test plan | Test strategy | Tester | All agents |
-| CI workflow | Build/test/deploy | DevOps | Everyone |
-| CHANGELOG.md | Release history | All agents | Humans, downstream |
+| Type | Description | Path |
+|-----------|---------|---------|
+| ADR | Architecture decisions | `docs/decisions/` |
+| Spec | Feature specification | `docs/specs/` |
+| Progress | Autonomous loop progress | `PROGRESS.md` |
+| Blockers | Items needing human input | `blockers.md` |
+| PR | Code change description | GitHub PR |
+| Test plan | Test strategy | `tests/` or `docs/test-plans/` |
+| CI workflow | Build/test/deploy | `.github/workflows/` |
+| CHANGELOG.md | Release history | Root |
 
 ## Vercel vs Non-Vercel Deploy Strategy
 

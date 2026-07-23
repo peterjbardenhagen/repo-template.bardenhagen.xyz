@@ -11,8 +11,10 @@
 1. [Conventions & Naming Standards](#1-conventions--naming-standards)
 2. [Git Workflows & Branching](#2-git-workflows--branching)
 3. [Agentic AI SDLC](#3-agentic-ai-sdlc)
-4. [Project Structure](#4-project-structure)
-5. [Quick Start](#5-quick-start)
+4. [GitHub Actions & Automation](#4-github-actions--automation)
+5. [Vercel Integration](#5-vercel-integration)
+6. [Project Structure](#6-project-structure)
+7. [Quick Start](#7-quick-start)
 
 ---
 
@@ -358,12 +360,20 @@ This template integrates with **AgentsOS** or similar orchestration systems:
 │
 ├── .github/
 │   ├── workflows/               # CI/CD pipelines
-│   │   ├── ci.yml               # Main CI workflow
-│   │   └── codeql-analysis.yml  # Security scanning
+│   │   ├── ci.yml               # Main CI workflow (lint, test, build)
+│   │   ├── codeql-analysis.yml  # Security scanning
+│   │   ├── security-scan.yml    # Container / dependency scanning
+│   │   ├── deploy-preview.yml   # Vercel preview deployments
+│   │   ├── deploy-prod.yml      # Vercel production deploy
+│   │   ├── ghcr-push.yml        # Container image build & push (GHCR)
+│   │   ├── dependency-review.yml# Dependency review on PRs
+│   │   ├── dependabot-auto-merge.yml  # Auto-merge Dependabot PRs
+│   │   └── stale.yml            # Stale issue / PR management
 │   ├── ISSUE_TEMPLATE/          # Issue templates
 │   ├── PULL_REQUEST_TEMPLATE.md # PR template
 │   ├── dependabot.yml           # Dependency automation
-│   └── CODEOWNERS               # Ownership & review routing
+│   ├── CODEOWNERS               # Ownership & review routing
+│   └── rulesets/                # Branch protection rules-as-code
 │
 ├── docs/
 │   ├── agentic-sdlc.md          # Full Agentic SDLC protocol
@@ -373,7 +383,9 @@ This template integrates with **AgentsOS** or similar orchestration systems:
 │
 ├── scripts/
 │   ├── init-project.sh          # Initialize from this template
-│   └── propagate-template.sh    # Update downstream projects
+│   ├── propagate-template.sh    # Update downstream projects
+│   ├── start-loop.sh            # Unattended agentic loop (Linux/macOS)
+│   └── start-loop.ps1           # Unattended agentic loop (Windows)
 │
 ├── seeds/                       # Project type starter kits
 │   ├── dotnet/
@@ -388,13 +400,156 @@ This template integrates with **AgentsOS** or similar orchestration systems:
 ├── docker-compose.yml           # Development environment
 ├── Dockerfile                   # Container definition
 ├── CHANGELOG.md                 # Version history
+├── PROGRESS.md                  # Agent loop progress tracker
+├── blockers.md                  # Agent loop blockers
+├── SECURITY.md                  # Security policy
+├── CODE_OF_CONDUCT.md           # Code of conduct
 ├── LICENSE                      # MIT license
 └── README.md                    # This file
 ```
 
 ---
 
-## 5. Quick Start
+## 5. GitHub Actions & Automation
+
+This template ships with hardened, production-ready GitHub Actions workflows.
+
+### Workflows Included
+
+| Workflow | Trigger | Purpose |
+|----------|---------|---------|
+| `ci.yml` | push/PR to main | Lint, test, build with concurrency cancellation and least-privilege permissions |
+| `codeql-analysis.yml` | push/PR + weekly | CodeQL security scanning for JS, Python, C#, Go |
+| `security-scan.yml` | push/PR + weekly | Container / dependency scanning |
+| `deploy-preview.yml` | PR opened/updated | Vercel preview deployment with URL comment on PR |
+| `deploy-prod.yml` | push to main | Vercel production deployment with environment protection |
+| `ghcr-push.yml` | push to main + tags | Multi-arch container image to GHCR |
+| `dependency-review.yml` | PR (dependency files) | Blocks PRs with high-severity or licence-violating deps |
+| `dependabot-auto-merge.yml` | Dependabot PR | Auto-approve + auto-merge patch/minor updates |
+| `stale.yml` | nightly | Closes stale issues/PRs after inactivity |
+
+### Security Hardening
+
+All workflows follow 2026 best practices:
+- **Least-privilege `GITHUB_TOKEN`** — read-only by default, expand only where needed
+- **SHA-pinned actions** — supply-chain hardened action references
+- **Concurrency controls** — cancels superseded runs to save minutes and prevent race conditions
+- **OIDC-ready** — `id-token: write` where cloud auth is needed
+
+### Branch Protection (Recommended)
+
+Enable these rules on `main` in GitHub Settings → Branches:
+1. Require pull request before merging
+2. Require status checks (CI, CodeQL, Dependency Review)
+3. Require linear history (squash merge)
+4. Dismiss stale reviews on new commits
+5. Restrict pushes to maintainers only
+
+---
+
+## 6. Vercel Integration
+
+Vercel auto-deploys `main` to production. Every feature branch gets a preview deployment.
+
+### Workflow
+
+```
+main ──feat/tenant-sso──PR──▶ main ──▶ Vercel prod auto-deploy
+                                 ↑
+                         (CI must pass, linear history)
+```
+
+1. Branch from `main`: `git checkout -b feat/tenant-sso`
+2. Work, commit, push — Vercel creates preview deployment via `deploy-preview.yml`
+3. Open PR — review on the preview URL (auto-commented by the workflow)
+4. Merge to `main` — Vercel auto-deploys to production via `deploy-prod.yml`
+
+### Required Secrets
+
+| Secret | Purpose |
+|--------|---------|
+| `VERCEL_TOKEN` | Vercel API authentication |
+| `VERCEL_ORG_ID` | Vercel team/organisation ID |
+| `VERCEL_PROJECT_ID` | Vercel project ID |
+
+### Environment Protection
+
+Production deploys use GitHub environment protection rules. Configure required reviewers in Settings → Environments → `production`.
+
+---
+
+## 7. Project Structure
+
+```
+.
+├── AGENTS.md                    # Master instructions for all AI agents
+├── CLAUDE.md                    # Claude Code / CLI configuration
+├── CODEX.md                     # OpenCode / Codex instructions
+├── COPILOT_INSTRUCTIONS.md      # GitHub Copilot context
+├── AI_CONTEXT.md                # One-page project summary
+├── .cursorrules                 # Cursor AI rules
+├── .windsurfrules               # Windsurf AI rules
+│
+├── rules/                       # Role-based agent skill files
+│   ├── 01-architect.md          # Architecture agent
+│   ├── 02-coder.md              # Implementation agent
+│   ├── 03-reviewer.md           # Code review agent
+│   ├── 04-tester.md             # Testing agent
+│   └── 05-devops.md             # DevOps / infrastructure agent
+│
+├── .github/
+│   ├── workflows/               # CI/CD pipelines
+│   │   ├── ci.yml               # Main CI workflow (lint, test, build)
+│   │   ├── codeql-analysis.yml  # Security scanning
+│   │   ├── security-scan.yml    # Container / dependency scanning
+│   │   ├── deploy-preview.yml   # Vercel preview deployments
+│   │   ├── deploy-prod.yml      # Vercel production deploy
+│   │   ├── ghcr-push.yml        # Container image build & push (GHCR)
+│   │   ├── dependency-review.yml# Dependency review on PRs
+│   │   ├── dependabot-auto-merge.yml  # Auto-merge Dependabot PRs
+│   │   └── stale.yml            # Stale issue / PR management
+│   ├── ISSUE_TEMPLATE/          # Issue templates
+│   ├── PULL_REQUEST_TEMPLATE.md # PR template
+│   ├── dependabot.yml           # Dependency automation
+│   ├── CODEOWNERS               # Ownership & review routing
+│   └── rulesets/                # Branch protection rules-as-code
+│
+├── docs/
+│   ├── agentic-sdlc.md          # Full Agentic SDLC protocol
+│   ├── architecture.md          # Architecture documentation
+│   ├── decisions/               # ADRs (Architecture Decision Records)
+│   └── getting-started.md       # Quick start guide
+│
+├── scripts/
+│   ├── init-project.sh          # Initialize from this template
+│   ├── propagate-template.sh    # Update downstream projects
+│   ├── start-loop.sh            # Unattended agentic loop (Linux/macOS)
+│   └── start-loop.ps1           # Unattended agentic loop (Windows)
+│
+├── seeds/                       # Project type starter kits
+│   ├── dotnet/
+│   ├── nextjs/
+│   └── python/
+│
+├── .editorconfig                # Cross-editor consistency
+├── .gitattributes               # Git normalization
+├── .gitignore                   # Comprehensive ignore patterns
+├── .env.example                 # Documented environment variables
+├── .prettierrc                  # Code formatting (if JS/TS)
+├── docker-compose.yml           # Development environment
+├── Dockerfile                   # Container definition
+├── CHANGELOG.md                 # Version history
+├── PROGRESS.md                  # Agent loop progress tracker
+├── blockers.md                  # Agent loop blockers
+├── SECURITY.md                  # Security policy
+├── CODE_OF_CONDUCT.md           # Code of conduct
+├── LICENSE                      # MIT license
+└── README.md                    # This file
+```
+
+---
+
+## 8. Quick Start
 
 ```bash
 # Use this template from GitHub
@@ -408,7 +563,23 @@ rm -rf .git && git init && git add -A && git commit -m "chore: initialise from r
 bash scripts/init-project.sh my-new-project
 ```
 
-### Template Maintenance
+### Unattended Agentic Loop
+
+For fully autonomous sessions, use the loop scripts:
+
+```bash
+# Linux / macOS
+bash scripts/start-loop.sh
+
+# Windows (PowerShell)
+.\scripts\start-loop.ps1
+```
+
+Stop conditions: create a `STOP` file, or write `DONE` to `PROGRESS.md`.
+
+---
+
+## 9. Template Maintenance
 
 This template is kept in sync across all your projects via the propagation script. See `scripts/propagate-template.sh` for the workflow.
 
