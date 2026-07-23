@@ -22,14 +22,14 @@ graph TD
 ## Core Components
 
 ### [Component 1]
-- **Purpose:** 
-- **Technology:** 
-- **Location:** 
+- **Purpose:**
+- **Technology:**
+- **Location:**
 
 ### [Component 2]
-- **Purpose:** 
-- **Technology:** 
-- **Location:** 
+- **Purpose:**
+- **Technology:**
+- **Location:**
 
 ## Data Flow
 
@@ -37,9 +37,16 @@ graph TD
 
 ## Deployment
 
-- **Hosting:** 
-- **CI/CD:** 
+- **Hosting:**
+- **CDN / Edge:**
+- **CI/CD:** See `.github/workflows/`
 - **Environment Variables:** See `.env.example`
+
+## Observability
+
+- **Logging:** [e.g., structured JSON to stdout, Loki, CloudWatch]
+- **Metrics:** [e.g., Prometheus, Datadog, Vercel Analytics]
+- **Tracing:** [e.g., OpenTelemetry, Jaeger, Vercel Speed Insights]
 
 ## Decisions
 
