@@ -11,7 +11,7 @@ This is the **Repo Template** (`repo-template.bardenhagen.xyz`) — a comprehens
 - **Default branch:** `main`
 - **Template repo:** `peterjbardenhagen/repo-template.bardenhagen.xyz`
 - **License:** MIT
-- **Version:** 2.0.0
+- **Version:** 2.1.0
 - **Source:** https://github.com/peterjbardenhagen/repo-template.bardenhagen.xyz
 
 ## Conventions at a Glance
@@ -23,6 +23,8 @@ This is the **Repo Template** (`repo-template.bardenhagen.xyz`) — a comprehens
 | Git workflow | Trunk-based: `main` is always green. Feature branches → PR → squash merge |
 | File naming | PascalCase for components, camelCase for utils, kebab-case for folders/files |
 | Repo naming | kebab-case, lowercase, hyphens only |
+| GH Actions | Least-privilege tokens, SHA-pinned actions, concurrency controls |
+| Vercel | OIDC-ready, preview + production deploys, environment protection |
 
 ## Agent Roles
 
@@ -40,7 +42,8 @@ This is the **Repo Template** (`repo-template.bardenhagen.xyz`) — a comprehens
 2. `git pull --ff-only origin main`
 3. Check existing issues, PRs, or the explicitly stated task
 4. Review docs/decisions/ for prior architecture decisions
-5. State approach before writing code
-6. Commit after every logical phase using conventional commits
-7. Run tests and verify before considering work complete
-8. Update CHANGELOG.md for significant changes
+5. Review PROGRESS.md for autonomous loop state
+6. State approach before writing code
+7. Commit after every logical phase using conventional commits
+8. Run tests and verify before considering work complete
+9. Update CHANGELOG.md for significant changes

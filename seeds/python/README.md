@@ -10,8 +10,26 @@ pip install fastapi uvicorn pytest httpx
 pip freeze > requirements.txt
 ```
 
-## Template Notes
+## Template Integration Checklist
 
-- `AI_CONTEXT.md` — Update stack to "Python / FastAPI / Python 3.11+"
-- `.gitignore` — Handles __pycache__/, .venv/, *.pyc
-- `docker-compose.yml` — Adjust for Python service
+- [ ] Run `bash scripts/init-project.sh <project-name>` or use GitHub template clone
+- [ ] `python -m venv .venv && source .venv/bin/activate`
+- [ ] `pip install fastapi uvicorn pytest ruff`
+- [ ] Create `src/` or `app/` package directory
+- [ ] Update `AI_CONTEXT.md` — stack to "Python / FastAPI / Python 3.12+"
+- [ ] Update `docs/architecture.md` — document service layers, routers, DTOs
+- [ ] Add `.env` variables to `.env.example` (DATABASE_URL, CORS_ORIGINS, etc.)
+- [ ] Configure `docker-compose.yml` for local Postgres / Redis
+- [ ] Create `pyproject.toml` or `requirements-dev.txt` for test deps
+
+## Recommended Packages
+
+| Purpose | Package |
+|---------|---------|
+| Web framework | `fastapi` |
+| ASGI server | `uvicorn` |
+| Validation | `pydantic` |
+| Testing | `pytest`, `pytest-asyncio`, `httpx` |
+| Linting | `ruff` |
+| Auth | `python-jose` + `passlib` |
+| Database ORM | `sqlalchemy` + `alembic` |

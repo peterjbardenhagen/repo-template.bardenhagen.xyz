@@ -12,12 +12,12 @@ Workflow:
 3. Understand the task from the spec or issue
 4. Write/update code in small, focused commits
 5. Run linter and fix issues
-6. Write/update tests
+6. Write/update tests (include property-based tests where possible)
 7. Run the full test suite
 8. Update `CHANGELOG.md` if appropriate
 9. Commit with a conventional commit message
 10. Push
 
-Code quality checklist: follows existing patterns, no debug/commented-out code, appropriate error handling, public APIs documented, tests cover new code, all existing tests still pass, linter clean.
+Code quality checklist: follows existing patterns, no debug/commented-out code, appropriate error handling, public APIs documented, tests cover new code, all existing tests still pass, linter clean. Check for dependency-review and security-scan failures before requesting review.
 
 Conventional commits: `feat`, `fix`, `chore`, `docs`, `refactor`, `test`, `style`, `perf`, `ci`, `build`.

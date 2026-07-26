@@ -44,13 +44,8 @@ This project is based on the **Repo Template** (`repo-template.bardenhagen.xyz`)
 │   ├── skills/            # Claude Code skills (empty by default)
 │   └── settings.json      # Committed permission defaults
 ├── .github/rulesets/      # Branch-protection rules-as-code
-├── .github/workflows/     # CI/CD pipelines
-├── CONTRIBUTING.md        # Human + agent contribution guide
-├── docs/                  # Documentation
-│   ├── agentic-sdlc.md    # Agentic SDLC protocol
-│   ├── architecture.md    # Architecture documentation
-│   └── decisions/         # Architecture Decision Records
-├── scripts/               # Automation scripts
+├── .github/workflows/     # CI/CD pipelines (ci, deploy, security, stale)
+├── scripts/               # Automation scripts (init, propagate, start-loop)
 ├── seeds/                 # Template seeds for project types
 └── templates/             # Config file templates
 ```
@@ -136,6 +131,7 @@ This template is versioned. See `CHANGELOG.md` for the current version and relea
 
 ## Available Skills
 
+- **kilo-config**: Guide for Kilo configuration: config paths, kilo.json fields, commands, agents, skills, permissions, MCPs, providers, TUI settings, plus Agent Manager worktree setup/run scripts, workflows, and state. Use for Kilo config questions, locating loaded config, changing settings, or Agent Manager questions about run/setup scripts, worktree setup/workflows, apply/merge/PR/conflicts, missing sessions/worktrees, and agent-manager.json recovery. See `.kilo/skills/kilo-config/SKILL.md`.
 - **pr-auto-merge**: Automatically resolve merge conflicts, approve, merge, and delete branches for open pull requests. See `.kilo/skills/pr-auto-merge/SKILL.md`.
 - **github-cleanup**: Clean up GitHub repositories by ensuring main branch is default, merging legacy master/Main/Master branches into main, and removing stale branches. See `.kilo/skills/github-cleanup/SKILL.md`.
 - **vercel-deploy**: Deploy to Vercel with environment switching (prod/dev/preview). Creates site if needed, ensures build works, and verifies accessibility. Installs Vercel CLI if missing. See `.kilo/skills/vercel-deploy/SKILL.md`.

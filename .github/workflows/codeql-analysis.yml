@@ -8,24 +8,23 @@ on:
   schedule:
     - cron: '0 12 * * 1'  # Weekly: every Monday at noon
 
+permissions:
+  contents: read
+  security-events: write
+  actions: read
+
 jobs:
   analyze:
     name: CodeQL Analyze
     runs-on: ubuntu-latest
-    permissions:
-      security-events: write
-      actions: read
-      contents: read
-
     strategy:
       fail-fast: false
       matrix:
         language: ['javascript', 'python', 'csharp', 'go']
-
     steps:
-      - uses: actions/checkout@v4
-      - uses: github/codeql-action/init@v3
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.3.1
+      - uses: github/codeql-action/init@9c65253f329324b8c8da4c7ba52422f26e1e5841 # v3.27.1
         with:
           languages: ${{ matrix.language }}
-      - uses: github/codeql-action/autobuild@v3
-      - uses: github/codeql-action/analyze@v3
+      - uses: github/codeql-action/autobuild@9c65253f329324b8c8da4c7ba52422f26e1e5841 # v3.27.1
+      - uses: github/codeql-action/analyze@9c65253f329324b8c8da4c7ba52422f26e1e5841 # v3.27.1

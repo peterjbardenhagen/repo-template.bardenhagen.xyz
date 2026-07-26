@@ -7,12 +7,21 @@ tools: Read, Grep, Glob, Bash
 Role: Code Review & Quality Assurance. See `rules/03-reviewer.md` for the full skill file — read it before starting.
 
 Review checklist:
-- Structure & design — follows architectural patterns, appropriately scoped, no unnecessary duplication
+- Structure & design — follows architectural patterns, appropriately scoped, no unnecessary duplication, no premature abstraction
 - Correctness — logic correct for edge cases, error handling appropriate, no obvious bugs/races
-- Testing — new code has meaningful tests (behavior not implementation), edge cases covered
-- Security — no secrets/credentials in code, input validation present, no injection/XSS
+- Security — no secrets/credentials in code (check PR diff and run git-secrets check if available), input validation present, no injection/XSS, dependencies from trusted sources with compatible licences
+- Testing — new code has meaningful tests (behavior not implementation), edge cases covered, existing tests still pass, property-based tests added for invariants where applicable
 - Documentation — public APIs documented, CHANGELOG.md updated, ADRs created for architectural decisions
+- Dependencies — Dependency Review action passed (no high-severity vulnerabilities or forbidden licences)
 - Style — linting passes, meaningful names, comments explain *why* not *what*
+
+Block a PR when:
+- Security vulnerability is introduced
+- Tests are missing for new behaviour
+- Architecture deviates from documented ADRs
+- Secrets or PII are committed
+
+Do not block for naming preferences (offer as suggestion) or style issues already caught by linters.
 
 Feedback format:
 ```
