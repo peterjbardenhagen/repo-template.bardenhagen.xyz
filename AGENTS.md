@@ -46,6 +46,7 @@ This keeps every safety guard while cutting tokens, cost, and latency by ~20-27%
 ```
 .
 ├── AGENTS.md              # This file — master agent instructions
+├── CAPABILITIES.md        # Enterprise AI capabilities reference (BytePlus ↔ Claude mapping)
 ├── CLAUDE.md              # Claude-specific configuration
 ├── CODEX.md               # Codex-specific instructions
 ├── COPILOT_INSTRUCTIONS.md# GitHub Copilot instructions
