@@ -1,60 +1,34 @@
-# Dependencies
+# ████████████████████████████████████████████
+# MULTI-STACK .gitignore                      #
+# Uncomment / modify sections for your stack  #
+# Based on GitHub/gitignore + industry best   #
+# ████████████████████████████████████████████
+
+# ==============================================
+# DEPENDENCIES
+# ==============================================
 node_modules/
 .pnp
 .pnp.js
+.jed/
+.webpack/
+.bun/
+bun.lock
+bun.lockb
+yarn.lock
+pnpm-lock.yaml
+.pnpm-store/
+.yarn/
+.yarnrc.yml
+.yarn/
+yarn-error.log
 
-# Build outputs
-dist/
-build/
-out/
-.next/
-.cache/
-.eslintcache
-*.tsbuildinfo
-
-# Environment files
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# Claude Code local overrides
-.claude/settings.local.json
-
-# IDE
-.vs/
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-.DS_Store
-Thumbs.db
-
-# Logs
-logs/
-*.log
-npm-debug.log*
-
-# Runtime
-pids/
-*.pid
-*.seed
-*.pid.lock
-
-# Coverage
-coverage/
-.nyc_output/
-
-# Docker
-.docker/
-
-# NuGet
-packages/
-*.nupkg
-**/[Pp]ackages/*
-!**/[Pp]ackages/build/
+vendor/
+.bundle/
+Gemfile.lock
+composer.lock
+Cargo.lock
+mix.lock
 
 # Python
 __pycache__/
@@ -65,21 +39,385 @@ __pycache__/
 env/
 venv/
 .venv/
+pip-log.txt
+pip-delete-this-directory.txt
 *.egg-info/
 .eggs/
 dist/
+wheels/
+share/python-wheels/
+*.egg
+MANIFEST
+.pip/
+.tox/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+.pytest_cache/
+ruff_cache/
 
-# .NET
+# Rust
+/target/
+**/*.rs.bk
+
+# Go
+vendor/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+go.work
+go.work.sum
+
+# ==============================================
+# BUILD OUTPUTS
+# ==============================================
+dist/
+build/
+out/
+.next/
+.cache/
+.eslintcache
+*.tsbuildinfo
+.next/
+.nuxt/
+.cache/
+.vite/
+.svelte-kit/
+.gatsby/
+.public/
+_ site/
+.static/
+server/
+client/
+
+# ==============================================
+# ENVIRONMENT FILES
+# ==============================================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.staging.local
+.env.*.local
+*.local
+
+# ==============================================
+# AI TOOL LOCAL OVERRIDES
+# ==============================================
+.claude/settings.local.json
+.cursor/settings.local.json
+.windsurf/settings.local.json
+
+# ==============================================
+# IDE / EDITOR
+# ==============================================
+.vs/
+.vscode/
+.vscode-server/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+*.sublime-project
+*.sublime-workspace
+*.sublime-workspace
+.history/
+.ionide/
+
+# ==============================================
+# LOGS
+# ==============================================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ==============================================
+# RUNTIME
+# ==============================================
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# ==============================================
+# COVERAGE
+# ==============================================
+coverage/
+.nyc_output/
+*.lcov
+coverage.lcov
+coverage/
+
+# ==============================================
+# DOCKER
+# ==============================================
+.docker/
+docker-compose.override.yml
+docker-compose.override.yaml
+*.dockercontext
+
+# ==============================================
+# NUGET / .NET
+# ==============================================
+packages/
+*.nupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
 **/[Bb]in/
 **/[Oo]bj/
 *.user
 *.suo
+*.userosscache
+*.sln.docstates
+*.userprefs
+*.csproj.user
+*.[Rr]elease]
+*.[Dd]ebug]
+*.nupkg
+*.snk
+.vs/
 
-# Terraform
+# ==============================================
+# JAVA / JVM
+# ==============================================
+*.class
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+hs_err_pid*
+replay_pid*
+target/
+!.mvn/wrapper/maven-wrapper.jar
+.mvn/
+*.log
+
+# ==============================================
+# NODE.JS / JAVASCRIPT / TYPESCRIPT
+# ==============================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+lerna-debug.log*
+.cache/
+.parcel-cache/
+.eslintcache
+*.tsbuildinfo
+.next/
+.nuxt/
+.vite/
+.svelte-kit/
+
+# ==============================================
+# PYTHON (extended)
+# ==============================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+*.egg-info/
+.eggs/
+dist/
+wheels/
+*.egg
+.installed.cfg
+*.manifest
+*.spec
+.tox/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+.pytest_cache/
+ruff_cache/
+.hypothesis/
+perf.data
+*.prof
+*.pyprof
+
+# ==============================================
+# TERRAFORM / OPENTOFU
+# ==============================================
 *.tfstate
 *.tfstate.*
 .terraform/
+.terraform.lock.hcl
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terragrunt-cache/
+terragrunt.hcl
 
-# Reports
+# ==============================================
+# AWS
+# ==============================================
+.aws/
+aws-config.json
+**/.serverless/
+**/.serverless_plugins/
+.serverless/
+.serverless_plugins/
+.serverless_nextjs/
+.elasticbeanstalk/
+*.pem
+
+# ==============================================
+# AZURE
+# ==============================================
+.azure/
+.env.azure*
+local.settings.json
+function.local.settings.json
+
+# ==============================================
+# GCP
+# ==============================================
+*.json
+!**/*.example.json
+!seeds/**/*.json
+.service-account.json
+application_default_credentials.json
+.gcloud/
+
+# ==============================================
+# REPORTS / TEST RESULTS
+# ==============================================
 reportdata/
 test-results/
+ReportData/
+PlaywrightE2E/
+dependency-check-data/
+test-reports/
+allure-results/
+allure-report/
+junit/
+test-results/
+results/
+
+# ==============================================
+# CI / CD
+# ==============================================
+.azuredevops/
+.yml.bak
+
+# ==============================================
+# SWIFT / XCODE
+# ==============================================
+*.xcworkspace
+xcuserdata/
+DerivedData/
+*.ipa
+*.dSYM.zip
+*.dSYM
+Pods/
+.build/
+*.build/
+
+# ==============================================
+# ANDROID / KOTLIN
+# ==============================================
+local.properties
+*.iml
+.gradle/
+build/
+!gradle-wrapper.jar
+
+# ==============================================
+# FLUTTER / DART
+# ==============================================
+.dart_tool/
+.packages
+.pub/
+build/
+*.freezed.dart
+*.g.dart
+
+# ==============================================
+# NEXT.JS SPECIFIC
+# ==============================================
+.next/
+out/
+.next/*
+!_next/static
+!_next/image
+
+# ==============================================
+# KUBERNETES
+# ==============================================
+*.kubeconfig
+kubeconfig
+.helm/
+charts/*.tgz
+
+# ==============================================
+# MEDIA / LARGE FILES
+# ==============================================
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.psd
+*.ai
+*.sketch
+*.fig
+*.blend
+*.max
+*.c4d
+*.zip
+*.tar.gz
+*.7z
+*.rar
+*.iso
+*.bin
+*.exe
+*.msi
+*.dmg
+
+# ==============================================
+# MISC
+# ==============================================
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# ==============================================
+# SECURITY SCANS (local copies)
+# ==============================================
+npm-audit.html
+trivy-cache/
+.grype/
+.snyk/
