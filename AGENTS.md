@@ -22,6 +22,25 @@ This project is based on the **Repo Template** (`repo-template.bardenhagen.xyz`)
 6. **No fake completion** — Never mark work done that isn't actually complete. Report blockers honestly.
 7. **Conventional commits** — Use `type(scope): description` (e.g., `feat(auth): add OAuth2 flow`).
 
+## Ponytail — Lazy Senior Dev Mode
+
+**Ponytail** (`ponytail.dev`) reduces code bloat by 54% on real AI agent work. Installed globally and included in `.claude/skills/ponytail/`.
+
+**Activation (Claude Code):**
+```
+/ponytail full
+```
+
+**How it works:** Before writing code, stop at the first rung that holds:
+1. Does this need to exist? → no: skip it (YAGNI)
+2. Already in this codebase? → reuse it, don't rewrite
+3. Stdlib does it? → use it
+4. Native platform feature? → use it
+5. Installed dependency? → use it
+6. One line? → one line
+
+This keeps every safety guard while cutting tokens, cost, and latency by ~20-27% vs. baseline.
+
 ## File Structure Overview
 
 ```
