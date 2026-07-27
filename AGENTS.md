@@ -154,3 +154,46 @@ This template is versioned. See `CHANGELOG.md` for the current version and relea
 - **pr-auto-merge**: Automatically resolve merge conflicts, approve, merge, and delete branches for open pull requests. See `.kilo/skills/pr-auto-merge/SKILL.md`.
 - **github-cleanup**: Clean up GitHub repositories by ensuring main branch is default, merging legacy master/Main/Master branches into main, and removing stale branches. See `.kilo/skills/github-cleanup/SKILL.md`.
 - **vercel-deploy**: Deploy to Vercel with environment switching (prod/dev/preview). Creates site if needed, ensures build works, and verifies accessibility. Installs Vercel CLI if missing. See `.kilo/skills/vercel-deploy/SKILL.md`.
+
+## 9Router AI Infrastructure
+
+The repo template includes a comprehensive setup script for 9Router and related AI infrastructure components:
+
+### Setup Script
+```powershell
+# Full installation with all components
+.\scripts\setup-9router.ps1
+
+# Selective installation
+.\scripts\setup-9router.ps1 -SkipRTK
+.\scripts\setup-9router.ps1 -SkipCLIProxy
+.\scripts\setup-9router.ps1 -SkipCaveman
+.\scripts\setup-9router.ps1 -SkipPonytail
+```
+
+### Components Installed
+
+| Component | Description | Purpose |
+|-----------|-------------|---------|
+| **9Router** | AI Gateway with OpenAI-compatible endpoints | Routes requests to 40+ providers, auto-fallback, quota tracking |
+| **CLIProxyAPI** | CLI proxy for OAuth-based providers | Connects Claude Code, Codex, Gemini subscriptions |
+| **RTK** | Rust Token Killer - bash output compression | Saves 60-90% tokens on dev commands |
+| **Caveman** | Terseness prompt injection | Cuts output tokens by ~65% |
+| **Ponytail** | Lazy senior dev prompt injection | YAGNI-first code, 54% code reduction |
+
+### Quick Start
+1. Run `.\scripts\setup-9router.ps1`
+2. Start 9Router: `cd ~/.ai-infrastructure/9router-source && npm run dev`
+3. Open http://localhost:20128/dashboard
+4. Configure AI tools: `http://localhost:20128/v1` with API key
+
+### Environment Variables
+```powershell
+$env:NINEROUTER_URL = "http://localhost:20128"
+$env:NINEROUTER_KEY = "sk-..."  # From dashboard
+```
+
+### Hermes Integration
+Profiles updated automatically:
+- `.hermes/profiles/default-profile.json` - Uses 9router as primary
+- `.hermes/profiles/omniroute-profile.json` - OmniRoute with 9router fallback
