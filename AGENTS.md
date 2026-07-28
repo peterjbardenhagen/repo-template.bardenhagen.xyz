@@ -64,8 +64,18 @@ This keeps every safety guard while cutting tokens, cost, and latency by ~20-27%
 │   ├── skills/            # Claude Code skills (empty by default)
 │   └── settings.json      # Committed permission defaults
 ├── .github/rulesets/      # Branch-protection rules-as-code
+<<<<<<< HEAD
 ├── .github/workflows/     # CI/CD pipelines (ci, deploy, security, stale)
 ├── scripts/               # Automation scripts (init, propagate, start-loop)
+=======
+├── .github/workflows/     # CI/CD pipelines
+├── CONTRIBUTING.md        # Human + agent contribution guide
+├── docs/                  # Documentation
+│   ├── agentic-sdlc.md    # Agentic SDLC protocol
+│   ├── architecture.md    # Architecture documentation
+│   └── decisions/         # Architecture Decision Records
+├── scripts/               # Automation scripts
+>>>>>>> feat/agentic-template-upgrade
 ├── seeds/                 # Template seeds for project types
 └── templates/             # Config file templates
 ```

@@ -8,6 +8,7 @@ on:
   schedule:
     - cron: '0 6 * * 1' # weekly, Monday 06:00 UTC
 
+<<<<<<< HEAD
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -17,15 +18,24 @@ permissions:
   security-events: write
   packages: read
 
+=======
+>>>>>>> feat/agentic-template-upgrade
 jobs:
   scan:
     name: Security scan (fail on High)
     runs-on: ubuntu-latest
     steps:
+<<<<<<< HEAD
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.3.1
 
       - name: Build scan image
         uses: docker/build-push-action@v6
+=======
+      - uses: actions/checkout@v4
+
+      - name: Build scan image
+        uses: docker/build-push-action@v5
+>>>>>>> feat/agentic-template-upgrade
         with:
           context: .
           load: true
@@ -40,7 +50,11 @@ jobs:
 
       - name: Upload results
         if: always()
+<<<<<<< HEAD
         uses: actions/upload-artifact@ea155f2e3b72ded3182e8b7f10e6571d12300a8e # v4.5.0
+=======
+        uses: actions/upload-artifact@v4
+>>>>>>> feat/agentic-template-upgrade
         with:
           name: security-scan-results
           path: scan-results.*
