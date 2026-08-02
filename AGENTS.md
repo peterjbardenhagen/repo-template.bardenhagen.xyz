@@ -21,6 +21,7 @@ This project is based on the **Repo Template** (`repo-template.bardenhagen.xyz`)
 5. **Pull before working** — Always sync from origin before making changes. Use `git pull --ff-only`.
 6. **No fake completion** — Never mark work done that isn't actually complete. Report blockers honestly.
 7. **Conventional commits** — Use `type(scope): description` (e.g., `feat(auth): add OAuth2 flow`).
+8. **Answer both questions** — "Did we build it correctly" *and* "did we build the right thing". The second is the expensive one and no test can check it. Define acceptance criteria before you code and verify against the original request before you call it done (`rules/07-analyst.md`). If it has a user-facing surface, apply `rules/06-ux.md` too.
 
 ## Ponytail — Lazy Senior Dev Mode
 
@@ -58,7 +59,9 @@ This keeps every safety guard while cutting tokens, cost, and latency by ~20-27%
 │   ├── 02-coder.md        # Coding agent
 │   ├── 03-reviewer.md     # Code review agent
 │   ├── 04-tester.md       # Testing agent
-│   └── 05-devops.md       # DevOps agent
+│   ├── 05-devops.md       # DevOps agent
+│   ├── 06-ux.md           # UX/CX & accessibility agent
+│   └── 07-analyst.md      # Requirements & acceptance agent
 ├── .claude/
 │   ├── agents/            # Claude Code subagents (mirror rules/ roles)
 │   ├── skills/            # Claude Code skills

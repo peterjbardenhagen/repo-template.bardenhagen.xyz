@@ -90,6 +90,27 @@ Also enable Dependabot alerts for `github-actions` (already configured in
 `.github/dependabot.yml`) — it updates SHA pins in place and keeps the comment
 in sync.
 
+## Prerequisite: enable Code scanning
+
+CodeQL analyses successfully but **cannot upload its results** until code
+scanning is switched on for the repository. The job fails with:
+
+```
+Code scanning is not enabled for this repository.
+Please enable code scanning in the repository settings.
+```
+
+This is a repository setting, not a workflow bug — no change to
+`codeql-analysis.yml` can fix it. Enable it once per repo:
+
+**Settings → Code security → Code scanning → Set up → Advanced**
+
+(Free on public repositories; requires GitHub Advanced Security on private ones.)
+
+The workflow is deliberately left strict rather than tolerating the upload
+failure: a CodeQL job that passes without publishing results looks like working
+security coverage while providing none.
+
 ## Environment Protection
 
 Production deploys are gated by GitHub environment protection rules:
