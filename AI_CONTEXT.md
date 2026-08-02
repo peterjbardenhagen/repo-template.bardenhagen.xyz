@@ -11,7 +11,7 @@ This is the **Repo Template** (`repo-template.bardenhagen.xyz`) — a comprehens
 - **Default branch:** `main`
 - **Template repo:** `peterjbardenhagen/repo-template.bardenhagen.xyz`
 - **License:** MIT
-- **Version:** 2.1.0
+- **Version:** 2.1.0 (current)
 - **Source:** https://github.com/peterjbardenhagen/repo-template.bardenhagen.xyz
 
 ## Conventions at a Glance
