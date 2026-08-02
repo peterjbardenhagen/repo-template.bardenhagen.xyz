@@ -110,23 +110,30 @@ This keeps every safety guard while cutting tokens, cost, and latency by ~20-27%
 
 ## Conventions
 
-- Default branch is `main` for all work unless a feature branch is explicitly specified.
+- `main` is the trunk — always green, always deployable. **Never commit to it directly.**
 - Project-wide naming conventions are documented in the README. Follow them.
 - Commit messages: `type(scope): description` (e.g., `feat(auth): add MFA support`).
-- Run `git pull --ff-only` before starting work and before pushing.
+- Branch from a current trunk: `git fetch origin && git checkout -B <branch> origin/main`.
+  Rebase onto `origin/main` before pushing.
+- PR branches: `feat/description`, `fix/description`, `chore/description`.
+  Agent-authored: `claude/<feature>-<short-code>`.
+- Squash merge, then delete the branch. `--force-with-lease` on your own branch
+  only; never force-push `main`.
 - Keep `.env` in `.gitignore`; document required variables in `.env.example`.
 - Architecture decisions go in `docs/decisions/` as ADR files.
 - Update `CHANGELOG.md` with every significant change.
-- PR branches: `feat/description`, `fix/description`, `chore/description`.
+
+Full branching, commit, and merge rules: [`docs/git-workflow.md`](docs/git-workflow.md).
 
 ## Agentic SDLC Protocol
 
 1. **Read context** — AGENTS.md → CLAUDE.md → AI_CONTEXT.md → .cursorrules
-2. **Orient** — `git pull --ff-only`, check issues/PRs/task
+2. **Orient** — `git fetch origin`, branch off `origin/main`, check issues/PRs/task
 3. **Plan** — State approach before coding. Write/update ADR if architect role.
 4. **Execute** — One logical change, run linters, commit.
 5. **Verify** — Full tests + build. Update CHANGELOG.md.
-6. **Deliver** — Push branch, create PR (if multi-agent) or merge (if solo + CI passing).
+6. **Deliver** — Rebase on `origin/main`, push branch, open PR.
+7. **Land** — Drive CI to green. Never bypass a failing check; fix it or escalate it.
 
 ## Naming Standards (Quick Reference)
 

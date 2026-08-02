@@ -1,56 +1,102 @@
 name: CI
 
+# ---------------------------------------------------------------------------
+# Replace the `run:` placeholders with your stack's commands, and the
+# setup-node step with your runtime (setup-python / setup-dotnet / setup-go).
+# Everything else — triggers, permissions, concurrency, SHA pins, the gate
+# job — is production-ready as shipped. Keep it.
+# ---------------------------------------------------------------------------
+
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
+  merge_group: # required for GitHub merge queues to report status
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
+# Least privilege. Every job inherits read-only; grant more per-job, never here.
 permissions:
   contents: read
-  pull-requests: read
+
+# One in-flight run per PR. Supersede stale PR runs, but never cancel a run
+# that is gating main or validating a merge-queue batch.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   lint:
     name: Lint
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.3.1
-      - name: Set up environment
-        run: echo "Set up your language runtime here"
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install dependencies
+        run: echo "Replace — e.g. npm ci"
       - name: Lint
-        run: echo "Add linter command here — e.g., npm run lint"
+        run: echo "Replace — e.g. npm run lint"
 
   test:
     name: Test
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.3.1
-      - name: Set up environment
-        run: echo "Set up your language runtime here"
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 20
+          cache: npm
       - name: Install dependencies
-        run: echo "Add install command here — e.g., npm ci"
+        run: echo "Replace — e.g. npm ci"
       - name: Run tests
-        run: echo "Add test command here — e.g., npm test"
+        run: echo "Replace — e.g. npm test"
 
   build:
     name: Build
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.3.1
-      - name: Set up environment
-        run: echo "Set up your language runtime here"
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 20
+          cache: npm
       - name: Install dependencies
-        run: echo "Add install command here"
+        run: echo "Replace — e.g. npm ci"
       - name: Build
-        run: echo "Add build command here"
+        run: echo "Replace — e.g. npm run build"
+
+  # ---------------------------------------------------------------------------
+  # One stable required check. Point the branch ruleset at "CI Gate" alone —
+  # then adding, renaming, or splitting a job above never means editing branch
+  # protection. `if: always()` ensures the gate reports even when a need fails.
+  # ---------------------------------------------------------------------------
+  ci-gate:
+    name: CI Gate
+    if: always()
+    needs: [lint, test, build]
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Verify every required job succeeded
+        env:
+          RESULTS: ${{ join(needs.*.result, ' ') }}
+        run: |
+          echo "Upstream job results: $RESULTS"
+          for r in $RESULTS; do
+            if [ "$r" != "success" ]; then
+              echo "::error::A required CI job did not succeed (saw '$r')."
+              exit 1
+            fi
+          done
+          echo "All required CI jobs passed."
