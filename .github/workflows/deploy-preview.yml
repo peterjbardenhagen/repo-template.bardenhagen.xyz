@@ -24,31 +24,61 @@ jobs:
     environment:
       name: preview
       url: ${{ steps.deploy.outputs.url }}
+    env:
+      # Passed through the environment rather than interpolated into each
+      # `run:` string. Inline `${{ secrets.* }}` is substituted into the script
+      # before the shell sees it, which both risks injection and can echo the
+      # secret in traces.
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.3.1
+      # Not every project generated from this template deploys to Vercel, and
+      # the template repo itself does not. Skip cleanly instead of failing.
+      # The check must be a step: the `secrets` context is unavailable in a
+      # job-level `if`.
+      - name: Check Vercel configuration
+        id: cfg
+        run: |
+          if [ -z "${VERCEL_TOKEN}" ]; then
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+            echo "VERCEL_TOKEN is not set — skipping preview deploy."
+          else
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        if: steps.cfg.outputs.configured == 'true'
+        with:
+          persist-credentials: false
 
       - name: Install Vercel CLI
+        if: steps.cfg.outputs.configured == 'true'
         run: npm install --global vercel@latest
 
       - name: Pull Vercel environment
-        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+        if: steps.cfg.outputs.configured == 'true'
+        run: vercel pull --yes --environment=preview --token="$VERCEL_TOKEN"
 
       - name: Build
-        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+        if: steps.cfg.outputs.configured == 'true'
+        run: vercel build --token="$VERCEL_TOKEN"
 
       - name: Deploy preview
         id: deploy
+        if: steps.cfg.outputs.configured == 'true'
         run: |
-          url=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})
+          url=$(vercel deploy --prebuilt --token="$VERCEL_TOKEN")
           echo "url=$url" >> "$GITHUB_OUTPUT"
 
       - name: Comment preview URL on PR
-        uses: actions/github-script@7b9a9ad156a1b2d0d8b3f2e5b1c9a8e7d6c5f4a3 # v7.2.0
+        if: steps.cfg.outputs.configured == 'true'
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
+        env:
+          PREVIEW_URL: ${{ steps.deploy.outputs.url }}
         with:
           script: |
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `Preview deployed: ${{ steps.deploy.outputs.url }}`
+              body: `Preview deployed: ${process.env.PREVIEW_URL}`
             })

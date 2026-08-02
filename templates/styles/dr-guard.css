@@ -1,0 +1,33 @@
+/**
+ * DR Standard 01 — Responsive & Mobile Width Guard
+ *
+ * The rule: on every viewport from 320px up, the document width equals
+ * the viewport width. The page never scrolls horizontally. No exceptions.
+ *
+ * REQUIRED: Import this FIRST in your global CSS, before Tailwind or any other styles.
+ *
+ * @import './dr-guard.css';
+ * @import 'tailwindcss';
+ *
+ * Reference: digitalresponse.com.au/standards
+ */
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip; /* NOT hidden — overflow-x: hidden breaks position: sticky */
+}
+
+/* Normalize box sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Guard against viewport-width units that include scrollbar */
+[class*="w-screen"],
+[style*="width: 100vw"],
+[style*="width:100vw"] {
+  width: 100% !important;
+}

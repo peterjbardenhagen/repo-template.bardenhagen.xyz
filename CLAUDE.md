@@ -56,11 +56,15 @@ docker compose down      # Stop environment
 
 ## Git Workflow
 
-- Default branch is `main` — always green, always deployable
-- Feature branches: `feat/description`, `fix/description`, `chore/description`
-- Always run `git pull --ff-only origin main` before starting work
-- Rebase feature branches on main before PR
-- Squash merge PRs to main
+Full rules in [`docs/git-workflow.md`](docs/git-workflow.md). The short version:
+
+- `main` is the trunk — always green, always deployable. **Never commit to it directly.**
+- Branches are short-lived (hours/days). Agent branches: `claude/<feature>-<short-code>`
+- Start from a current trunk: `git fetch origin && git checkout -B <branch> origin/main`
+- Rebase onto `origin/main` before pushing, so CI tests what will actually land
+- Squash merge; delete the branch after
+- `--force-with-lease` on your own branch only. Never force-push `main`
+- Never bypass a failing check — fix it or escalate it
 
 ## AI Agent Protocol
 

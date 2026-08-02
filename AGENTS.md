@@ -21,6 +21,7 @@ This project is based on the **Repo Template** (`repo-template.bardenhagen.xyz`)
 5. **Pull before working** — Always sync from origin before making changes. Use `git pull --ff-only`.
 6. **No fake completion** — Never mark work done that isn't actually complete. Report blockers honestly.
 7. **Conventional commits** — Use `type(scope): description` (e.g., `feat(auth): add OAuth2 flow`).
+8. **Answer both questions** — "Did we build it correctly" *and* "did we build the right thing". The second is the expensive one and no test can check it. Define acceptance criteria before you code and verify against the original request before you call it done (`rules/07-analyst.md`). If it has a user-facing surface, apply `rules/06-ux.md` too.
 
 ## Ponytail — Lazy Senior Dev Mode
 
@@ -58,10 +59,13 @@ This keeps every safety guard while cutting tokens, cost, and latency by ~20-27%
 │   ├── 02-coder.md        # Coding agent
 │   ├── 03-reviewer.md     # Code review agent
 │   ├── 04-tester.md       # Testing agent
-│   └── 05-devops.md       # DevOps agent
+│   ├── 05-devops.md       # DevOps agent
+│   ├── 06-ux.md           # UX/CX & accessibility agent
+│   └── 07-analyst.md      # Requirements & acceptance agent
 ├── .claude/
 │   ├── agents/            # Claude Code subagents (mirror rules/ roles)
-│   ├── skills/            # Claude Code skills (empty by default)
+│   ├── skills/            # Claude Code skills
+│   │   └── template-uplift/  # Promote an improvement back into the template
 │   └── settings.json      # Committed permission defaults
 ├── .github/rulesets/      # Branch-protection rules-as-code
 ├── .github/workflows/     # CI/CD pipelines (ci, deploy, security, stale)
@@ -69,11 +73,24 @@ This keeps every safety guard while cutting tokens, cost, and latency by ~20-27%
 ├── docs/                  # Documentation
 │   ├── agentic-sdlc.md    # Agentic SDLC protocol
 │   ├── architecture.md    # Architecture documentation
+│   ├── git-workflow.md    # Branching, commits, merging, force-push rules
+│   ├── ci-cd.md           # Pipelines, permissions, supply-chain hardening
+│   ├── web-standards.md   # Responsive, a11y, SEO — incl. banned patterns
+│   ├── component-structure.md # App Router layout, data layer, styling
+│   ├── build-versioning.md    # Build provenance in the footer
+│   ├── github-standards.md    # Social card, metadata, issue forms, security
+│   ├── claude-tooling.md      # .claude/ — agents, skills, hooks, MCP
+│   ├── template-lifecycle.md  # Two-way sync with repo-template
 │   └── decisions/         # Architecture Decision Records
 ├── scripts/               # Automation scripts (init, propagate, start-loop)
 ├── seeds/                 # Template seeds for project types
-└── templates/             # Config file templates
+└── templates/             # Copyable scripts, components, styles
 ```
+
+**Before writing code, read the standard that governs it** — `web-standards.md`
+for anything with a UI, `component-structure.md` for React/Next work,
+`git-workflow.md` before your first commit. Each carries a banned-patterns table
+or checklist that is faster to scan than the bug it prevents is to debug.
 
 ## Anti-Patterns
 
@@ -110,23 +127,30 @@ This keeps every safety guard while cutting tokens, cost, and latency by ~20-27%
 
 ## Conventions
 
-- Default branch is `main` for all work unless a feature branch is explicitly specified.
+- `main` is the trunk — always green, always deployable. **Never commit to it directly.**
 - Project-wide naming conventions are documented in the README. Follow them.
 - Commit messages: `type(scope): description` (e.g., `feat(auth): add MFA support`).
-- Run `git pull --ff-only` before starting work and before pushing.
+- Branch from a current trunk: `git fetch origin && git checkout -B <branch> origin/main`.
+  Rebase onto `origin/main` before pushing.
+- PR branches: `feat/description`, `fix/description`, `chore/description`.
+  Agent-authored: `claude/<feature>-<short-code>`.
+- Squash merge, then delete the branch. `--force-with-lease` on your own branch
+  only; never force-push `main`.
 - Keep `.env` in `.gitignore`; document required variables in `.env.example`.
 - Architecture decisions go in `docs/decisions/` as ADR files.
 - Update `CHANGELOG.md` with every significant change.
-- PR branches: `feat/description`, `fix/description`, `chore/description`.
+
+Full branching, commit, and merge rules: [`docs/git-workflow.md`](docs/git-workflow.md).
 
 ## Agentic SDLC Protocol
 
 1. **Read context** — AGENTS.md → CLAUDE.md → AI_CONTEXT.md → .cursorrules
-2. **Orient** — `git pull --ff-only`, check issues/PRs/task
+2. **Orient** — `git fetch origin`, branch off `origin/main`, check issues/PRs/task
 3. **Plan** — State approach before coding. Write/update ADR if architect role.
 4. **Execute** — One logical change, run linters, commit.
 5. **Verify** — Full tests + build. Update CHANGELOG.md.
-6. **Deliver** — Push branch, create PR (if multi-agent) or merge (if solo + CI passing).
+6. **Deliver** — Rebase on `origin/main`, push branch, open PR.
+7. **Land** — Drive CI to green. Never bypass a failing check; fix it or escalate it.
 
 ## Naming Standards (Quick Reference)
 
@@ -169,6 +193,7 @@ This template is versioned. See `CHANGELOG.md` for the current version and relea
 
 ## Available Skills
 
+- **template-uplift**: Promote an improvement from this project back into `repo-template.bardenhagen.xyz` so every future project inherits it. Use when told "add this to the template" / "every project should do this", or after fixing a bug whose root cause would recur in any project built from the template. See `.claude/skills/template-uplift/SKILL.md`.
 - **kilo-config**: Guide for Kilo configuration: config paths, kilo.json fields, commands, agents, skills, permissions, MCPs, providers, TUI settings, plus Agent Manager worktree setup/run scripts, workflows, and state. Use for Kilo config questions, locating loaded config, changing settings, or Agent Manager questions about run/setup scripts, worktree setup/workflows, apply/merge/PR/conflicts, missing sessions/worktrees, and agent-manager.json recovery. See `.kilo/skills/kilo-config/SKILL.md`.
 - **pr-auto-merge**: Automatically resolve merge conflicts, approve, merge, and delete branches for open pull requests. See `.kilo/skills/pr-auto-merge/SKILL.md`.
 - **github-cleanup**: Clean up GitHub repositories by ensuring main branch is default, merging legacy master/Main/Master branches into main, and removing stale branches. See `.kilo/skills/github-cleanup/SKILL.md`.

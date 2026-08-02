@@ -1,0 +1,96 @@
+name: Template uplift
+description: Promote an improvement discovered in a downstream project back into the template
+title: "uplift: "
+labels: ["template-uplift"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this when a project built from this template solved something that
+        **every** project would benefit from.
+
+        Most fixes should *not* be promoted. Every rule in the template is read
+        by every agent on every project, so a bloated template is worse than a
+        thin one. Two tests, both must pass:
+
+        1. **It would recur** — the cause is structural, not specific to one
+           project's data, domain, or design.
+        2. **It is stateable as a rule** — "never X, always Y", applicable by
+           someone who never saw the original bug.
+
+  - type: input
+    id: source
+    attributes:
+      label: Where was this found?
+      description: Repo, and the PR or commit that fixed it.
+      placeholder: peterjbardenhagen/dashypjb#15
+    validations:
+      required: true
+
+  - type: textarea
+    id: failure
+    attributes:
+      label: What went wrong?
+      description: |
+        Lead with the failure mode, not the fix. What a reader needs in order to
+        recognise the same bug in their own code.
+      placeholder: |
+        repeat(auto-fit, minmax(300px, 1fr)) claims a hard 300px per track, so
+        below ~340px the card's right edge is pushed off-screen while its left
+        edge stays visible. It reads as a styling bug, not an overflow one,
+        which is why it survived review.
+    validations:
+      required: true
+
+  - type: textarea
+    id: rule
+    attributes:
+      label: The generalised rule
+      description: Stripped of project specifics — no app names, routes, colours, or domain nouns. Include ✅/❌ code.
+      placeholder: |
+        ❌ grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        ✅ grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    validations:
+      required: true
+
+  - type: dropdown
+    id: destination
+    attributes:
+      label: Where should it live?
+      options:
+        - docs/git-workflow.md — branching, commits, merging
+        - docs/ci-cd.md or .github/workflows/ — pipelines, permissions, supply chain
+        - docs/web-standards.md — responsive, a11y, SEO
+        - docs/component-structure.md — React/Next structure, data layer
+        - docs/build-versioning.md — build provenance
+        - templates/ — a copyable script, component, or stylesheet
+        - rules/ or .claude/agents/ — a role's responsibilities
+        - AGENTS.md — a one-line rule every agent must follow
+        - A new .claude/skills/ skill — a repeatable multi-step workflow
+        - Not sure
+    validations:
+      required: true
+
+  - type: textarea
+    id: enforcement
+    attributes:
+      label: How can it be enforced?
+      description: |
+        A rule in prose is a suggestion. A lint regex, a CI step, a script check,
+        or a checklist line makes it real. Say "none possible" if it genuinely
+        cannot be checked.
+      placeholder: 'rg -n "minmax\(\s*[0-9]+(px|rem)" src — must return nothing'
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Filter
+      options:
+        - label: This would recur in other projects — it is not specific to one codebase
+          required: true
+        - label: I have stated it as a rule someone could apply without seeing the original bug
+          required: true
+        - label: I verified any proposed check against both a passing and a failing example
+          required: false

@@ -1,5 +1,18 @@
 name: Dependabot Auto-Merge
 
+# ---------------------------------------------------------------------------
+# `pull_request_target` is deliberate and safe HERE, and only here.
+# Dependabot PRs get a read-only token on `pull_request`, so approving and
+# merging needs the elevated context `pull_request_target` provides. The
+# pattern is safe because this workflow NEVER checks out or executes PR code —
+# it only reads metadata and calls the GitHub API. Two rules keep it that way:
+#   1. Never add actions/checkout to this file.
+#   2. Never add a step that runs code from the PR branch (build, test, or
+#      `npm ci` — all execute attacker-controlled scripts).
+# To build or test a Dependabot PR, do it in ci.yml on the normal
+# `pull_request` trigger, which is correctly sandboxed.
+# ---------------------------------------------------------------------------
+
 on:
   pull_request_target:
     branches: [main]
@@ -15,7 +28,7 @@ jobs:
     steps:
       - name: Fetch dependency metadata
         id: metadata
-        uses: dependabot/fetch-metadata@e7a46dc2241a17cd2d63b869c0f3019d3bc15f46 # v2.5.0
+        uses: dependabot/fetch-metadata@21025c705c08248db411dc16f3619e6b5f9ea21a # v2.5.0
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
 

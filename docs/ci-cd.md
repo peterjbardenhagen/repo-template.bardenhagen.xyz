@@ -42,10 +42,74 @@ on:
 
 ## Supply-Chain Hardening
 
-All third-party actions in this template are pinned to specific commit SHAs or stable tags. When forking:
-1. Audit the SHAs against the upstream action source
-2. Update pins during regular maintenance cycles
-3. Enable GitHub's Dependabot alerts for actions
+Every third-party action is pinned to a full commit SHA with the version in a
+trailing comment. The comment is not decoration — Dependabot needs it to bump
+the pin, and `verify-action-pins.sh` needs it to check the pin is real:
+
+```yaml
+uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+```
+
+### Never invent a SHA
+
+Resolve it from the live repo:
+
+```bash
+git ls-remote https://github.com/OWNER/REPO 'refs/tags/TAG^{}' refs/tags/TAG \
+  | sort -k2 | tail -1 | cut -f1
+```
+
+The `^{}` matters. For an *annotated* tag, `refs/tags/vX` is the tag object, not
+the commit, and a pin to the tag object does not resolve.
+
+A made-up SHA is worse than a floating tag. The job does not run degraded — it
+never starts, failing with `Unable to resolve action ... unable to find version`,
+and the workflow file looks completely correct because one 40-hex string is
+indistinguishable from another. This is a mistake both humans and agents make
+easily.
+
+### The guard
+
+`scripts/verify-action-pins.sh` runs as the **Verify action pins** CI job and
+fails the build on any of:
+
+| Failure | Why it matters |
+|---|---|
+| SHA does not match its comment tag | The job cannot start |
+| Comment tag does not exist upstream | The pin can never be verified or bumped |
+| Pinned SHA with no version comment | Unverifiable; Dependabot cannot bump it |
+| Floating tag (`@v4`) | The thing pinning exists to prevent |
+
+Run it locally before pushing a workflow change:
+
+```bash
+./scripts/verify-action-pins.sh
+```
+
+Also enable Dependabot alerts for `github-actions` (already configured in
+`.github/dependabot.yml`) — it updates SHA pins in place and keeps the comment
+in sync.
+
+## Prerequisite: enable Code scanning
+
+CodeQL analyses successfully but **cannot upload its results** until code
+scanning is switched on for the repository. The job fails with:
+
+```
+Code scanning is not enabled for this repository.
+Please enable code scanning in the repository settings.
+```
+
+This is a repository setting, not a workflow bug — no change to
+`codeql-analysis.yml` can fix it. Enable it once per repo:
+
+**Settings → Code security → Code scanning → Set up → Advanced**
+
+(Free on public repositories; requires GitHub Advanced Security on private ones.)
+
+The workflow is deliberately left strict rather than tolerating the upload
+failure: a CodeQL job that passes without publishing results looks like working
+security coverage while providing none.
 
 ## Environment Protection
 

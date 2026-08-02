@@ -1,0 +1,79 @@
+<!--
+  GitHub social preview card — 1280×640.
+
+  This is the image GitHub shows when the repo is linked in Slack, Teams,
+  LinkedIn, or X. Without one, the link renders as the owner's avatar and a
+  wall of text, which is why repos with a card get noticeably more clicks.
+
+  Usage:
+    1. Edit TITLE, SUBTITLE, and the accent colour below
+    2. Export to PNG at exactly 1280×640:
+         rsvg-convert -w 1280 -h 640 social-preview.svg -o social-preview.png
+       (or open in a browser and screenshot, or use Figma/Inkscape)
+    3. Upload: Settings → General → Social preview → Edit → Upload an image
+
+  THE 40pt SAFE AREA (the dashed guide) is why this template exists: different
+  surfaces crop this image differently — some to 2:1, some closer to square.
+  Anything outside the guide can be cut off. Keep all text and logos inside it.
+  Delete the <g id="safe-area-guide"> block before exporting.
+
+  Recommended: under 1 MB. GitHub accepts PNG, JPG, and GIF.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-label="Repository social preview">
+  <defs>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1280" height="640" fill="#0d1117"/>
+
+  <!-- Accent bar -->
+  <rect x="0" y="0" width="1280" height="10" fill="url(#accent)"/>
+
+  <!-- Content — all inside the 40pt safe area -->
+  <g transform="translate(100, 0)">
+    <!-- Repo owner / org -->
+    <text x="0" y="230" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+          font-size="30" font-weight="500" fill="#8b949e" letter-spacing="0.5">
+      OWNER
+    </text>
+
+    <!-- TITLE — keep to ~28 characters so it does not run into the safe edge -->
+    <text x="0" y="320" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+          font-size="76" font-weight="700" fill="#f0f6fc">
+      Repository Name
+    </text>
+
+    <!-- SUBTITLE — one line, ~70 characters max -->
+    <text x="0" y="392" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+          font-size="32" font-weight="400" fill="#8b949e">
+      One line on what this repository actually does.
+    </text>
+
+    <!-- Optional tag row -->
+    <g transform="translate(0, 450)">
+      <rect x="0" y="0" width="160" height="44" rx="22" fill="#1f6feb" fill-opacity="0.15" stroke="#1f6feb" stroke-opacity="0.4"/>
+      <text x="80" y="29" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            font-size="20" font-weight="600" fill="#58a6ff">TypeScript</text>
+
+      <rect x="176" y="0" width="160" height="44" rx="22" fill="#1f6feb" fill-opacity="0.15" stroke="#1f6feb" stroke-opacity="0.4"/>
+      <text x="256" y="29" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
+            font-size="20" font-weight="600" fill="#58a6ff">Next.js</text>
+    </g>
+  </g>
+
+  <!-- ===================================================================
+       SAFE-AREA GUIDE — DELETE THIS GROUP BEFORE EXPORTING
+       40pt inset on every edge. Nothing important may sit outside it.
+       =================================================================== -->
+  <g id="safe-area-guide">
+    <rect x="40" y="40" width="1200" height="560"
+          fill="none" stroke="#f85149" stroke-width="2" stroke-dasharray="10 8" opacity="0.6"/>
+    <text x="52" y="30" font-family="monospace" font-size="18" fill="#f85149" opacity="0.7">
+      40pt safe area — delete this guide before export
+    </text>
+  </g>
+</svg>

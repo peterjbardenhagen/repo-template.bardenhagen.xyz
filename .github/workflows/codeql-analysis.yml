@@ -8,23 +8,78 @@ on:
   schedule:
     - cron: '0 12 * * 1'  # Weekly: every Monday at noon
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 permissions:
   contents: read
-  security-events: write
-  actions: read
 
 jobs:
+  # A hardcoded language matrix fails every language the repo does not contain:
+  # CodeQL errors rather than no-oping when it finds no source to analyze. That
+  # kept this workflow permanently red in the bare template. Detecting the
+  # languages actually present also means a generated project gets correct
+  # coverage without anyone hand-editing this matrix.
+  detect:
+    name: Detect languages
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      languages: ${{ steps.detect.outputs.languages }}
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          persist-credentials: false
+
+      - name: Detect languages present
+        id: detect
+        run: |
+          langs=()
+          files=$(git ls-files)
+          has() { printf '%s\n' "$files" | grep -qE "$1"; }
+
+          # 'actions' analyses the workflow files themselves for injection and
+          # supply-chain issues — always applicable in a repo with workflows.
+          has '^\.github/workflows/.*\.ya?ml$' && langs+=('actions')
+          has '\.(js|jsx|ts|tsx|mjs|cjs)$'     && langs+=('javascript-typescript')
+          has '\.py$'                          && langs+=('python')
+          has '\.(cs|csproj)$'                 && langs+=('csharp')
+          has '\.go$'                          && langs+=('go')
+          has '\.(java|kt)$'                   && langs+=('java-kotlin')
+          has '\.rb$'                          && langs+=('ruby')
+
+          if [ ${#langs[@]} -eq 0 ]; then
+            json='[]'
+          else
+            json=$(printf '%s\n' "${langs[@]}" | jq -R . | jq -sc .)
+          fi
+
+          echo "languages=$json" >> "$GITHUB_OUTPUT"
+          echo "Analyzing: $json"
+
   analyze:
     name: CodeQL Analyze
+    needs: detect
+    if: needs.detect.outputs.languages != '[]'
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
     strategy:
       fail-fast: false
       matrix:
-        language: ['javascript', 'python', 'csharp', 'go']
+        language: ${{ fromJSON(needs.detect.outputs.languages) }}
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.3.1
-      - uses: github/codeql-action/init@9c65253f329324b8c8da4c7ba52422f26e1e5841 # v3.27.1
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          persist-credentials: false
+      - uses: github/codeql-action/init@f205ea1c3313d32999d8d6a48b4f6530d4437b38 # v4.37.4
         with:
           languages: ${{ matrix.language }}
-      - uses: github/codeql-action/autobuild@9c65253f329324b8c8da4c7ba52422f26e1e5841 # v3.27.1
-      - uses: github/codeql-action/analyze@9c65253f329324b8c8da4c7ba52422f26e1e5841 # v3.27.1
+      - uses: github/codeql-action/autobuild@f205ea1c3313d32999d8d6a48b4f6530d4437b38 # v4.37.4
+      - uses: github/codeql-action/analyze@f205ea1c3313d32999d8d6a48b4f6530d4437b38 # v4.37.4
+        with:
+          category: "/language:${{ matrix.language }}"

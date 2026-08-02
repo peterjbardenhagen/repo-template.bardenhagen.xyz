@@ -62,8 +62,9 @@ TEMPLATE_FILES=(
   ".github/workflows/auto-assign.yml"
   ".github/dependabot.yml"
   ".github/CODEOWNERS"
-  ".github/ISSUE_TEMPLATE/bug_report.md"
-  ".github/ISSUE_TEMPLATE/feature_request.md"
+  ".github/ISSUE_TEMPLATE/bug_report.yml"
+  ".github/ISSUE_TEMPLATE/feature_request.yml"
+  ".github/ISSUE_TEMPLATE/template_uplift.yml"
   ".github/ISSUE_TEMPLATE/config.yml"
   ".github/PULL_REQUEST_TEMPLATE.md"
 
@@ -74,6 +75,8 @@ TEMPLATE_FILES=(
   "rules/03-reviewer.md"
   "rules/04-tester.md"
   "rules/05-devops.md"
+  "rules/06-ux.md"
+  "rules/07-analyst.md"
 
   # Documentation
   "docs/agentic-sdlc.md"
@@ -81,10 +84,23 @@ TEMPLATE_FILES=(
   "docs/decisions/README.md"
   "docs/decisions/ADR-001-record-architecture-decisions.md"
   "docs/getting-started.md"
+  "docs/git-workflow.md"
+  "docs/build-versioning.md"
+  "docs/component-structure.md"
+  "docs/web-standards.md"
+  "docs/github-standards.md"
+  "docs/claude-tooling.md"
+  "docs/template-lifecycle.md"
   "CHANGELOG.md"
+
+  # Claude Code skills
+  ".claude/skills/template-uplift/SKILL.md"
+  ".claude/agents/ux.md"
+  ".claude/agents/analyst.md"
 
   # Scripts
   "scripts/init-project.sh"
+  "scripts/verify-action-pins.sh"
   "scripts/propagate-template.sh"
 )
 
@@ -208,8 +224,22 @@ propagate_to_repo() {
           log_ok "Updated ${tfile} (template overrides project)"
           changes_made=true
           ;;
+        .claude/skills/*)
+          cp "$src" "$dst"
+          log_ok "Updated ${tfile} (template overrides project)"
+          changes_made=true
+          ;;
+        # Template-owned standards. These are the same rules everywhere by
+        # design, so the template wins — otherwise a doc lands once and then
+        # silently diverges, and downstream repos keep following superseded
+        # guidance forever. Project-specific docs stay in the docs/* branch below.
+        docs/git-workflow.md|docs/build-versioning.md|docs/component-structure.md|docs/web-standards.md|docs/github-standards.md|docs/claude-tooling.md|docs/template-lifecycle.md|docs/agentic-sdlc.md)
+          cp "$src" "$dst"
+          log_ok "Updated ${tfile} (template overrides project)"
+          changes_made=true
+          ;;
         docs/*)
-          # Only copy if project doesn't have its own version
+          # Project-owned docs (architecture, getting-started) — never clobber.
           log_skip "Skipped ${tfile} (project has its own version)"
           ;;
         .github/*)

@@ -1,14 +1,13 @@
----
-
-## 3. Repository Onboarding & Launch Script
-Place this script in `scripts/open-repo.sh`. It prepares your Git Bash / Windows workspace, opens VS Code, and displays agent guidance.
-
-```bash
 #!/usr/bin/env bash
 # scripts/open-repo.sh
+#
+# Prepares the workspace, installs dependencies if needed, opens VS Code,
+# and prints agent guidance.
+
+set -euo pipefail
 
 echo "=========================================="
-echo "📂 Opening Project Workspace for Vibe Kanban & OpenCode"
+echo "📂 Opening Project Workspace"
 echo "=========================================="
 
 # Ensure Git Bash handles Windows paths smoothly
@@ -21,14 +20,14 @@ if [ -f "package.json" ] && [ ! -d "node_modules" ]; then
 fi
 
 echo ""
-echo "🤖 OpenCode / Vibe Kanban Workspace Ready."
+echo "🤖 Workspace Ready."
 echo "------------------------------------------"
 echo "Available Commands in Terminal / Agent Prompt:"
 echo "1. Run full automated delivery:"
 echo "   ./scripts/commit-and-clean.sh \"your commit message\""
 echo ""
-echo "2. Ask OpenCode Agent:"
-echo "   \"Use the committer agent to build, test, merge into main, clean branches, and push.\""
+echo "2. Ask your coding agent:"
+echo "   \"Build, test, open a PR, and drive CI to green.\""
 echo "------------------------------------------"
 
 # Open current directory in VS Code if installed
