@@ -24,7 +24,26 @@ jobs:
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
+      # The template's Dockerfile is a placeholder doing `COPY package*.json`
+      # and `npm ci`, so it cannot build in the bare template, which has no
+      # manifest. These steps activate on their own once a generated project
+      # adds one.
+      #
+      # The check must live in a step, not a job-level `if`: hashFiles() and
+      # file tests evaluate against the workspace, which is still empty before
+      # checkout runs.
+      - name: Detect buildable project
+        id: detect
+        run: |
+          if [ -f package.json ] || [ -f requirements.txt ] || [ -f go.mod ] || [ -f Cargo.toml ]; then
+            echo "buildable=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "buildable=false" >> "$GITHUB_OUTPUT"
+            echo "No project manifest found — skipping image build and scan."
+          fi
+
       - name: Build scan image
+        if: steps.detect.outputs.buildable == 'true'
         uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6.19.2
         with:
           context: .
@@ -34,6 +53,7 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: Run scan
+        if: steps.detect.outputs.buildable == 'true'
         run: |
           echo "Add your scanner here — e.g. trivy, grype, npm audit --json, pip-audit"
           echo "Write findings to scan-results.json / scan-results.txt"
