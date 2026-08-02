@@ -28,7 +28,8 @@ const PATHS = process.argv.slice(3).length > 0 ? process.argv.slice(3) : ['/'];
 let hasErrors = false;
 
 async function auditPage(browser, url, viewport) {
-  const context = await browser.createBrowserContext();
+  // Playwright's API is newContext() — createBrowserContext() is Puppeteer's.
+  const context = await browser.newContext();
   const page = await context.newPage();
 
   try {
@@ -95,10 +96,13 @@ async function runAudit() {
     if (hasErrors) {
       console.error('\n❌ Audit failed. Fix horizontal scrolling and try again.');
       console.error('\nCommon causes:');
+      console.error('  • repeat(auto-fit, minmax(300px, 1fr)) — the floor does not shrink.');
+      console.error('    Use minmax(min(300px, 100%), 1fr)');
       console.error('  • w-[600px] or other hard-coded widths on decorative elements');
       console.error('  • w-screen or width: 100vw');
       console.error('  • Negative margins pushing content off-screen');
       console.error('  • Missing overflow-hidden on parent sections');
+      console.error('  • A wide table not wrapped in an overflow-x-auto container');
       console.error('\nFix guide: https://digitalresponse.com.au/standards/01-responsive');
       process.exit(1);
     } else {

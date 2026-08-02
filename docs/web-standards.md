@@ -86,24 +86,131 @@ import { DecorLayer, Blob } from '@/components/DecorLayer';
 </div>
 ```
 
+#### The `minmax()` Grid Trap
+
+The single most common way a card grid breaks on a phone:
+
+```css
+/* ❌ Overflows below ~340px. The 300px floor is a HARD minimum — when the
+   viewport minus padding is narrower than 300px, the track still claims
+   300px and the card's right edge is pushed outside the viewport. */
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+/* ✅ The floor collapses to the container width when that is the smaller
+   of the two, so the card always fits. */
+grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+```
+
+Tailwind:
+
+```tsx
+❌ grid-cols-[repeat(auto-fit,minmax(300px,1fr))]
+✅ grid-cols-[repeat(auto-fit,minmax(min(300px,100%),1fr))]
+```
+
+The failure is easy to miss because it is *asymmetric*: the left border of each
+card stays visible while the right border is clipped off-screen, so it reads as
+a styling bug rather than an overflow one. Any `auto-fit`/`auto-fill` track with
+a fixed floor needs the `min()` wrapper.
+
+#### Component-Level Responsiveness: Container Queries
+
+Prefer container queries over viewport breakpoints when the behaviour belongs to
+a *component* rather than the page. A card in a narrow sidebar should lay out as
+though it is narrow, regardless of how wide the window is — which a media query
+cannot express.
+
+```css
+.card-grid { container-type: inline-size; }
+
+@container (min-width: 480px) {
+  .card { grid-template-columns: auto 1fr; }
+}
+```
+
+```tsx
+<div className="@container">
+  <div className="flex flex-col @md:flex-row">…</div>
+</div>
+```
+
+Baseline across Chrome, Firefox, Safari, and Edge since late 2023 (>95% global).
+
+Keep **media** queries for what they are still the right tool for: user
+preferences (`prefers-color-scheme`, `prefers-reduced-motion`,
+`prefers-contrast`), print styles, and genuine page-level layout shifts.
+
+#### Fluid Type and Space
+
+Prefer `clamp()` over stacked breakpoints — fewer rules, no jumps between them:
+
+```css
+h1 { font-size: clamp(1.75rem, 1.2rem + 2.5vw, 3rem); }
+.section { padding-block: clamp(2rem, 5vw, 5rem); }
+```
+
+Body text must never resolve below `16px` — iOS Safari zooms the viewport on
+focus of any input with a smaller computed font size.
+
+#### Heading Hierarchy
+
+Visual size must track semantic level. Exactly one `<h1>` per page, and no
+heading larger than the one above it.
+
+```tsx
+❌ <PageHead title="Files" />        {/* h1 */}
+   <h1 className="text-4xl">OneDrive Files</h1>   {/* second h1, and larger */}
+
+✅ <PageHead title="Files" />        {/* h1 */}
+   <h2 className="text-2xl">OneDrive Files</h2>
+```
+
+If a page already renders its title through shared chrome (`PageHead`, a layout,
+a template), the page body starts at `<h2>`. Screen readers navigate by heading
+level; a document with two `<h1>`s has no reliable outline.
+
+#### Tables
+
+A table is the most common overflow source after grids. Never let one set the
+page width:
+
+```tsx
+<div className="w-full overflow-x-auto">
+  <table className="min-w-[40rem]">…</table>
+</div>
+```
+
+The `min-w-*` goes on the **table**, never on the wrapper — on the wrapper it
+forces the page wide, which is the exact bug it is meant to prevent.
+
 ### Banned Patterns
 
 | ❌ Never | ✅ Instead |
 |---------|-----------|
 | `w-screen` | `w-full` |
 | `width: 100vw` | `w-full` |
+| `minmax(300px, 1fr)` in `auto-fit`/`auto-fill` | `minmax(min(300px, 100%), 1fr)` |
 | `w-[600px]` on decoration | `w-[min(600px,120vw)]` or `<Blob size={600} />` |
 | `-left-20` / `-right-20` outside clipping parent | Wrap in `<DecorLayer>` |
 | `overflow-x: hidden` on `html`/`body` | `overflow-x: clip` |
 | `min-w-[400px]` on layout | `min-w-0` + responsive `max-w-*` |
+| `min-w-*` on a table's scroll wrapper | `min-w-*` on the `<table>` itself |
 | Fixed-width tables | Wrap in `overflow-x-auto` |
+| Font size < 16px on inputs | ≥ 16px (prevents iOS zoom-on-focus) |
+| A second `<h1>`, or `<h2>` larger than the `<h1>` | One `<h1>`; descending sizes |
 
 ### Quality Gates
 
 **Linting:**
 ```bash
+# Hard-coded viewport widths
 rg -n "w-screen|100vw|w-\[[0-9]{3,}px\]" src/app src/components
-# Should return nothing
+
+# The minmax() grid trap: an auto-fit/auto-fill floor that cannot shrink.
+# Matches minmax(300px, …) but not minmax(min(300px, 100%), …)
+rg -n "minmax\(\s*[0-9]+(px|rem)" src/app src/components src/styles
+
+# Both should return nothing.
 ```
 
 **Automated Testing:**
@@ -277,6 +384,9 @@ logger.critical('database_down', {
 - [ ] All `<section>` tags use `relative isolate overflow-hidden`
 - [ ] Zero decorative elements outside `<DecorLayer>`
 - [ ] `rg -n "w-screen|100vw" src` returns nothing
+- [ ] `rg -n "minmax\(\s*[0-9]+(px|rem)" src` returns nothing
+- [ ] Every table wrapped in `overflow-x-auto`, with `min-w-*` on the table
+- [ ] One `<h1>` per page; no heading larger than its parent level
 - [ ] `npm run audit:overflow` passes at all widths
 - [ ] Tested on real device (not devtools)
 - [ ] Metadata on all pages (title, description, OG)
