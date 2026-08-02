@@ -1,0 +1,86 @@
+name: Bug report
+description: Something behaves incorrectly
+title: "fix: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. The two fields that decide whether this gets
+        fixed quickly are **reproduction steps** and **expected vs actual** —
+        please be specific in both.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you observe? Include exact error text where there is any.
+      placeholder: 'Clicking "Save" on the settings page shows "Error: null" and the change is lost.'
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Numbered, starting from a known state. A bug nobody can reproduce rarely gets fixed.
+      value: |
+        1. Go to …
+        2. Click …
+        3. See …
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version / commit
+      description: From the app footer if it shows build info, otherwise the commit SHA.
+      placeholder: v2.1.0 (f057fd3)
+    validations:
+      required: false
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options:
+        - Blocks work — no workaround
+        - Significant — painful workaround exists
+        - Minor — cosmetic or rare
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Browser/OS/device where relevant. Say if it only occurs on mobile.
+    validations:
+      required: false
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or screenshots
+      description: Paste logs directly — they are automatically formatted as code.
+      render: shell
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I searched existing issues for a duplicate
+          required: true
+        - label: I removed any secrets, tokens, or personal data from the details above
+          required: true

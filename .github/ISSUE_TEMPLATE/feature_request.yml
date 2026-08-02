@@ -1,0 +1,67 @@
+name: Feature request
+description: Propose a new capability or an improvement
+title: "feat: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe the **problem and the outcome you want**, not only the solution
+        you have in mind. A stated solution hides the problem behind it, and the
+        problem often has a cheaper answer.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: Who hits it, how often, and what do they do today instead?
+      placeholder: Every month I re-enter the same expense rows by hand because there is no way to copy last month's.
+    validations:
+      required: true
+
+  - type: textarea
+    id: outcome
+    attributes:
+      label: What does success look like?
+      description: Describe it observably — how would you check it works? This becomes the acceptance criteria.
+      placeholder: |
+        Given last month has saved expenses
+        When I open a new month
+        Then I can copy them forward in one action, then edit before saving
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed approach (optional)
+      description: If you have one in mind. Leave blank if you would rather the problem was solved freely.
+    validations:
+      required: false
+
+  - type: textarea
+    id: out-of-scope
+    attributes:
+      label: Explicitly out of scope
+      description: Naming this prevents both gold-plating and "I assumed you'd also…".
+    validations:
+      required: false
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: How much does this matter?
+      options:
+        - Blocking something I need to do
+        - Significant time saving
+        - Nice to have
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I searched existing issues for a duplicate
+          required: true
