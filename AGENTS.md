@@ -78,6 +78,9 @@ This keeps every safety guard while cutting tokens, cost, and latency by ~20-27%
 │   ├── web-standards.md   # Responsive, a11y, SEO — incl. banned patterns
 │   ├── component-structure.md # App Router layout, data layer, styling
 │   ├── build-versioning.md    # Build provenance in the footer
+│   ├── github-standards.md    # Social card, metadata, issue forms, security
+│   ├── claude-tooling.md      # .claude/ — agents, skills, hooks, MCP
+│   ├── template-lifecycle.md  # Two-way sync with repo-template
 │   └── decisions/         # Architecture Decision Records
 ├── scripts/               # Automation scripts (init, propagate, start-loop)
 ├── seeds/                 # Template seeds for project types
