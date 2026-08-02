@@ -92,6 +92,7 @@ TEMPLATE_FILES=(
 
   # Scripts
   "scripts/init-project.sh"
+  "scripts/verify-action-pins.sh"
   "scripts/propagate-template.sh"
 )
 

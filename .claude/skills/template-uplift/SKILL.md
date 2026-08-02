@@ -124,6 +124,11 @@ worse than nothing, because it will be trusted.
   taking the last sorted line yields the commit for annotated tags and the only
   line for lightweight ones. Keep the version in a trailing comment so
   Dependabot can still bump it: `uses: owner/repo@<sha> # v1.2.3`
+
+  Then let the guard confirm it: `./scripts/verify-action-pins.sh`. **Never
+  hand-write a SHA from memory** — a plausible-looking but wrong one stops the
+  job from starting at all, and reviews do not catch it because one 40-hex
+  string looks like any other.
 - Links resolve to files that exist.
 
 ## 6. Ship
