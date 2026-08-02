@@ -12,6 +12,9 @@ When you create a repo from this template, you receive:
 - **Developer environment** — `.devcontainer/devcontainer.json` for Codespaces/VS Code
 - **Project structure** — `docs/`, `rules/`, `scripts/`, `seeds/`, `templates/` directories
 - **Agent configuration** — `AGENTS.md`, `CLAUDE.md`, `CODEX.md`, `.cursorrules`, `.windsurfrules`
+- **Mobile development** — `Makefile` (Termux-compatible), `.editorconfig`, and `docs/acode-setup.md` for Acode on Android
+- **UI/UX/CX automation** — Lighthouse CI workflow and config (`.github/lighthouserc.json`, `.github/workflows/lighthouse-ci.yml`)
+- **Claude Code hooks** — `.claude/hooks/hooks.json` for quality enforcement
 
 ## Post-Creation Checklist
 
@@ -27,6 +30,9 @@ After instantiating the template, update the following:
 | `.github/workflows/ci.yml` | Adjust language-specific steps and runtime setup |
 | `.devcontainer/devcontainer.json` | Adjust extensions and image for your stack |
 | `.github/dependabot.yml` | Verify or remove Dependabot configuration |
+| `.github/workflows/lighthouse-ci.yml` | Adjust URLs in `.lighthouserc.json` for your site |
+| `.claude/hooks/hooks.json` | Update hook commands for your project's tooling |
+| `docs/acode-setup.md` | Reference for Android/Acode users (no action needed) |
 
 ## Recommended Immediate Steps
 
@@ -53,3 +59,19 @@ The template ships with language-agnostic skeletons. To add language-specific sc
 - **Ruby** — add a `Gemfile` and test skeleton
 
 See the `seeds/` directory for project-type examples and `rules/` for role-based agent instructions.
+
+## Mobile Development (Acode on Android)
+
+This template includes a Termux-compatible `Makefile` and `.editorconfig` for use with [Acode](https://acode.quest/) on Android. See `docs/acode-setup.md` for full instructions on cloning, setting up Termux, installing pre-commit hooks, and running builds from your phone.
+
+## Propagating Updates to Downstream Repos
+
+Template updates can be synced to downstream repos using:
+
+```bash
+# Push template updates to all downstream repos
+bash scripts/propagate-template.sh
+
+# Collect improvements from downstream repos (feedback -> template)
+bash scripts/propagate-template.sh --collect-feedback --dry-run
+```

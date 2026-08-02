@@ -18,7 +18,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 TEMPLATE_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
-TEMPLATE_VERSION="2.0.0"
+TEMPLATE_VERSION="2.1.0"
 
 # ============================================================================
 # Configuration — list of downstream repos to propagate to
@@ -48,6 +48,8 @@ TEMPLATE_FILES=(
   ".cursorrules"
   ".windsurfrules"
   ".cursor/rules/project-rules.mdc"
+  ".claude/settings.json"
+  ".claude/hooks/hooks.json"
 
   # Project configs
   ".editorconfig"
@@ -57,7 +59,9 @@ TEMPLATE_FILES=(
   ".prettierrc"
 
   # GitHub workflows & templates
+  ".github/lighthouserc.json"
   ".github/workflows/ci.yml"
+  ".github/workflows/lighthouse-ci.yml"
   ".github/workflows/codeql-analysis.yml"
   ".github/workflows/auto-assign.yml"
   ".github/dependabot.yml"
@@ -66,6 +70,11 @@ TEMPLATE_FILES=(
   ".github/ISSUE_TEMPLATE/feature_request.md"
   ".github/ISSUE_TEMPLATE/config.yml"
   ".github/PULL_REQUEST_TEMPLATE.md"
+
+  # Community files
+  "CITATION.cff"
+  "Makefile"
+  "TEMPLATE_INFO.md"
 
   # Role-based rules
   "rules/README.md"
@@ -78,6 +87,7 @@ TEMPLATE_FILES=(
   # Documentation
   "docs/agentic-sdlc.md"
   "docs/architecture.md"
+  "docs/acode-setup.md"
   "docs/decisions/README.md"
   "docs/decisions/ADR-001-record-architecture-decisions.md"
   "docs/getting-started.md"
@@ -264,11 +274,147 @@ propagate_to_repo() {
 }
 
 # ============================================================================
+# Collect feedback from downstream repos (downstream -> template)
+# ============================================================================
+# Scans downstream repos for improvements to template-managed files and
+# generates a report that can be filed as a GitHub issue against the template.
+# This closes the feedback loop: template pushes updates downstream, downstream
+# improvements get collected and proposed back upstream.
+#
+# Usage: ./scripts/propagate-template.sh --collect-feedback [--dry-run] [--repo repo1,repo2,...]
+# ============================================================================
+
+collect_feedback() {
+  local dry_run="${1:-false}"
+  local feedback_file
+  feedback_file=$(mktemp -t "template-feedback-XXXXXX.md")
+
+  echo "========================================================"
+  echo "  Template Feedback Collection"
+  echo "  Dry run: ${DRY_RUN:-false}"
+  echo "  Date:    $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+  echo "========================================================"
+  echo ""
+
+  {
+    echo "# Template Feedback Report"
+    echo ""
+    echo "Generated from downstream repo analysis."
+    echo ""
+    echo "## Summary"
+    echo ""
+    echo "| Repo | Files Checked | Potential Improvements |"
+    echo "|------|--------------|------------------------|"
+  } > "$feedback_file"
+
+  local total_improvements=0
+
+  for repo in "${REPOS_TO_PROCESS[@]}"; do
+    log_info "Collecting feedback from: ${repo}"
+
+    local repo_data
+    repo_data=$(check_repo "$repo") || continue
+
+    local default_branch
+    default_branch=$(echo "$repo_data" | jq -r '.default_branch')
+    local repo_name
+    repo_name=$(echo "$repo_data" | jq -r '.name')
+
+    local repo_dir
+    repo_dir=$(mktemp -d -t "feedback-${repo_name}-XXXXXX")
+
+    clone_repo "$repo" "$repo_dir" || {
+      rm -rf "$repo_dir"
+      continue
+    }
+
+    pushd "$repo_dir" > /dev/null
+
+    local repo_improvements=0
+    local improvement_details=""
+
+    for tfile in "${TEMPLATE_FILES[@]}"; do
+      local src="${TEMPLATE_DIR}/${tfile}"
+      local dst="${repo_dir}/${tfile}"
+
+      if [ ! -f "$src" ]; then
+        continue
+      fi
+
+      if [ ! -f "$dst" ]; then
+        # File is missing from downstream — might need to be added
+        improvement_details+="  - **Missing**: \`${tfile}\` (not present in downstream)\n"
+        ((repo_improvements++))
+        continue
+      fi
+
+      # Skip files where template always wins (no need to collect feedback)
+      case "$tfile" in
+        AGENTS.md|CLAUDE.md|CODEX.md|COPILOT_INSTRUCTIONS.md|AI_CONTEXT.md|\
+        .cursorrules|.windsurfrules|.cursor/rules/*|rules/*|\
+        .github/CODEOWNERS|.github/ISSUE_TEMPLATE/*|.github/PULL_REQUEST_TEMPLATE.md|\
+        .github/workflows/*|.github/dependabot.yml|.github/renovate.json|\
+        .editorconfig|.gitattributes|.gitignore|.env.example|.prettierrc|\
+        CHANGELOG.md|LICENSE|\
+        scripts/init-project.sh|scripts/propagate-template.sh)
+          # These files are always overwritten by template — skip
+          continue
+          ;;
+      esac
+
+      # Compare template vs downstream
+      if ! diff -q "$src" "$dst" > /dev/null 2>&1; then
+        # Check if downstream version is newer/better
+        local diff_stat
+        diff_stat=$(diff --stat "$src" "$dst" 2>/dev/null | tail -1)
+        improvement_details+="  - **Improved**: \`${tfile}\` — downstream has changes (${diff_stat})\n"
+        ((repo_improvements++))
+      fi
+    done
+
+    echo "| \`${repo}\` | ${#TEMPLATE_FILES[@]} | ${repo_improvements} |" >> "$feedback_file"
+
+    if [ -n "$improvement_details" ]; then
+      echo "" >> "$feedback_file"
+      echo "### ${repo}" >> "$feedback_file"
+      echo -e "$improvement_details" >> "$feedback_file"
+      total_improvements=$((total_improvements + repo_improvements))
+    fi
+
+    popd > /dev/null
+    rm -rf "$repo_dir"
+  done
+
+  {
+    echo ""
+    echo "## Total Potential Improvements: ${total_improvements}"
+    echo ""
+    echo "## Next Steps"
+    echo ""
+    echo "1. Review the improvements above"
+    echo "2. For each improvement, evaluate whether it should be propagated to the template"
+    echo "3. Create a PR against \`repo-template.bardenhagen.xyz\` with the selected improvements"
+    echo "4. Or run: \`gh issue create --title \"Template feedback from downstream\" --body \"\`cat ${feedback_file}\`\`"
+  } >> "$feedback_file"
+
+  if [ "$dry_run" = true ]; then
+    log_info "Dry run — report generated at ${feedback_file}"
+    cat "$feedback_file"
+  else
+    log_ok "Feedback report saved to: ${feedback_file}"
+    log_info "Review the report and file a PR/issue against the template repo."
+  fi
+
+  rm -f "$feedback_file"
+}
+
+# ============================================================================
 # Main
 # ============================================================================
 
 DRY_RUN=false
 FILTER_REPOS=()
+COLLECT_FEEDBACK=false
 
 # Parse arguments
 while [[ $# -gt 0 ]]; do
@@ -281,9 +427,13 @@ while [[ $# -gt 0 ]]; do
       IFS=',' read -ra FILTER_REPOS <<< "$2"
       shift 2
       ;;
+    --collect-feedback)
+      COLLECT_FEEDBACK=true
+      shift
+      ;;
     *)
       echo "Unknown option: $1"
-      echo "Usage: $0 [--dry-run] [--repo repo1,repo2,...]"
+      echo "Usage: $0 [--dry-run] [--repo repo1,repo2,...] [--collect-feedback]"
       exit 1
       ;;
   esac
@@ -294,6 +444,12 @@ if [ ${#FILTER_REPOS[@]} -gt 0 ]; then
   REPOS_TO_PROCESS=("${FILTER_REPOS[@]}")
 else
   REPOS_TO_PROCESS=("${DOWNSTREAM_REPOS[@]}")
+fi
+
+# Branch: collect feedback (downstream -> template) vs propagate (template -> downstream)
+if [ "$COLLECT_FEEDBACK" = true ]; then
+  collect_feedback "$DRY_RUN"
+  exit 0
 fi
 
 echo "========================================================"

@@ -1,0 +1,55 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo Checking for dangerous commands... && if echo \"$CLAUDE_TOOL_INPUT_command\" | grep -qE '(rm -rf|git reset --hard|git push --force)'; then echo \"BLOCKED: Potentially destructive command detected. This hook prevents dangerous operations.\"; exit 1; fi"
+          }
+        ]
+      },
+      {
+        "matcher": "source.path ends with:.env or source.path ends with:.env.local",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo WARNING: Writing to a .env file. Ensure secrets are not committed. Use .env.example for templates."
+          }
+        ]
+      },
+      {
+        "matcher": "source.path ends with:package.json or source.path ends with:requirements.txt",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo WARNING: Dependency file changed. Remember to pin versions and run security audits."
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo Running formatter on edited file... && (npx prettier --write \"$CLAUDE_TOOL_RESULT_PATH\" 2>/dev/null || npx prettier --write \"$CLAUDE_TOOL_RESULT_PATH\" --config .prettierrc 2>/dev/null || echo \"No formatter available or file not formatted.\")"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "default",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo Running final quality checks... && (npm run lint 2>/dev/null && npm run test 2>/dev/null || echo \"Run lint and tests manually if npm scripts not configured.\")"
+          }
+        ]
+      }
+    ]
+  }
+}

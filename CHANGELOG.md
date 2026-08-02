@@ -12,9 +12,14 @@
 ### Added
 - `TEMPLATE_INFO.md` — explicit instructions for using this repository as a GitHub template, including post-creation checklist and naming conventions
 - `CITATION.cff` — citation metadata (CFF 1.2.0 format) for Zenodo and GitHub citation export
-- `Makefile` — common developer tasks (help, install, lint, format, test, build, docs, dev, clean)
+- `Makefile` — common developer tasks (help, install, lint, format, test, build, docs, dev, clean); portable for Termux/Android
+- `.github/lighthouserc.json` — Lighthouse CI configuration template for automated UI/UX/CX quality checks
+- `.github/workflows/lighthouse-ci.yml` — CI workflow for automated Lighthouse + accessibility audits
+- `.claude/hooks/hooks.json` — Claude Code lifecycle hooks (dangerous command blocking, auto-formatting, quality checks)
 - `.pre-commit-config.yaml` with hooks to detect merge conflicts, YAML/JSON validation, trailing whitespace, and Markdown linting
-- `docs/TOOL-FILE-STRUCTURE.md` — clarifies source of truth for AI tool configurations (.claude/ vs rules/ vs IDE-specific files)
+- `docs/TOOL-FILE-STRUCTURE.md` — clarifies source of truth for AI tool configurations
+- `--collect-feedback` mode in `scripts/propagate-template.sh` — collects improvements from downstream repos
+- Acode (Android) editor support — Makefile portability, `.editorconfig` compatibility, and `docs/acode-setup.md` guide
 - Pre-commit installation instructions in AGENTS.md
 
 ### Changed

@@ -303,6 +303,8 @@ function.local.settings.json
 *.json
 !**/*.example.json
 !seeds/**/*.json
+!.claude/hooks/hooks.json
+!.github/lighthouserc.json
 .service-account.json
 application_default_credentials.json
 .gcloud/
