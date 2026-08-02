@@ -81,7 +81,14 @@ TEMPLATE_FILES=(
   "docs/decisions/README.md"
   "docs/decisions/ADR-001-record-architecture-decisions.md"
   "docs/getting-started.md"
+  "docs/git-workflow.md"
+  "docs/build-versioning.md"
+  "docs/component-structure.md"
+  "docs/web-standards.md"
   "CHANGELOG.md"
+
+  # Claude Code skills
+  ".claude/skills/template-uplift/SKILL.md"
 
   # Scripts
   "scripts/init-project.sh"
@@ -208,8 +215,22 @@ propagate_to_repo() {
           log_ok "Updated ${tfile} (template overrides project)"
           changes_made=true
           ;;
+        .claude/skills/*)
+          cp "$src" "$dst"
+          log_ok "Updated ${tfile} (template overrides project)"
+          changes_made=true
+          ;;
+        # Template-owned standards. These are the same rules everywhere by
+        # design, so the template wins — otherwise a doc lands once and then
+        # silently diverges, and downstream repos keep following superseded
+        # guidance forever. Project-specific docs stay in the docs/* branch below.
+        docs/git-workflow.md|docs/build-versioning.md|docs/component-structure.md|docs/web-standards.md|docs/agentic-sdlc.md)
+          cp "$src" "$dst"
+          log_ok "Updated ${tfile} (template overrides project)"
+          changes_made=true
+          ;;
         docs/*)
-          # Only copy if project doesn't have its own version
+          # Project-owned docs (architecture, getting-started) — never clobber.
           log_skip "Skipped ${tfile} (project has its own version)"
           ;;
         .github/*)
