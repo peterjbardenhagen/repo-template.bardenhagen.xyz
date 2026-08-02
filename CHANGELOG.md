@@ -10,6 +10,9 @@
   - Cleaned up `.gitignore` to remove duplicate entries
 
 ### Added
+- `TEMPLATE_INFO.md` — explicit instructions for using this repository as a GitHub template, including post-creation checklist and naming conventions
+- `CITATION.cff` — citation metadata (CFF 1.2.0 format) for Zenodo and GitHub citation export
+- `Makefile` — common developer tasks (help, install, lint, format, test, build, docs, dev, clean)
 - `.pre-commit-config.yaml` with hooks to detect merge conflicts, YAML/JSON validation, trailing whitespace, and Markdown linting
 - `docs/TOOL-FILE-STRUCTURE.md` — clarifies source of truth for AI tool configurations (.claude/ vs rules/ vs IDE-specific files)
 - Pre-commit installation instructions in AGENTS.md

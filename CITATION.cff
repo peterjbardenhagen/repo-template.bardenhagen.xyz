@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this software in a publication, please cite it as below."
+title: "Repo Template — AI Agentic SDLC Starter"
+authors:
+  - family-names: Bardenhagen
+    given-names: Peter
+    orcid: "https://orcid.org/0000-0000-0000-0000"
+date-released: 2026-01-01
+version: 2.1.0
+license: MIT
+repository-code: "https://github.com/peterjbardenhagen/repo-template.bardenhagen.xyz"
+keywords:
+  - software-engineering
+  - ai-agents
+  - sdld
+  - template
+  - github-actions
+  - devcontainer
