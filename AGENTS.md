@@ -64,18 +64,13 @@ This keeps every safety guard while cutting tokens, cost, and latency by ~20-27%
 │   ├── skills/            # Claude Code skills (empty by default)
 │   └── settings.json      # Committed permission defaults
 ├── .github/rulesets/      # Branch-protection rules-as-code
-<<<<<<< HEAD
 ├── .github/workflows/     # CI/CD pipelines (ci, deploy, security, stale)
-├── scripts/               # Automation scripts (init, propagate, start-loop)
-=======
-├── .github/workflows/     # CI/CD pipelines
 ├── CONTRIBUTING.md        # Human + agent contribution guide
 ├── docs/                  # Documentation
 │   ├── agentic-sdlc.md    # Agentic SDLC protocol
 │   ├── architecture.md    # Architecture documentation
 │   └── decisions/         # Architecture Decision Records
-├── scripts/               # Automation scripts
->>>>>>> feat/agentic-template-upgrade
+├── scripts/               # Automation scripts (init, propagate, start-loop)
 ├── seeds/                 # Template seeds for project types
 └── templates/             # Config file templates
 ```
@@ -146,6 +141,18 @@ This keeps every safety guard while cutting tokens, cost, and latency by ~20-27%
 | Config files | `kebab-case` | `tailwind.config.js` |
 | Environment vars | `UPPER_SNAKE` | `DATABASE_URL` |
 
+## Pre-Commit Hooks
+
+A `.pre-commit-config.yaml` is included to catch merge conflict markers before they're committed. Install and activate it:
+
+```bash
+pip install pre-commit
+pre-commit install
+pre-commit run --all-files  # Validate existing files
+```
+
+This prevents accidentally committing files with `<<<<<<< HEAD` markers and catches other common issues (trailing whitespace, YAML/JSON syntax errors, etc.).
+
 ## Before You Finish
 
 - [ ] Read the relevant READMEs and `docs/` before making assumptions
@@ -154,6 +161,7 @@ This keeps every safety guard while cutting tokens, cost, and latency by ~20-27%
 - [ ] Updated docs (including this file's sections above, if they went stale)
 - [ ] Ran the full build
 - [ ] Tested manually if the change has a UI or user-facing surface
+- [ ] For tool/config changes: reviewed `docs/TOOL-FILE-STRUCTURE.md` to ensure consistency
 
 ## Version
 

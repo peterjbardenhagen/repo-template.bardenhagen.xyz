@@ -2,6 +2,23 @@
 
 ## [Unreleased]
 
+### Fixed
+- **Merge conflict resolution:** Resolved all `<<<<<<< HEAD` markers from `feat/agentic-template-upgrade` branch merge
+  - Hardened `.github/workflows/deploy-preview.yml` and `security-scan.yml` with SHA-pinned actions and proper permissions
+  - Unified CONTRIBUTING.md with both human and AI contribution workflows
+  - Enhanced agent configs in `.claude/agents/` with more detailed principles (security by design, property-based testing, etc.)
+  - Cleaned up `.gitignore` to remove duplicate entries
+
+### Added
+- `.pre-commit-config.yaml` with hooks to detect merge conflicts, YAML/JSON validation, trailing whitespace, and Markdown linting
+- `docs/TOOL-FILE-STRUCTURE.md` — clarifies source of truth for AI tool configurations (.claude/ vs rules/ vs IDE-specific files)
+- Pre-commit installation instructions in AGENTS.md
+
+### Changed
+- Version bumped to 2.1.0 across README.md and AI_CONTEXT.md for consistency
+
+## [Unreleased (Previous)]
+
 ### Added
 - `/kilo-config` skill description in AGENTS.md
 - Hardened GitHub Actions workflows: least-privilege permissions, SHA-pinned actions, concurrency cancellation

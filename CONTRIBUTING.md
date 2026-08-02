@@ -1,7 +1,8 @@
 # Contributing
 
-<<<<<<< HEAD
 Thank you for your interest in improving this template.
+
+**Before you start:** Read `AGENTS.md` — it's the source of truth for both human and AI-agent contributors: conventions, branch naming, commit format, and the agentic SDLC protocol this repo follows.
 
 ## Code of Conduct
 
@@ -11,9 +12,10 @@ Be respectful and inclusive. See `CODE_OF_CONDUCT.md`.
 
 1. Open an issue describing the problem or feature
 2. Discuss the approach in the issue
-3. Branch from `main` and implement the change
-4. Ensure CI passes (lint, test, build, CodeQL, Dependency Review)
-5. Submit a PR using the provided template
+3. Branch from `main` and implement the change: `git pull --ff-only origin main`
+4. Commit using Conventional Commits: `type(scope): description` (see below)
+5. Ensure CI passes (lint, test, build, CodeQL, Dependency Review)
+6. Submit a PR using the provided template
 
 ## Commit Conventions
 
@@ -47,9 +49,7 @@ type(scope): description
 ## Branching
 
 - `main` is the default branch and must remain deployable
-- Short-lived feature branches: `feat/description`
-- Bug fixes: `fix/description`
-- Docs: `docs/description`
+- Short-lived feature branches: `feat/description`, `fix/description`, `chore/description`, `docs/description`
 - Never force-push or rewrite history on `main`
 
 ## Human Review Loop
@@ -62,19 +62,6 @@ For downstream template propagation, use this flow:
 4. **Merge** — Human merges after verifying CI passes
 
 For this repo itself, all PRs require human review before merging.
-=======
-## Before you start
-
-Read `AGENTS.md` — it's the source of truth for both human and AI-agent contributors: conventions, branch naming, commit format, and the agentic SDLC protocol this repo follows.
-
-## Workflow
-
-1. `git pull --ff-only origin main`
-2. Branch: `feat/description`, `fix/description`, or `chore/description`
-3. Commit using Conventional Commits: `type(scope): description` (see `rules/02-coder.md` for the full type list)
-4. Run linter and tests before pushing
-5. Open a PR against `main` — CI must pass before merge
-6. Squash merge
 
 ## Architecture changes
 
