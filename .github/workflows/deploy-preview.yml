@@ -40,26 +40,21 @@ jobs:
           persist-credentials: false
 
       - name: Install Vercel CLI
-        if: steps.cfg.outputs.configured == 'true'
         run: npm install --global vercel@latest
 
       - name: Pull Vercel environment
-        if: steps.cfg.outputs.configured == 'true'
         run: vercel pull --yes --environment=preview --token="$VERCEL_TOKEN"
 
       - name: Build
-        if: steps.cfg.outputs.configured == 'true'
         run: vercel build --token="$VERCEL_TOKEN"
 
       - name: Deploy preview
         id: deploy
-        if: steps.cfg.outputs.configured == 'true'
         run: |
           url=$(vercel deploy --prebuilt --token="$VERCEL_TOKEN")
           echo "url=$url" >> "$GITHUB_OUTPUT"
 
       - name: Comment preview URL on PR
-        if: steps.cfg.outputs.configured == 'true'
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
           PREVIEW_URL: ${{ steps.deploy.outputs.url }}
