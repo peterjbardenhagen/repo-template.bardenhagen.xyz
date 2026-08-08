@@ -1,5 +1,28 @@
 # Release Notes
 
+## v2.3.0 — 2026-08-08
+
+### Summary
+Supply chain hardening, structured content for AI agents, and spec-driven development scaffolding.
+
+### Highlights
+- Added OpenSSF Scorecard, Gitleaks, actionlint, and SBOM generation workflows
+- Added SLSA provenance and cosign signing scaffold for release artifacts
+- Added `.mcp.json` with Context7, GitHub, and Playwright MCP servers
+- Added PR body validation workflow enforcing Conventional Commits and linked issues
+- Added Harden-Runner runtime security hardening to CI and deploy workflows
+- Added CODEOWNERS for automatic review assignment
+- Added `specs/` directory with mission.md, tech-stack.md, and initiatives/ scaffold
+- Added `HANDOFF.md` template for live working state documentation
+- Added `docs/structure-for-ai.md` defining machine-readable context schema for agents
+- Added `docs/spec-driven-development.md` with lightweight SDD methodology
+- Added `docs/supply-chain-hardening.md` comprehensive security reference
+- Added worktree parallelism scripts (`worktree-create.sh`, `worktree-list.sh`, `worktree-remove.sh`)
+- Updated CI workflow with Harden-Runner and YAML anchors for reusable steps
+- Updated deploy workflows with Harden-Runner, bare expression fixes, and per-step VERCEL_TOKEN guards
+- Bumped Docker base image from `node:20-alpine` to `node:25-alpine`
+- Updated AGENTS.md with structured context loading principle and progressive disclosure guidance
+
 ## v2.2.0 — 2026-08-08
 
 ### Summary

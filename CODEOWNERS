@@ -1,0 +1,13 @@
+# Default owners for everything
+* @peterjbardenhagen
+
+# Specific ownership
+/.github/ @peterjbardenhagen
+/docs/ @peterjbardenhagen
+/.claude/ @peterjbardenhagen
+/.agents/ @peterjbardenhagen
+/scripts/ @peterjbardenhagen
+/seeds/ @peterjbardenhagen
+/templates/ @peterjbardenhagen
+/rules/ @peterjbardenhagen
+/planning/ @peterjbardenhagen

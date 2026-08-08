@@ -54,6 +54,19 @@ ARCHITECT ──▶   CODER ──────▶    REVIEWER ───▶    TE
 
 Each handoff produces an artifact (ADR, code, PR, test report) that the next agent reads from the filesystem, not from memory.
 
+### Modern Agentic Enhancements (v2.3.0)
+
+This release introduces several enhancements based on leading agentic AI and software platform research:
+
+1. **Structured Content for AI** — See `docs/structure-for-ai.md` for machine-readable context schema. Agents reason about the codebase programmatically rather than scanning raw text.
+2. **Spec-Driven Development** — See `docs/spec-driven-development.md` for lightweight SDD methodology. Write specs before code; keep them in the repo; organize them as a constitution plus per-phase spec trio.
+3. **Dual-Model Review** — Generate with one model (e.g., Claude Code), review with another (e.g., Codex CLI). Separation of duties catches errors that single-model review misses.
+4. **Evidence-Chain Acceptance** — Browser QA with Playwright MCP produces screenshots and reports. Evidence is committed to the PR or `tests/reports/` so acceptance is verifiable, not claimed.
+5. **Worktree Parallelism** — Use `scripts/worktree-create.sh` to isolate parallel pipelines. Each worktree gets its own branch, port range, and `.claude/.sdlc-config`.
+6. **Live Working State** — `HANDOFF.md` is the single source of truth for what is in flight, what to pick up next, and what is ignored by default.
+7. **MCP Servers** — `.mcp.json` pre-wires Context7 (live library docs), GitHub (issues/PRs), and Playwright (browser QA) so agents have live tool access without manual setup.
+8. **Supply Chain Hardening** — OpenSSF Scorecard, Gitleaks, actionlint, SBOM, and SLSA provenance workflows provide defense-in-depth against supply chain attacks.
+
 ### Agent-to-Agent Communication Protocol
 
 ```

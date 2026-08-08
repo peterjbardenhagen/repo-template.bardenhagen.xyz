@@ -296,9 +296,11 @@ function.local.settings.json
 # ==============================================
 # GCP
 # ==============================================
+.mcp.json
 *.json
 !**/*.example.json
-!seeds/**/*.json
+!seeds/**/.mcp.json
+*.json
 .service-account.json
 application_default_credentials.json
 .gcloud/
@@ -417,3 +419,7 @@ npm-audit.html
 trivy-cache/
 .grype/
 .snyk/
+
+# Local AI environment (do not commit)
+.kilocode/
+.agents/

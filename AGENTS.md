@@ -21,6 +21,7 @@ This project is based on the **Repo Template** (`repo-template.bardenhagen.xyz`)
 5. **Pull before working** — Always sync from origin before making changes. Use `git pull --ff-only`.
 6. **No fake completion** — Never mark work done that isn't actually complete. Report blockers honestly.
 7. **Conventional commits** — Use `type(scope): description` (e.g., `feat(auth): add OAuth2 flow`).
+9. **Load structured context first** — Check `HANDOFF.md` for live state, then load phase-specific instructions. Do not load every file into context; use progressive disclosure.
 8. **Answer both questions** — "Did we build it correctly" *and* "did we build the right thing". The second is the expensive one and no test can check it. Define acceptance criteria before you code and verify against the original request before you call it done (`rules/07-analyst.md`). If it has a user-facing surface, apply `rules/06-ux.md` too.
 
 ## Ponytail — Lazy Senior Dev Mode
@@ -52,7 +53,10 @@ This keeps every safety guard while reducing unnecessary code.
 ├── CODEX.md               # Codex-specific instructions
 ├── COPILOT_INSTRUCTIONS.md# GitHub Copilot instructions
 ├── AI_CONTEXT.md          # Project context summary (all agents)
-├── .cursorrules           # Cursor AI rules
+├── .mcp.json              # MCP server configuration (Context7, GitHub, Playwright)
+├── HANDOFF.md             # Live working state for agent sessions
+├── specs/                 # Spec-driven development artifacts
+├── CODEOWNERS             # Auto-review assignment
 ├── .windsurfrules         # Windsurf AI rules
 ├── rules/                 # Role-based agent skill files
 │   ├── 01-architect.md    # Architecture agent
@@ -68,6 +72,7 @@ This keeps every safety guard while reducing unnecessary code.
 │   │   └── template-uplift/  # Promote an improvement back into the template
 │   └── settings.json      # Committed permission defaults
 ├── .github/rulesets/      # Branch-protection rules-as-code
+├── .github/workflows/     # CI/CD pipelines (ci, deploy, security, stale, scorecard, gitleaks, sbom)
 ├── .github/workflows/     # CI/CD pipelines (ci, deploy, security, stale)
 ├── CONTRIBUTING.md        # Human + agent contribution guide
 ├── docs/                  # Documentation
@@ -82,7 +87,7 @@ This keeps every safety guard while reducing unnecessary code.
 │   ├── claude-tooling.md      # .claude/ — agents, skills, hooks, MCP
 │   ├── template-lifecycle.md  # Two-way sync with repo-template
 │   └── decisions/         # Architecture Decision Records
-├── scripts/               # Automation scripts (init, propagate, start-loop)
+├── scripts/               # Automation scripts (init, propagate, start-loop, worktree)
 ├── seeds/                 # Template seeds for project types
 └── templates/             # Copyable scripts, components, styles
 ```
@@ -96,6 +101,30 @@ or checklist that is faster to scan than the bug it prevents is to debug.
 
 - **Don't create a parallel implementation.** If similar functionality already exists, extend it. If this repo has a documented history of duplicate/abandoned implementations, it lives in `archive/README.md` — read it before starting new work in a mature area of the codebase.
 - **Don't let docs drift from shipped state.** If a change affects anything user-facing (features, architecture, pricing, roadmap) and this project has a marketing site or public docs, update them in the *same* change — not a follow-up. Documentation drift is worse than a missing feature.
+
+## Progressive Disclosure for Agents
+
+**State lives in files, not in model memory.** Agents MUST use progressive disclosure to avoid loading the entire repository into context:
+
+1. **Session start** — Load only `AGENTS.md`, `HANDOFF.md`, and the phase index (`docs/agentic-sdlc.md`).
+2. **Task start** — Load the relevant skill or role file (`rules/01-architect.md`, etc.) only when that role is active.
+3. **Deep work** — Load architecture, conventions, and tech stack only when implementing a specific component.
+4. **Review** — Load PR contract and quality gates only when reviewing.
+
+This keeps token usage proportional to task complexity and prevents context window exhaustion.
+
+## Structured Content for AI Consumption
+
+When authoring documentation, follow the schema in `docs/structure-for-ai.md`. Structured content enables agents to:
+- Reason about the codebase programmatically
+- Validate artifacts against schemas
+- Trace requirements from intent to implementation
+
+Key files for structured context:
+- `specs/mission.md` — Project constitution (what we build, who we serve)
+- `specs/tech-stack.md` — Stack constraints and rationale
+- `HANDOFF.md` — Live working state (in flight, next picks, blockers)
+- `.mcp.json` — MCP server configuration for live tool access
 
 ## Architecture Decisions
 

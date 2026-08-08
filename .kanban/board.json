@@ -1,0 +1,74 @@
+{
+  "columns": [
+    "Backlog",
+    "In Progress",
+    "Review",
+    "Done"
+  ],
+  "cards": [
+    {
+      "id": "1786230464",
+      "title": "Add OpenSSF Scorecard workflow for supply chain security audit",
+      "status": "Backlog",
+      "priority": "High",
+      "created": "2026-08-08T23:07:44Z"
+    },
+    {
+      "id": "1786230464",
+      "title": "Add SLSA provenance and cosign signing for release artifacts",
+      "status": "Backlog",
+      "priority": "High",
+      "created": "2026-08-08T23:07:44Z"
+    },
+    {
+      "id": "1786230464",
+      "title": "Add gitleaks secret scanning workflow to catch leaked credentials",
+      "status": "Backlog",
+      "priority": "High",
+      "created": "2026-08-08T23:07:44Z"
+    },
+    {
+      "id": "1786230464",
+      "title": "Add .mcp.json with pre-configured MCP servers (Context7, GitHub, Playwright)",
+      "status": "Backlog",
+      "priority": "High",
+      "created": "2026-08-08T23:07:44Z"
+    },
+    {
+      "id": "1786230464",
+      "title": "Add Harden-Runner action to CI workflows for runtime security hardening",
+      "status": "Backlog",
+      "priority": "Medium",
+      "created": "2026-08-08T23:07:44Z"
+    },
+    {
+      "id": "1786230464",
+      "title": "Add HANDOFF.md template for live working state documentation",
+      "status": "Backlog",
+      "priority": "Medium",
+      "created": "2026-08-08T23:07:44Z"
+    },
+    {
+      "id": "1786230464",
+      "title": "Add SBOM generation with syft for supply chain transparency",
+      "status": "Backlog",
+      "priority": "Medium",
+      "created": "2026-08-08T23:07:44Z"
+    },
+    {
+      "id": "1786230464",
+      "title": "Add specs/ directory structure for spec-driven development (SDD)",
+      "status": "Backlog",
+      "priority": "High",
+      "created": "2026-08-08T23:07:44Z"
+    },
+    {
+      "id": "1786230464",
+      "title": "Add PR body validation workflow to enforce quality gates on PRs",
+      "status": "Backlog",
+      "priority": "Medium",
+      "created": "2026-08-08T23:07:44Z"
+    }
+  ],
+  "status": "default"
+}

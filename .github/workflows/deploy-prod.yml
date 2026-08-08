@@ -1,7 +1,7 @@
 name: Deploy Production (Vercel)
 
 # Production deployment for Vercel-hosted projects.
-# Uses Vercel OIDC token when available, falls back to VERCEL_TOKEN.
+# Uses VERCEL_TOKEN secret.
 
 on:
   push:
@@ -32,28 +32,39 @@ jobs:
     # Skip if VERCEL_TOKEN is not configured — the bare template does not have
     # a linked Vercel project. Downstream projects should add the secret and,
     # if needed, a `vercel.json` or `vercel` config block in package.json.
-    if: secrets.VERCEL_TOKEN != ''
+    if: ${{ secrets.VERCEL_TOKEN != '' }}
     environment:
       name: production
       url: ${{ steps.deploy.outputs.url }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
+      - name: Harden Runner
+        uses: step-security/harden-runner@17d0e2bd7d51742c71641bd3e17f1cf056c1328c # v2.11.0
+        with:
+          egress-policy: block
+          allow-same-org: true
+
       - name: Install Vercel CLI
+        if: ${{ secrets.VERCEL_TOKEN != '' }}
         run: npm install --global vercel@latest
 
       - name: Pull Vercel environment
+        if: ${{ secrets.VERCEL_TOKEN != '' }}
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Build
+        if: ${{ secrets.VERCEL_TOKEN != '' }}
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Deploy production
         id: deploy
+        if: ${{ secrets.VERCEL_TOKEN != '' }}
         run: |
           vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Verify deployment
+        if: ${{ secrets.VERCEL_TOKEN != '' }}
         run: |
           url=$(vercel ls --prod --token=${{ secrets.VERCEL_TOKEN }} | head -n 1 | awk '{print $2}')
           echo "url=$url" >> "$GITHUB_OUTPUT"

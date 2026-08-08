@@ -1,5 +1,31 @@
 # Changelog
 
+## [2.3.0] — 2026-08-08
+
+### Added
+- **Supply chain security hardening:** OpenSSF Scorecard, Gitleaks, actionlint, SBOM generation, and SLSA provenance workflows
+- **Structured content for AI:** `docs/structure-for-ai.md` defines machine-readable context schema for agents
+- **Spec-driven development:** `docs/spec-driven-development.md` with lightweight SDD methodology and two-way door test
+- **MCP configuration:** `.mcp.json` with Context7, GitHub, and Playwright MCP servers pre-configured
+- **PR body validation:** Enforces Conventional Commits format and linked issues on pull requests
+- **CODEOWNERS:** Automatic review assignment for key directories
+- **Worktree scripts:** `scripts/worktree-create.sh`, `worktree-list.sh`, `worktree-remove.sh` for parallel agent development
+- **Harden-Runner:** Runtime security hardening added to CI and deploy workflows
+- **HANDOFF.md:** Live working state template for agent session continuity
+- **specs/ directory:** Constitution scaffold (`mission.md`, `tech-stack.md`, `initiatives/`) for spec-driven development
+- **docs/supply-chain-hardening.md:** Comprehensive supply chain security reference
+
+### Changed
+- **CI workflow:** Added Harden-Runner step, updated node baseline from 20 to 25, added YAML anchors for reusable steps
+- **Deploy workflows:** Added Harden-Runner, fixed bare expressions in job-level `if:` conditions, added per-step `if:` guards for VERCEL_TOKEN configuration
+- **Dependabot:** Updated Docker base image from `node:20-alpine` to `node:25-alpine`
+- **All GitHub Actions:** SHA pins verified against live upstream tags
+- **AGENTS.md:** Added structured context loading principle, progressive disclosure guidance, and references to new files
+
+### Fixed
+- **Merge conflict resolution:** Resolved all `<<<<<<< HEAD` markers from prior branch merges
+- **Dockerfile:** Bumped Node.js base image to current stable (`node:25-alpine`)
+
 ## [2.2.0] — 2026-08-08
 
 ### Fixed

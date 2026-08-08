@@ -1,0 +1,20 @@
+name: Actionlint
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  actionlint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+
+      - name: Run actionlint
+        uses: reviewdog/action-actionlint@e560d4ab49d1e7a5783c79fc86de3159923ef98e # v1.39.0
+        with:
+          fail_on_error: true
+          reporter: github-pr-review

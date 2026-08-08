@@ -43,7 +43,7 @@ body:
     attributes:
       label: Version / commit
       description: From the app footer if it shows build info, otherwise the commit SHA.
-      placeholder: v2.2.0 (abc1234)
+      placeholder: v2.3.0 (abc1234)
     validations:
       required: false
 

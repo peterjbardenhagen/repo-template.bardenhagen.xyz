@@ -24,7 +24,7 @@ jobs:
     # Skip if VERCEL_TOKEN is not configured — the bare template does not have
     # a linked Vercel project. Downstream projects should add the secret and,
     # if needed, a `vercel.json` or `vercel` config block in package.json.
-    if: secrets.VERCEL_TOKEN != ''
+    if: ${{ secrets.VERCEL_TOKEN != '' }}
     environment:
       name: preview
       url: ${{ steps.deploy.outputs.url }}
@@ -39,17 +39,27 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Harden Runner
+        uses: step-security/harden-runner@17d0e2bd7d51742c71641bd3e17f1cf056c1328c # v2.11.0
+        with:
+          egress-policy: block
+          allow-same-org: true
+
       - name: Install Vercel CLI
+        if: ${{ secrets.VERCEL_TOKEN != '' }}
         run: npm install --global vercel@latest
 
       - name: Pull Vercel environment
+        if: ${{ secrets.VERCEL_TOKEN != '' }}
         run: vercel pull --yes --environment=preview --token="$VERCEL_TOKEN"
 
       - name: Build
+        if: ${{ secrets.VERCEL_TOKEN != '' }}
         run: vercel build --token="$VERCEL_TOKEN"
 
       - name: Deploy preview
         id: deploy
+        if: ${{ secrets.VERCEL_TOKEN != '' }}
         run: |
           url=$(vercel deploy --prebuilt --token="$VERCEL_TOKEN")
           echo "url=$url" >> "$GITHUB_OUTPUT"

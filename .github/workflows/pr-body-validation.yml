@@ -1,0 +1,34 @@
+name: PR Body Validation
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+
+      - name: Validate PR body
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v7.0.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const body = context.payload.pull_request.body || '';
+            const title = context.payload.pull_request.title || '';
+
+            const conventionalCommitRegex = /^(feat|fix|chore|docs|style|refactor|perf|test|build|ci|revert)(\(.+\))?: .+/;
+            if (!conventionalCommitRegex.test(title)) {
+              core.setFailed(`PR title must follow Conventional Commits format: "type(scope): description". Got: "${title}"`);
+            }
+
+            if (body.length < 20) {
+              core.setFailed('PR body must contain a meaningful description (at least 20 characters).');
+            }
+
+            const hasLinkedIssue = /#\d+/.test(body) || /Closes #\d+|Fixes #\d+|Resolves #\d+/.test(body);
+            if (!hasLinkedIssue) {
+              core.warning('PR body should reference a linked issue (e.g., "Closes #123").');
+            }
