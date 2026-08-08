@@ -24,7 +24,7 @@ jobs:
     # Skip if VERCEL_TOKEN is not configured — the bare template does not have
     # a linked Vercel project. Downstream projects should add the secret and,
     # if needed, a `vercel.json` or `vercel` config block in package.json.
-    if: ${{ secrets.VERCEL_TOKEN != '' }}
+    if: secrets.VERCEL_TOKEN != ''
     environment:
       name: preview
       url: ${{ steps.deploy.outputs.url }}
