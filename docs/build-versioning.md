@@ -74,7 +74,7 @@ Set `NEXT_PUBLIC_REPO_URL` to make the commit hash a link to the diff.
 
 ```json
 {
-  "version": "2.1.0",
+  "version": "2.2.0",
   "commit": "abc1234",
   "commitFull": "abc1234567890abcdef1234567890abcdef1234",
   "branch": "main",

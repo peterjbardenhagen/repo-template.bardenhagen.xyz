@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.1.0] — 2026-08-08
+## [2.2.0] — 2026-08-08
 
 ### Fixed
 - **Merge conflict resolution:** Resolved all `<<<<<<< HEAD` markers from `feat/agentic-template-upgrade` branch merge

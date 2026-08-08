@@ -1,6 +1,6 @@
 # End-to-End Agentic SDLC — Complete Guide
 
-**Version:** 2.1.0 | **Date:** August 2026
+**Version:** 2.2.0 | **Date:** August 2026
 
 ---
 

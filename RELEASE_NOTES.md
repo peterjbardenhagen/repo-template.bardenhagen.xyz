@@ -1,6 +1,6 @@
 # Release Notes
 
-## v2.1.0 — 2026-08-08
+## v2.2.0 — 2026-08-08
 
 ### Summary
 Hardened supply-chain security and cleaned up long-standing template debt.
