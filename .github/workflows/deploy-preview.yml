@@ -21,18 +21,10 @@ jobs:
   deploy-preview:
     name: Build & deploy preview
     runs-on: ubuntu-latest
-    # Skip if VERCEL_TOKEN is not configured — the bare template does not have
-    # a linked Vercel project. Downstream projects should add the secret and,
-    # if needed, a `vercel.json` or `vercel` config block in package.json.
-    if: ${{ secrets.VERCEL_TOKEN }}
     environment:
       name: preview
       url: ${{ steps.deploy.outputs.url }}
     env:
-      # Passed through the environment rather than interpolated into each
-      # `run:` string. Inline `${{ secrets.* }}` is substituted into the script
-      # before the shell sees it, which both risks injection and can echo the
-      # secret in traces.
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
