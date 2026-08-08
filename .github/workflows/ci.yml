@@ -36,11 +36,6 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - name: Harden Runner
-        uses: step-security/harden-runner@4d991eb9b905ef189e4c376166672c3f2f230481 # v2.11.0
-        with:
-          egress-policy: block
-          allow-same-org: true
       - name: Verify every pinned SHA matches its version comment
         run: ./scripts/verify-action-pins.sh
 
@@ -52,11 +47,6 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - name: Harden Runner
-        uses: step-security/harden-runner@4d991eb9b905ef189e4c376166672c3f2f230481 # v2.11.0
-        with:
-          egress-policy: block
-          allow-same-org: true
       # Skips itself in the bare template, which has no lockfile — `cache: npm`
       # hard-fails when one is absent. Runs automatically once your project has
       # a lockfile. Swap for setup-python / setup-dotnet / setup-go as needed.
@@ -78,11 +68,6 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - name: Harden Runner
-        uses: step-security/harden-runner@4d991eb9b905ef189e4c376166672c3f2f230481 # v2.11.0
-        with:
-          egress-policy: block
-          allow-same-org: true
       # Skips itself in the bare template, which has no lockfile — `cache: npm`
       # hard-fails when one is absent. Runs automatically once your project has
       # a lockfile. Swap for setup-python / setup-dotnet / setup-go as needed.
@@ -104,11 +89,6 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      - name: Harden Runner
-        uses: step-security/harden-runner@4d991eb9b905ef189e4c376166672c3f2f230481 # v2.11.0
-        with:
-          egress-policy: block
-          allow-same-org: true
       # Skips itself in the bare template, which has no lockfile — `cache: npm`
       # hard-fails when one is absent. Runs automatically once your project has
       # a lockfile. Swap for setup-python / setup-dotnet / setup-go as needed.
