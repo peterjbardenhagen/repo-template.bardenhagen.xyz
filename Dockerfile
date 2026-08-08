@@ -1,7 +1,7 @@
 # Use an official runtime as the base image
 # Replace with your project's actual base image and build steps.
 # Node 20 LTS is the current stable baseline; adjust to match your project's engine.
-FROM node:20-alpine AS base
+FROM node:25-alpine AS base
 
 # Set working directory
 WORKDIR /app
@@ -21,7 +21,7 @@ COPY . .
 RUN if [ -f package.json ] && jq -e '.scripts.build' package.json >/dev/null 2>&1; then npm run build; else echo "No build script — skipping npm run build"; fi
 
 # Production stage
-FROM node:20-alpine AS production
+FROM node:25-alpine AS production
 WORKDIR /app
 
 COPY --from=base /app/node_modules ./node_modules
