@@ -19,6 +19,9 @@ jobs:
   build:
     name: Build and Push
     runs-on: ubuntu-latest
+    # The bare template has no Dockerisable project — skip cleanly until a
+    # downstream project adds a Dockerfile with a real build context.
+    if: ${{ hashFiles('Dockerfile') != '' && (hashFiles('package.json') != '' || hashFiles('requirements.txt') != '' || hashFiles('go.mod') != '' || hashFiles('Cargo.toml') != '' || hashFiles('*.csproj') != '') }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 

@@ -21,6 +21,10 @@ jobs:
   deploy-preview:
     name: Build & deploy preview
     runs-on: ubuntu-latest
+    # Skip if VERCEL_TOKEN is not configured — the bare template does not have
+    # a linked Vercel project. Downstream projects should add the secret and,
+    # if needed, a `vercel.json` or `vercel` config block in package.json.
+    if: ${{ secrets.VERCEL_TOKEN != '' }}
     environment:
       name: preview
       url: ${{ steps.deploy.outputs.url }}
@@ -31,22 +35,7 @@ jobs:
       # secret in traces.
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
     steps:
-      # Not every project generated from this template deploys to Vercel, and
-      # the template repo itself does not. Skip cleanly instead of failing.
-      # The check must be a step: the `secrets` context is unavailable in a
-      # job-level `if`.
-      - name: Check Vercel configuration
-        id: cfg
-        run: |
-          if [ -z "${VERCEL_TOKEN}" ]; then
-            echo "configured=false" >> "$GITHUB_OUTPUT"
-            echo "VERCEL_TOKEN is not set — skipping preview deploy."
-          else
-            echo "configured=true" >> "$GITHUB_OUTPUT"
-          fi
-
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        if: steps.cfg.outputs.configured == 'true'
         with:
           persist-credentials: false
 
