@@ -1,4 +1,4 @@
-# AgentsOS Architecture Decisions
+# YOUR_PROJECT_NAME Architecture Decisions
 
 ## ADR Process
 
@@ -112,7 +112,7 @@ Consequences: [Positive and negative impacts]
 
 **Context:** Need community adoption + revenue. Pure open source doesn't pay; pure proprietary doesn't get developer mindshare.
 
-**Decision:** AgentsOS runtime (scheduler, executor, DAG/evolution, MCP) source-available/open-core. MyDesk is the paid product.
+**Decision:** YOUR_PROJECT_NAME runtime (scheduler, executor, DAG/evolution, MCP) source-available/open-core. MyDesk is the paid product.
 
 **Rationale:** Open-core builds trust and tool connectors. MyDesk per-seat pricing with vertical premium (Legal).
 

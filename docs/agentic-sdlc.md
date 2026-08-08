@@ -105,7 +105,7 @@ main ──────────────▶ Vercel auto-deploy to product
 ```
 main ────────────────────────────────────────── (integration branch)
   │                                             │
-  └── release/v2.1.0 ── QA ──▶ tag v2.1.0 ──▶ deploy
+  └── release/vX.Y.Z ── QA ──▶ tag vX.Y.Z ──▶ deploy
 ```
 
 - `main` is always green (tests pass) but not automatically deployed
@@ -134,9 +134,9 @@ main
 - **Do track in external system** — W&B / MLflow / Neptune
 - **Notebooks** — use `jupytext` to export `.py` alongside `.ipynb`
 
-## Multi-Agent Orchestration (AgentsOS / Kanban)
+## Multi-Agent Orchestration
 
-When using an orchestration platform like AgentsOS:
+When using an orchestration platform or kanban board:
 
 1. **Orchestrator decomposes** — A planner agent breaks the goal into kanban tasks
 2. **Specialist agents execute** — Each task picks up its role-appropriate rule file

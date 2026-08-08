@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [2.1.0] — 2026-08-08
 
 ### Fixed
 - **Merge conflict resolution:** Resolved all `<<<<<<< HEAD` markers from `feat/agentic-template-upgrade` branch merge
@@ -15,12 +15,12 @@
 - Pre-commit installation instructions in AGENTS.md
 
 ### Changed
-- Version bumped to 2.1.0 across README.md and AI_CONTEXT.md for consistency
+- Upgraded GitHub Actions: `actions/checkout` to v7.0.1, `docker/build-push-action` to v7.3.0
+- Dependabot configuration deduplicated and standardised to weekly Monday 09:00 AEST
+- Docker base image moved from `node:26-alpine` to `node:20-alpine` (current LTS)
+- All SHA pins verified against live upstream tags
 
-## [Unreleased (Previous)]
-
-### Added
-- `/kilo-config` skill description in AGENTS.md
+## [2.0.0] — 2026-07-21
 - Hardened GitHub Actions workflows: least-privilege permissions, SHA-pinned actions, concurrency cancellation
 - New workflows: `dependency-review.yml`, `deploy-prod.yml`, `ghcr-push.yml`, `stale.yml`
 - Security docs: `SECURITY.md`, `CODE_OF_CONDUCT.md`

@@ -100,11 +100,11 @@ export const metadata = {
   openGraph: {
     title: 'MyDesk — AI Operating System',
     description: 'Enterprise AI platform for automated workflows',
-    url: 'https://mydesk.digitalresponse.com.au',
+    url: 'https://yourdomain.com',
     siteName: 'MyDesk',
     images: [
       {
-        url: 'https://mydesk.digitalresponse.com.au/og-image.jpg',
+        url: 'https://yourdomain.com/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'MyDesk Platform',
@@ -116,7 +116,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'MyDesk — AI Operating System',
     description: 'Enterprise AI platform',
-    images: ['https://mydesk.digitalresponse.com.au/twitter-image.jpg'],
+    images: ['https://yourdomain.com/twitter-image.jpg'],
   },
 };
 ```
@@ -128,8 +128,8 @@ const schemaData = {
   '@type': 'SoftwareApplication',
   name: 'MyDesk',
   description: 'Enterprise AI Operating System',
-  url: 'https://mydesk.digitalresponse.com.au',
-  image: 'https://mydesk.digitalresponse.com.au/logo.png',
+  url: 'https://yourdomain.com',
+  image: 'https://yourdomain.com/logo.png',
   applicationCategory: 'BusinessApplication',
   aggregateRating: {
     '@type': 'AggregateRating',

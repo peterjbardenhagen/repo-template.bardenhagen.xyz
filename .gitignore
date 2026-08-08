@@ -84,9 +84,7 @@ out/
 .cache/
 .eslintcache
 *.tsbuildinfo
-.next/
 .nuxt/
-.cache/
 .vite/
 .svelte-kit/
 .gatsby/
@@ -129,7 +127,6 @@ client/
 Thumbs.db
 *.sublime-project
 *.sublime-workspace
-*.sublime-workspace
 .history/
 .ionide/
 
@@ -159,7 +156,6 @@ coverage/
 .nyc_output/
 *.lcov
 coverage.lcov
-coverage/
 
 # ==============================================
 # DOCKER

@@ -6,8 +6,8 @@
 
 ## 2026-07-21
 - AGENTSOS-PLAN.md produced after repo-template + GitTools run
-- Marketing site canonical URL set to agentsos.digitalresponse.com.au
-- Folder rename: agentsos.digitalresponse.com.au → AgentsOS (junction created)
+- Marketing site canonical URL set to yourproject.com
+- Folder rename: yourproject.com → YOUR_PROJECT_NAME (junction created)
 
 ## 2026-07 (Earlier)
 - Phase 1 foundation complete

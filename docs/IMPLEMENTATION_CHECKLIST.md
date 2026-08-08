@@ -87,7 +87,7 @@ A comprehensive checklist for implementing all marketing standards and best prac
 
 **Verification**: 
 ```bash
-curl https://mydesk.digitalresponse.com.au/sitemap.xml
+curl https://yourdomain.com/sitemap.xml
 # Should return valid XML
 ```
 
@@ -240,7 +240,7 @@ npm run dev
 **Verification**:
 ```bash
 # Check headers
-curl -I https://mydesk.digitalresponse.com.au
+curl -I https://yourdomain.com
 ```
 
 ---

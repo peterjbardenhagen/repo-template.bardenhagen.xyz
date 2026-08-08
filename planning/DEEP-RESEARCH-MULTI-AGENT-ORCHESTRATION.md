@@ -1,4 +1,4 @@
-# Deep Research — Multi-Agent Orchestration, AI Gateways & Next AgentsOS Iteration
+# Deep Research — Multi-Agent Orchestration, AI Gateways & Next YOUR_PROJECT_NAME Iteration
 
 **Date:** July 27, 2026
 **Sources:** Sakana AI Conductor paper (ICLR 2026), academic surveys on multi-agent orchestration, 9router & OmniRoute gateway analysis
@@ -27,16 +27,16 @@ A **7B parameter model trained via Reinforcement Learning** to orchestrate a poo
 - The 7B Conductor + pool of frontier models beats single large models on complex tasks
 - Learned orchestration patterns that no human engineer would have designed manually
 
-### 1.4 Implications for AgentsOS
+### 1.4 Implications for YOUR_PROJECT_NAME
 
-| Conductor Finding | AgentsOS Impact |
+| Conductor Finding | YOUR_PROJECT_NAME Impact |
 |-------------------|-----------------|
 | RL can learn orchestration patterns | Our genetic engine evolves DAG structure, but doesn't learn *how to orchestrate* — it optimizes *what to execute* |
 | Dynamic complexity scaling | Our planner always produces full DAGs. Conductor shows simple tasks should bypass the pipeline entirely |
 | Self-selection as corrective worker | Our agents don't self-evaluate and retry. The conductor's self-awareness pattern is a gap |
 | Natural language orchestration | Our orchestration is code-based (Planner → Scheduler → DAG). Conductor proves NL instructions can be more flexible |
 
-**Bottom line:** The Conductor demonstrates that *learning to orchestrate* is more valuable than *learning to execute*. AgentsOS's genetic engine is closest to this philosophy but operates at the wrong abstraction level — it evolves DAG structure, not orchestration strategy.
+**Bottom line:** The Conductor demonstrates that *learning to orchestrate* is more valuable than *learning to execute*. YOUR_PROJECT_NAME's genetic engine is closest to this philosophy but operates at the wrong abstraction level — it evolves DAG structure, not orchestration strategy.
 
 ---
 
@@ -44,12 +44,12 @@ A **7B parameter model trained via Reinforcement Learning** to orchestrate a poo
 
 ### 2.1 The Four Orchestration Patterns (from survey literature)
 
-| Pattern | Description | Examples | AgentsOS Status |
+| Pattern | Description | Examples | YOUR_PROJECT_NAME Status |
 |---------|-------------|----------|-----------------|
 | **Centralized Router** | Single model picks which agent handles each task | Simple LLM router, 9router | ❌ Not implemented |
 | **Hierarchical Manager** | Manager decomposes → delegates → aggregates | Sakana Conductor, HALO | ✅ MasterOrchestrator (static) |
 | **Peer-to-Peer Negotiation** | Agents debate and vote on solutions | CrewAI discussions | ❌ Not implemented |
-| **Evolutionary/Memetic** | Populations of solutions evolve via selection | AgentsOS GeneticEngine | ✅ Implemented + tenant-isolated |
+| **Evolutionary/Memetic** | Populations of solutions evolve via selection | YOUR_PROJECT_NAME GeneticEngine | ✅ Implemented + tenant-isolated |
 
 ### 2.2 Key Papers Referenced
 
@@ -62,7 +62,7 @@ A **7B parameter model trained via Reinforcement Learning** to orchestrate a poo
 
 ### 2.3 The Gap Between Theory and Practice
 
-The academic literature reveals a key insight: **most production multi-agent systems use rigid, human-designed workflows** (pattern 1 or 2). Only research prototypes explore patterns 3 and 4. AgentsOS is unusual in that it has pattern 4 (evolution) in production-ready code — but without the learning loop that would make it truly adaptive.
+The academic literature reveals a key insight: **most production multi-agent systems use rigid, human-designed workflows** (pattern 1 or 2). Only research prototypes explore patterns 3 and 4. YOUR_PROJECT_NAME is unusual in that it has pattern 4 (evolution) in production-ready code — but without the learning loop that would make it truly adaptive.
 
 The Conductor paper shows the bridge: **RL-trained orchestration that learns from outcomes**, not just evolves structure.
 
@@ -72,7 +72,7 @@ The Conductor paper shows the bridge: **RL-trained orchestration that learns fro
 
 ### 3.1 Feature Comparison
 
-| Feature | 9router | OmniRoute | AgentsOS (native) |
+| Feature | 9router | OmniRoute | YOUR_PROJECT_NAME (native) |
 |---------|---------|-----------|-------------------|
 | **Provider Count** | 60+ | 290+ | ~10 (via ModelManager) |
 | **Free Providers** | Some | 90+ | N/A (self-hosted) |
@@ -88,19 +88,19 @@ The Conductor paper shows the bridge: **RL-trained orchestration that learns fro
 
 ### 3.2 What Gateways Do That We Don't
 
-1. **Model routing by cost/latency**: 9router and OmniRoute automatically pick the cheapest/fastest provider that meets quality thresholds. AgentsOS delegates this to manual ModelManager config.
+1. **Model routing by cost/latency**: 9router and OmniRoute automatically pick the cheapest/fastest provider that meets quality thresholds. YOUR_PROJECT_NAME delegates this to manual ModelManager config.
 
-2. **Auto-fallback chains**: When a provider is down or rate-limited, gateways transparently switch. AgentsOS has no fallback logic — if the configured model fails, the task fails.
+2. **Auto-fallback chains**: When a provider is down or rate-limited, gateways transparently switch. YOUR_PROJECT_NAME has no fallback logic — if the configured model fails, the task fails.
 
 3. **Token optimization**: 9router's RTK (Real-Time Kernel) and Caveman modes save 20-65% tokens. OmniRoute's auto-combo engine merges prompts across providers. We have nothing equivalent.
 
-4. **Multi-modal routing**: 9router supports Chat, Embeddings, TTS, STT, Image Gen, Vision, Video, Web Search through one endpoint. AgentsOS is text-only.
+4. **Multi-modal routing**: 9router supports Chat, Embeddings, TTS, STT, Image Gen, Vision, Video, Web Search through one endpoint. YOUR_PROJECT_NAME is text-only.
 
-5. **Provider abstraction**: Gateways present one OpenAI-compatible endpoint regardless of backend. AgentsOS requires per-provider configuration.
+5. **Provider abstraction**: Gateways present one OpenAI-compatible endpoint regardless of backend. YOUR_PROJECT_NAME requires per-provider configuration.
 
 ### 3.3 What We Do That Gateways Don't
 
-| AgentsOS Capability | Gateway Equivalent | Verdict |
+| YOUR_PROJECT_NAME Capability | Gateway Equivalent | Verdict |
 |---------------------|-------------------|---------|
 | DAG planning & execution | ❌ None | **Our moat** |
 | Genetic evolution of plans | ❌ None | **Our moat** |
@@ -110,7 +110,7 @@ The Conductor paper shows the bridge: **RL-trained orchestration that learns fro
 | Governance / RBAC / audit | ❌ None | **Our moat** |
 | Legal vertical agents | ❌ None | **Our moat** |
 
-**Key insight:** Gateways are Layer 1 (model routing). AgentsOS is Layer 3 (orchestration + business logic). They're complementary, not competitive. We should *consume* gateway capabilities, not replicate them.
+**Key insight:** Gateways are Layer 1 (model routing). YOUR_PROJECT_NAME is Layer 3 (orchestration + business logic). They're complementary, not competitive. We should *consume* gateway capabilities, not replicate them.
 
 ---
 
@@ -145,11 +145,11 @@ This is exactly what the Conductor does — and what 9router does at the infrast
 
 ### 5.1 The Core Thesis
 
-**AgentsOS should become a Conductor-like orchestrator that routes through gateway infrastructure, not a gateway that happens to have orchestration.**
+**YOUR_PROJECT_NAME should become a Conductor-like orchestrator that routes through gateway infrastructure, not a gateway that happens to have orchestration.**
 
 The differentiation is clear:
 - 9router/OmniRoute = model routing (Layer 1)
-- AgentsOS = learned orchestration + business logic + governance (Layer 3)
+- YOUR_PROJECT_NAME = learned orchestration + business logic + governance (Layer 3)
 - The gap = a learned routing layer that connects them
 
 ### 5.2 Phase 5 Scope — "Conductor Integration"
@@ -189,7 +189,7 @@ The differentiation is clear:
 | **vs OmniRoute** | We don't have 290+ providers | We use OmniRoute/9router as backend |
 | **vs CrewAI** | No learned orchestration | RL-trained routing + evolution |
 | **vs IBM watsonx** | Static workflows | Dynamic complexity adaptation |
-| **vs Sakana Conductor** | 7B model vs our genetic engine | Complementary: Conductor = NL orchestration, AgentsOS = DAG evolution + business logic |
+| **vs Sakana Conductor** | 7B model vs our genetic engine | Complementary: Conductor = NL orchestration, YOUR_PROJECT_NAME = DAG evolution + business logic |
 
 ---
 
@@ -252,9 +252,9 @@ Task Input
 
 The research reveals a clear strategic opportunity:
 
-1. **The Conductor proves** that learned orchestration outperforms hand-designed workflows — and AgentsOS's genetic engine is the closest production implementation to this philosophy
+1. **The Conductor proves** that learned orchestration outperforms hand-designed workflows — and YOUR_PROJECT_NAME's genetic engine is the closest production implementation to this philosophy
 
-2. **9router/OmniRoute prove** that model routing is solved infrastructure — AgentsOS should consume, not replicate
+2. **9router/OmniRoute prove** that model routing is solved infrastructure — YOUR_PROJECT_NAME should consume, not replicate
 
 3. **The gap** is a learned routing layer that sits between our orchestration engine and gateway infrastructure — deciding *how* to route, not just *where*
 

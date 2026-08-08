@@ -1,23 +1,23 @@
-# Claude Capabilities Reference
+# AI Model Capabilities Reference
 
-This document maps enterprise AI capabilities (BytePlus ModelArk) to Claude implementation patterns available in this template.
+This document maps common AI model capabilities to implementation patterns available in this template. It is stack-agnostic; adapt the examples to your chosen provider (Claude, GPT-4, Gemini, Llama, etc.).
 
 ## Model Capabilities
 
-| Capability | Claude Implementation | Status | Notes |
+| Capability | Implementation | Status | Notes |
 |---|---|---|---|
-| **Text Generation** | Messages API, Responses API | ✓ Native | Core foundation for all text tasks |
-| **Multi-modal Understanding** | Vision API (Images, PDFs, Videos) | ✓ Native | `vision` parameter in messages; Files API for preprocessing |
+| **Text Generation** | Messages API | ✓ Native | Core foundation for all text tasks |
+| **Multi-modal Understanding** | Vision API (Images, PDFs) | ✓ Native | Pass image URL or base64 in message content |
 | **Image Understanding** | Vision API | ✓ Native | Direct image/screenshot analysis |
 | **Video Understanding** | Files API + Vision | ✓ Native | Upload via Files API, then reference in messages |
 | **Document Understanding** | Files API (PDFs) | ✓ Native | PDF parsing + structured output |
-| **Audio Understanding** | Files API (transcription) | 🔄 Via partner | Use external transcription, then feed text to Claude |
-| **Image Generation** | External integration (DALL-E, etc.) | 🔄 Tool-based | Invoke via function calling / MCP |
-| **Video Generation** | External integration (Runway, etc.) | 🔄 Tool-based | Invoke via function calling / MCP |
+| **Audio Understanding** | External transcription | 🔄 Via partner | Transcribe externally, then feed text to model |
+| **Image Generation** | External integration | 🔄 Tool-based | Invoke via function calling / MCP |
+| **Video Generation** | External integration | 🔄 Tool-based | Invoke via function calling / MCP |
 
 ## Advanced Features
 
-| Feature | Claude Implementation | Status | Config |
+| Feature | Implementation | Status | Config |
 |---|---|---|---|
 | **Deep Reasoning** | Extended thinking | ✓ Native | `budget_tokens` param (40k-100k) |
 | **Tool Use** | Function calling + MCP | ✓ Native | `.claude/agents/`, `.claude/skills/` |
@@ -28,10 +28,10 @@ This document maps enterprise AI capabilities (BytePlus ModelArk) to Claude impl
 | **Streaming Output** | Server-sent events (SSE) | ✓ Native | `stream: true` in API calls |
 | **Prefill-based Response** | `system` role + priming | ✓ Native | Set assistant message prefix to guide output |
 | **Visual Grounding** | Vision + JSON + coordinate math | ✓ Native | Return bounding boxes / coordinates in structured output |
-| **Web Search** | MCP integration + Firecrawl | ✓ via MCP | Use web search MCP or Firecrawl skill |
-| **Embeddings** | API endpoint | ✓ Native | Use via Claude SDK or external service |
-| **Managed Agents** | Delegated agent sessions | ✓ Native | BytePlus ModelArk Managed Agents API |
-| **Context Management** | System prompts + memory | ✓ Native | CLAUDE.md, persistent memory, context windows |
+| **Web Search** | MCP integration | ✓ via MCP | Use web search MCP or Firecrawl skill |
+| **Embeddings** | API endpoint | ✓ Native | Use via SDK or external service |
+| **Managed Agents** | Delegated agent sessions | ✓ Native | Platform-specific Managed Agents API |
+| **Context Management** | System prompts + memory | ✓ Native | AGENTS.md, persistent memory, context windows |
 
 ## Local Configuration
 
@@ -145,15 +145,15 @@ See `.claude/agents/` for role-based subagent definitions.
 
 ## Claude Code Specific
 
-- **Ponytail** (`/ponytail full`) — code generation optimizer (54% LOC reduction)
+- **Ponytail** (`/ponytail full`) — YAGNI-first code generation
 - **Caveman** (`/caveman full`) — terse output mode
-- **Agents** (`.claude/agents/`) — specialized subagents for reviews, exploration, architecture
+- **Agents** (`.claude/agents/`) — specialised subagents for reviews, exploration, architecture
 - **Skills** (`.claude/skills/`) — reusable workflows (Firecrawl, web search, design reviews, etc.)
 - **MCP Servers** (`.claude/settings.json`) — connect external APIs and tools
 
 ## Equivalent Capabilities by Use Case
 
-| Use Case | BytePlus | Claude | Setup |
+| Use Case | Generic AI Platform | Claude | Setup |
 |---|---|---|---|
 | Chat with documents | Document understanding | Files API + Vision | Upload PDF via Files API |
 | Web search | Web search API | MCP web search plugin | Install via MCP marketplace |

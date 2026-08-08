@@ -6,6 +6,9 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Australia/Brisbane"
     labels:
       - "dependencies"
       - "github-actions"
@@ -18,72 +21,61 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Australia/Brisbane"
     labels:
       - "dependencies"
       - "javascript"
+    open-pull-requests-limit: 10
 
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
       interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Australia/Brisbane"
     labels:
       - "dependencies"
       - "python"
+    open-pull-requests-limit: 10
 
   - package-ecosystem: "cargo"
     directory: "/"
     schedule:
       interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Australia/Brisbane"
     labels:
       - "dependencies"
       - "rust"
+    open-pull-requests-limit: 10
 
   - package-ecosystem: "gomod"
     directory: "/"
     schedule:
       interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Australia/Brisbane"
     labels:
       - "dependencies"
       - "go"
+    open-pull-requests-limit: 10
 
   - package-ecosystem: "nuget"
     directory: "/"
     schedule:
       interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Australia/Brisbane"
     labels:
       - "dependencies"
       - "dotnet"
-      day: "monday"
-      time: "09:00"
-      timezone: "Australia/Brisbane"
     open-pull-requests-limit: 10
-    labels:
-      - "dependencies"
-      - "npm"
-
-  - package-ecosystem: "pip"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "09:00"
-      timezone: "Australia/Brisbane"
-    open-pull-requests-limit: 10
-    labels:
-      - "dependencies"
-      - "python"
-
-  - package-ecosystem: "nuget"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "09:00"
-      timezone: "Australia/Brisbane"
-    open-pull-requests-limit: 10
-    labels:
-      - "dependencies"
-      - "nuget"
 
   - package-ecosystem: "docker"
     directory: "/"
@@ -92,11 +84,7 @@ updates:
       day: "monday"
       time: "09:00"
       timezone: "Australia/Brisbane"
-
-  - package-ecosystem: "github-actions"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "09:00"
-      timezone: "Australia/Brisbane"
+    labels:
+      - "dependencies"
+      - "docker"
+    open-pull-requests-limit: 10

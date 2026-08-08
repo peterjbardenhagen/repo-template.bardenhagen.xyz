@@ -1,4 +1,4 @@
-# AgentsOS Development Phases
+# YOUR_PROJECT_NAME Development Phases
 
 ## Phase 1: Foundation Hardening (v3.1) ✅
 

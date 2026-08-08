@@ -116,7 +116,7 @@ worse than nothing, because it will be trusted.
     git ls-remote "https://github.com/$1" "refs/tags/$2^{}" "refs/tags/$2" \
       | sort -k2 | tail -1 | cut -f1
   }
-  resolve actions/checkout v6.0.3
+  resolve actions/checkout v7.0.1
   ```
 
   The `^{}` ref matters: for an *annotated* tag, `refs/tags/vX` is the tag

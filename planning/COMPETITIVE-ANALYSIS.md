@@ -121,7 +121,7 @@ The enterprise AI agent platform market is accelerating at ~41% annually. Gartne
 
 | Platform | Governance | Local-First | Biz Mgmt | Multi-Agent | Legal Vertical | Open Core | Pricing |
 |----------|-----------|-------------|----------|-------------|----------------|-----------|---------|
-| **AgentsOS** | ✅✅✅ | ✅✅✅ | ✅✅✅ | ✅✅✅ | ✅✅✅ | ✅✅ | $149-399/u |
+| **YOUR_PROJECT_NAME** | ✅✅✅ | ✅✅✅ | ✅✅✅ | ✅✅✅ | ✅✅✅ | ✅✅ | $149-399/u |
 | Sana/Workday | ✅✅✅ | ❌ | ❌ | ✅✅ | ❌ | ❌ | ~$30/u |
 | Microsoft Copilot | ✅✅ | ❌ | ❌ | ✅✅ | ❌ | ❌ | ~$30/u |
 | Google Vertex | ✅ | ❌ | ❌ | ✅✅ | ❌ | ❌ | Usage |
@@ -137,7 +137,7 @@ The enterprise AI agent platform market is accelerating at ~41% annually. Gartne
 
 ## 4. Key Market Trends (from research)
 
-| Trend | Evidence | AgentsOS Status |
+| Trend | Evidence | YOUR_PROJECT_NAME Status |
 |-------|----------|-----------------|
 | **"AI OS" positioning is standard** | Every major vendor now calls their platform an OS | ✅ Already positioned correctly |
 | **Governance is #1 buying criteria** | IBM, Persistent, Sana all lead with audit | ✅ Provenance ledger ready. Hash-chain in Phase 3. |
@@ -189,12 +189,12 @@ Based on competitive analysis, the next phase should focus on:
 ### 🟡 High (lean into differentiators)
 
 4. **Lead marketing with local-first sovereignty** — "Your data never leaves your building" is our strongest story. Nobody credible says this.
-5. **Feature the evolutionary engine** — Publish benchmarks. "AgentsOS gets smarter with every project" is a genuine moat.
+5. **Feature the evolutionary engine** — Publish benchmarks. "YOUR_PROJECT_NAME gets smarter with every project" is a genuine moat.
 6. **Build the legal vertical accelerator** — Pre-built agents for contract review, discovery, compliance. IBM has 150 skills. We need 20 legal-specific ones.
 
 ### 🟢 Medium (table stakes)
 
-7. **Connector marketplace** — Package MCP connectors as "AgentsOS Skills" with docs
+7. **Connector marketplace** — Package MCP connectors as "YOUR_PROJECT_NAME Skills" with docs
 8. **Usage analytics dashboard** — Show customers token usage, cost per agent, latency
 9. **Public API docs / OpenAPI spec** — Developer experience for ecosystem growth
 

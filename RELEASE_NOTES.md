@@ -1,32 +1,64 @@
-# Release Notes — v1.0.0
+# Release Notes
 
-**Date:** 2026-07-20
+## v2.1.0 — 2026-08-08
 
-## Summary
+### Summary
+Hardened supply-chain security and cleaned up long-standing template debt.
 
-The Repo Template is a comprehensive, opinionated starter template for modern software projects that covers naming conventions, git workflows, and the full Agentic AI SDLC lifecycle. This is the initial release, consolidating best practices from across Peter Bardenhagen's projects into a single, reusable template.
+### Highlights
+- Resolved all merge conflict markers from prior branch merges
+- Upgraded `actions/checkout` to v7.0.1 and `docker/build-push-action` to v7.3.0
+- Deduplicated and standardised Dependabot config (weekly Monday 09:00 AEST)
+- Replaced bleeding-edge `node:26-alpine` base image with current LTS `node:20-alpine`
+- Removed duplicate `.gitignore` entries
+- Added `.pre-commit-config.yaml` with merge-conflict detection, YAML/JSON validation, and Markdown linting
+- Fixed CONTRIBUTING.md merge conflict markers
 
-## Key Features
+## v2.0.0 — 2026-07-21
 
-1. **AI Agent First Design** — Every configuration file is designed to make AI coding tools immediately productive.
-2. **Role-Based Agent Skills** — Specialized instructions for architect, coder, reviewer, tester, and DevOps agents.
-3. **Autonomous SDLC Protocol** — A documented, repeatable development lifecycle that works with unattended agent loops.
-4. **Template Propagation** — Automated nightly updates keeping all downstream projects in sync.
-5. **Comprehensive Documentation** — ADRs, architecture docs, getting-started guides, and release notes.
+### Summary
+Major rewrite consolidating naming conventions, git workflows, and the Agentic AI SDLC protocol into a single reusable template.
 
-## What's New
+### Highlights
+- Renamed from `perfect-repo-template-pjb` to `repo-template.bardenhagen.xyz`
+- Default branch switched from `master` to `main`
+- Comprehensive naming conventions guide (files, folders, repos, env vars, AI/ML)
+- Expanded Agentic AI SDLC: multi-agent handoff pipeline, error recovery, kanban integration
+- AI/ML extensions (experiment tracking, model weights, data versioning)
+- Repository organisation guidance (monorepo vs separate repos)
+- All GitHub Actions references pinned to SHAs or stable v4/v5+ tags
+- Least-privilege permissions model across all workflows
+- New workflows: dependency-review, deploy-prod, ghcr-push, stale
+- Security docs: SECURITY.md, CODE_OF_CONDUCT.md
+- Autonomous loop scripts: start-loop.sh, start-loop.ps1
+- Loop state files: PROGRESS.md, blockers.md
+- .devcontainer config for GitHub Codespaces
+- Renovate config as alternative to Dependabot
+- Expanded Dependabot config (npm, pip, cargo, gomod, nuget)
+- Vercel OIDC setup guide
+- CI/CD workflow index and troubleshooting doc
+- Enhanced project seeds (Next.js, Python, .NET)
+- Rewritten CONTRIBUTING.md with PR checklist and commit conventions
 
-- All AI agent config files created
-- GitHub workflows and templates configured
-- Role-based rules defined
-- Propagate script ready
-- Nightly cron job designed
+## v1.0.0 — 2026-07-20
+
+### Summary
+Initial template structure with AI agent configs, role-based rules, GitHub workflows, and propagation scripts.
+
+### What's New
+- AGENTS.md, CLAUDE.md, CODEX.md, COPILOT_INSTRUCTIONS.md, AI_CONTEXT.md
+- Role-based agent skill files (architect, coder, reviewer, tester, devops)
+- CI/CD workflows, issue/PR templates, Dependabot config
+- Documentation structure with ADR support
+- Project seeds for dotnet, nextjs, python
+- Init and propagate scripts
+- Dockerfile and docker-compose.yml
 
 ## Origin
 
-Synthesized from artifacts found across these projects:
-- AgentsOS (AGENTS.md, agentic-sdlc.md, CI workflows, Docker configs)
+Synthesised from patterns and configs across:
+- AI-agent projects (AGENTS.md, agentic-sdlc.md, CI workflows, Docker configs)
 - ai-test-orchestrator (CLAUDE.md, Windsurf workflows)
 - apartment-1507 (AI/ documentation directory)
 - mydesk.digitalresponse.com.au (GitHub workflows)
-- Various other repos (patterns, configs, and conventions)
+- Various other repos (naming conventions, deployment patterns, CI templates)

@@ -1,6 +1,7 @@
 # Use an official runtime as the base image
-# Replace with your project's actual base image
-FROM node:26-alpine AS base
+# Replace with your project's actual base image.
+# Node 20 LTS is the current stable baseline; adjust to match your project's engine.
+FROM node:20-alpine AS base
 
 # Set working directory
 WORKDIR /app
@@ -18,7 +19,7 @@ COPY . .
 RUN npm run build
 
 # Production stage
-FROM node:26-alpine AS production
+FROM node:20-alpine AS production
 WORKDIR /app
 
 COPY --from=base /app/node_modules ./node_modules

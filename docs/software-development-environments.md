@@ -10,18 +10,18 @@ This document defines the standard environment tiers and naming conventions for 
   - `npx run dev` / `npm run dev` (Node.js projects)
   - `dotnet run` / Kestrel (ASP.NET Core)
   - IIS website (for IIS-hosted applications)
-- **DNS pattern**: `dev.{subdomain}.{domain}` (e.g., `dev.classic.mydesk.digitalresponse.com.au`)
-- **Infrastructure**: Can point to developer's machine via Tailscale DNS (e.g., `pb-legion.digitalresponse.com.au` → `pb-legion`'s Tailscale DNS name)
+- **DNS pattern**: `dev.{subdomain}.{domain}` (e.g., `dev.classic.yourdomain.com`)
+- **Infrastructure**: Can point to developer's machine via Tailscale DNS (e.g., `dev-machine.yourdomain.com` → `pb-legion`'s Tailscale DNS name)
 
 ### UAT (User Acceptance Testing)
 - **Scope**: Shared staging environment for testing
-- **DNS pattern**: `uat.{subdomain}.{domain}` (e.g., `uat.classic.mydesk.digitalresponse.com.au`)
+- **DNS pattern**: `uat.{subdomain}.{domain}` (e.g., `uat.classic.yourdomain.com`)
 - **Deployment**: Manual or automated from feature/release branches
 - **Note**: Not all projects have a UAT environment
 
 ### Production
 - **Scope**: Live customer-facing environment
-- **DNS pattern**: `{subdomain}.{domain}` (e.g., `classic.mydesk.digitalresponse.com.au`)
+- **DNS pattern**: `{subdomain}.{domain}` (e.g., `classic.yourdomain.com`)
 - **Deployment**: Auto-deploy from `main` branch
 - **Requirement**: All projects must have production deployment configured
 
@@ -64,15 +64,15 @@ This document defines the standard environment tiers and naming conventions for 
 ## DNS Resolution Examples
 
 ```
-dev.classic.mydesk.digitalresponse.com.au
-  → pb-legion.digitalresponse.com.au
+dev.classic.yourdomain.com
+  → dev-machine.yourdomain.com
   → pb-legion's Tailscale DNS name
   → Developer's local machine
 
-uat.classic.mydesk.digitalresponse.com.au
+uat.classic.yourdomain.com
   → Shared UAT server
 
-classic.mydesk.digitalresponse.com.au
+classic.yourdomain.com
   → Production (Vercel/Azure/IIS)
 ```
 

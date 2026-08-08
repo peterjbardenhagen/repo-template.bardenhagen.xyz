@@ -74,4 +74,3 @@ Use the issue templates under `.github/ISSUE_TEMPLATE/`.
 ## Code of conduct
 
 Be direct, be kind, assume good faith. No harassment, no gatekeeping.
->>>>>>> feat/agentic-template-upgrade

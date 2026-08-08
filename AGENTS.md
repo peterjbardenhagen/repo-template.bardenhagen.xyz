@@ -25,7 +25,7 @@ This project is based on the **Repo Template** (`repo-template.bardenhagen.xyz`)
 
 ## Ponytail — Lazy Senior Dev Mode
 
-**Ponytail** (`ponytail.dev`) reduces code bloat by 54% on real AI agent work. Installed globally and included in `.claude/skills/ponytail/`.
+**Ponytail** (`ponytail.dev`) applies YAGNI-first code generation. Installed globally and included in `.claude/skills/ponytail/`.
 
 **Activation (Claude Code):**
 ```
@@ -40,7 +40,7 @@ This project is based on the **Repo Template** (`repo-template.bardenhagen.xyz`)
 5. Installed dependency? → use it
 6. One line? → one line
 
-This keeps every safety guard while cutting tokens, cost, and latency by ~20-27% vs. baseline.
+This keeps every safety guard while reducing unnecessary code.
 
 ## File Structure Overview
 

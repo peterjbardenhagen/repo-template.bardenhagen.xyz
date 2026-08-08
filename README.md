@@ -28,7 +28,7 @@
 
 | Context | Convention | Examples |
 |---------|-----------|---------|
-| **GitHub repos** | `kebab-case` | `app.mydesk.digitalresponse.com.au` |
+| **GitHub repos** | `kebab-case` | `app.yourdomain.com` |
 | **Web folders** | `kebab-case` | `src/components/`, `src/lib/hooks/` |
 | **React/Vue/Next.js components** | `PascalCase` | `UserProfile.tsx`, `SidebarNav.vue` |
 | **Blazor/.NET pages** | `PascalCase` | `Login.razor`, `Dashboard.razor` |
@@ -58,7 +58,7 @@ length:   2-5 meaningful words, ideally ≤30 chars
 
 | Good | Why |
 |------|-----|
-| `app.mydesk.digitalresponse.com.au` | Matches the actual domain — perfect for Vercel |
+| `app.yourdomain.com` | Matches the actual domain — perfect for Vercel |
 | `ai-test-orchestrator` | Short, clear, hyphenated |
 | `agents-os` | Clear project identity |
 | `tailscale-gateway-exporter` | Self-documenting |
@@ -75,7 +75,7 @@ length:   2-5 meaningful words, ideally ≤30 chars
 
 **Option A — Separate repos** (best when tech stacks differ):
 ```
-github.com/org/app.mydesk.digitalresponse.com.au  # Next.js web app → Vercel
+github.com/org/app.yourdomain.com  # Next.js web app → Vercel
 github.com/org/mydesk-browser                      # WPF desktop shell
 github.com/org/mydesk-shared                       # Shared libraries (NuGet/npm)
 github.com/org/agents-os                           # Agent orchestration service
@@ -327,9 +327,9 @@ Key rules:
 └── DO track in external system → W&B / MLflow / Neptune
 ```
 
-### For Multi-Agent Orchestration Platforms (AgentsOS)
+### For Multi-Agent Orchestration Platforms
 
-This template integrates with **AgentsOS** or similar orchestration systems:
+This template integrates with orchestration platforms or kanban boards:
 
 - **Kanban board** agents discover work from a shared board
 - **Agent profiles** map to `rules/` — each profile loads its role's rule file
