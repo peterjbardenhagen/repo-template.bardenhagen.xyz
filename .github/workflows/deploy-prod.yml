@@ -29,10 +29,6 @@ jobs:
   deploy:
     name: Deploy to Vercel
     runs-on: ubuntu-latest
-    # Skip if VERCEL_TOKEN is not configured — the bare template does not have
-    # a linked Vercel project. Downstream projects should add the secret and,
-    # if needed, a `vercel.json` or `vercel` config block in package.json.
-    if: ${{ secrets.VERCEL_TOKEN }}
     environment:
       name: production
       url: ${{ steps.deploy.outputs.url }}
