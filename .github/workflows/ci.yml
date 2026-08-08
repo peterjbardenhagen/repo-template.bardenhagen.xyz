@@ -24,16 +24,6 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
-# Reusable step: Harden-Runner security agent
-# Installs a security agent on the GitHub-hosted runner to prevent
-# credential exfiltration and detect compromised dependencies.
-_harden-runner: &harden-runner
-  - name: Harden Runner
-    uses: step-security/harden-runner@17d0e2bd7d51742c71641bd3e17f1cf056c1328c # v2.11.0
-    with:
-      egress-policy: block
-      allow-same-org: true
-
 jobs:
   # Supply-chain guard. An invented SHA looks perfectly plausible in review but
   # stops the job from starting at all ("Unable to resolve action"). Verifying
@@ -46,7 +36,11 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      <<: *harden-runner
+      - name: Harden Runner
+        uses: step-security/harden-runner@17d0e2bd7d51742c71641bd3e17f1cf056c1328c # v2.11.0
+        with:
+          egress-policy: block
+          allow-same-org: true
       - name: Verify every pinned SHA matches its version comment
         run: ./scripts/verify-action-pins.sh
 
@@ -58,7 +52,11 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      <<: *harden-runner
+      - name: Harden Runner
+        uses: step-security/harden-runner@17d0e2bd7d51742c71641bd3e17f1cf056c1328c # v2.11.0
+        with:
+          egress-policy: block
+          allow-same-org: true
       # Skips itself in the bare template, which has no lockfile — `cache: npm`
       # hard-fails when one is absent. Runs automatically once your project has
       # a lockfile. Swap for setup-python / setup-dotnet / setup-go as needed.
@@ -80,7 +78,11 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      <<: *harden-runner
+      - name: Harden Runner
+        uses: step-security/harden-runner@17d0e2bd7d51742c71641bd3e17f1cf056c1328c # v2.11.0
+        with:
+          egress-policy: block
+          allow-same-org: true
       # Skips itself in the bare template, which has no lockfile — `cache: npm`
       # hard-fails when one is absent. Runs automatically once your project has
       # a lockfile. Swap for setup-python / setup-dotnet / setup-go as needed.
@@ -102,7 +104,11 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      <<: *harden-runner
+      - name: Harden Runner
+        uses: step-security/harden-runner@17d0e2bd7d51742c71641bd3e17f1cf056c1328c # v2.11.0
+        with:
+          egress-policy: block
+          allow-same-org: true
       # Skips itself in the bare template, which has no lockfile — `cache: npm`
       # hard-fails when one is absent. Runs automatically once your project has
       # a lockfile. Swap for setup-python / setup-dotnet / setup-go as needed.
