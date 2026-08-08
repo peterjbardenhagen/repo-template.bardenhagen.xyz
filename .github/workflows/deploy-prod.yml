@@ -36,7 +36,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Harden Runner
-        uses: step-security/harden-runner@17d0e2bd7d51742c71641bd3e17f1cf056c1328c # v2.11.0
+        uses: step-security/harden-runner@4d991eb9b905ef189e4c376166672c3f2f230481 # v2.11.0
         with:
           egress-policy: block
           allow-same-org: true

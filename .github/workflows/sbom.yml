@@ -20,21 +20,21 @@ jobs:
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
 
       - name: Generate SBOM with Syft
-        uses: anchore/sbom-action@f56ef92b849e58e92a30e7a4f6a4c4f878f7d4c7 # v0.17.7
+        uses: anchore/sbom-action@fc46e51fd3cb168ffb36c6d1915723c47db58abb # v0.17.7
         with:
           image: ${{ github.repository }}
           format: spdx-json
           output-file: sbom.spdx.json
 
       - name: Upload SBOM artifact
-        uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b3bb5f0802 # v4.3.1
+        uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3 # v4.3.1
         with:
           name: sbom
           path: sbom.spdx.json
           retention-days: 90
 
       - name: Attest SBOM
-        uses: actions/attest@5b027da2e2fc3eb1ec91b1b2bc4af8f4af1517f7 # v2.2.0
+        uses: actions/attest@0fae56888724ae3bba68e14ff82712d5c3d8e1f0 # v2.2.0
         with:
           subject-path: 'sbom.spdx.json'
           attestation-name: sbom

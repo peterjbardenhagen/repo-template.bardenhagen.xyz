@@ -23,13 +23,13 @@ jobs:
           persist-credentials: false
 
       - name: Run OpenSSF Scorecard
-        uses: ossf/scorecard-action@62b2cac7ed819bb5fc352199e38ac4b5b5f5e22c # v2.4.1
+        uses: ossf/scorecard-action@f49aabe0b5af0936a0987cfb85d86b75731b0186 # v2.4.1
         with:
           results_file: results.sarif
           results_format: sarif
           publish_results: true
 
       - name: Upload results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@4b333ccf6ec53f917297b6b2d0504974343e5a74 # v3.28.0
+        uses: github/codeql-action/upload-sarif@48ab28a6f5dbc2a99bf1e0131198dd8f1df78169 # v3.28.0
         with:
           sarif_file: results.sarif
