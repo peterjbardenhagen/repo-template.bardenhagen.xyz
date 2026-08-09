@@ -58,7 +58,33 @@ Include `SoftwareApplication`, `Organization`, `WebSite`, `BreadcrumbList`, `FAQ
 </script>
 ```
 
-## 2. Favicon & Icons
+## 2. Analytics
+
+Vercel-hosted projects should use **Vercel Web Analytics** and **Speed Insights**.
+Both are free, zero-config, and respect privacy regulations.
+
+### Next.js
+
+```tsx
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+
+// Add inside RootLayout body:
+<Analytics />
+<SpeedInsights />
+```
+
+### Static HTML
+
+```html
+<script defer src="https://analytics.vercel.app/main.js"></script>
+<script defer src="https://analytics.vercel.app/speed-insights.js"></script>
+```
+
+Place before `</body>` or in `<head>` with `defer`. No configuration required —
+Vercel auto-detects the project.
+
+## 3. Favicon & Icons
 
 | File | Size | Purpose |
 |------|------|---------|

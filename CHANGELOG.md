@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.5.0] — 2026-08-09
+
+### Added
+- **Vercel Analytics integration:** Added free Vercel Web Analytics and Speed Insights to `docs/index.html` and documented setup for both static sites and Next.js apps
+- **Website enhancements:** Added SEO meta tags (description, Open Graph, Twitter Card), favicon, skip-to-content link, and `aria-label` to navigation
+- **Contributing section on landing page:** New "How to Contribute" section in `docs/index.html` with CTAs to the Contributing Guide and GitHub Issues
+- **Expanded CONTRIBUTING.md:** Added structured sections for AI agents, architecture decisions, template propagation, and PR checklist
+- **How to Contribute in getting-started.md:** Added contribution guidance and template uplift instructions to the quick-start guide
+
+### Changed
+- **Canonical URL:** Updated from GitHub repo URL to `https://repo-template.bardenhagen.xyz/`
+- **docs/index.html navigation:** Added Contribute link alongside GitHub, Docs, and SDLC links
+- **docs/build-versioning.md:** Added Vercel Analytics section with Next.js and static HTML examples
+- **docs/website-polishing-standards.md:** Added Analytics section to the polishing standards
+- **README.md:** Added Vercel Analytics subsection under Vercel Integration with code examples
+
 ## [2.4.0] — 2026-08-09
 
 ### Added

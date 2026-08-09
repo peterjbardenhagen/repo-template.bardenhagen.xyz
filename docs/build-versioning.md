@@ -120,3 +120,46 @@ git rev-parse --short origin/main
 If they differ, the deployment has not finished — or it failed and the host is
 still serving the previous build. That is precisely the case a dashboard's green
 checkmark hides.
+
+## Vercel Analytics
+
+Vercel projects include **Web Analytics** and **Speed Insights** for free. Both
+are zero-config and auto-bound to the project.
+
+### Next.js
+
+Install the official packages:
+
+```bash
+npm install @vercel/analytics @vercel/speed-insights
+```
+
+Add to `app/layout.tsx`:
+
+```tsx
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        {children}
+        <Analytics />
+        <SpeedInsights />
+      </body>
+    </html>
+  );
+}
+```
+
+### Static / Non-Next.js
+
+Add to the `<head>` of your HTML:
+
+```html
+<script defer src="https://analytics.vercel.app/main.js"></script>
+<script defer src="https://analytics.vercel.app/speed-insights.js"></script>
+```
+
+Both respect Do Not Track and require no secrets.
