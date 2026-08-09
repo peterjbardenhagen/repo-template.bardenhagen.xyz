@@ -1,7 +1,7 @@
 # Use an official runtime as the base image
 # Replace with your project's actual base image and build steps.
 # Node 25 is the current baseline; adjust to match your project's engine.
-FROM node:25-alpine AS base
+FROM node:26-alpine AS base
 
 # Install build tools
 RUN apk add --no-cache jq
@@ -24,7 +24,7 @@ COPY . .
 RUN if [ -f package.json ] && jq -e '.scripts.build' package.json >/dev/null 2>&1; then npm run build; else echo "No build script — skipping npm run build"; fi
 
 # Production stage
-FROM node:25-alpine AS production
+FROM node:26-alpine AS production
 
 # Create non-root user
 RUN addgroup -g 1001 -S nodejs && \
