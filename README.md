@@ -1,6 +1,6 @@
-# Repo Template — AI Agentic SDLC Starter
+# Repo Template — AI Agentic SDLC
 
-**Version:** 2.3.0
+**Version:** 2.4.0
 
 > A comprehensive, opinionated starter template for modern software projects that covers **naming conventions**, **git workflows**, and the full **Agentic AI SDLC lifecycle**. Every file, rule, and workflow is designed to make AI coding tools (Claude Code, Codex, Cursor, Windsurf, GitHub Copilot) maximally effective from the first keystroke.
 
@@ -15,6 +15,8 @@
 5. [Vercel Integration](#5-vercel-integration)
 6. [Project Structure](#6-project-structure)
 7. [Quick Start](#7-quick-start)
+8. [GitHub Repo Hygiene](#8-github-repo-hygiene)
+9. [Template Maintenance](#9-template-maintenance)
 
 ---
 
@@ -348,15 +350,50 @@ This template integrates with orchestration platforms or kanban boards:
 ├── CODEX.md                     # OpenCode / Codex instructions
 ├── COPILOT_INSTRUCTIONS.md      # GitHub Copilot context
 ├── AI_CONTEXT.md                # One-page project summary
+├── CAPABILITIES.md              # Enterprise AI capabilities reference
+├── CHANGELOG.md                 # Version history
+├── CLEANUP.md                   # Repo hygiene runbook
+├── CONTRIBUTING.md              # Contribution guide
+├── HANDOFF.md                   # Live working state for agent sessions
+├── PROGRESS.md                  # Agent loop progress tracker
+├── RELEASE_NOTES.md             # Release history
+├── SECURITY.md                  # Security policy
+├── SUPPORT.md                   # Support & issue guidance
+├── blockers.md                  # Agent loop blockers
+├── CODE_OF_CONDUCT.md           # Code of conduct
+├── LICENSE                      # MIT license
+├── README.md                    # This file
 ├── .cursorrules                 # Cursor AI rules
 ├── .windsurfrules               # Windsurf AI rules
+├── .editorconfig                # Cross-editor consistency
+├── .gitattributes               # Git normalization
+├── .gitignore                   # Comprehensive ignore patterns
+├── .env.example                 # Documented environment variables
+├── .mcp.json                    # MCP server configuration
+├── .pre-commit-config.yaml       # Pre-commit hooks
+├── .prettierrc                  # Code formatting (if JS/TS)
+├── Dockerfile                   # Container definition
+├── docker-compose.yml           # Development environment
 │
-├── rules/                       # Role-based agent skill files
-│   ├── 01-architect.md          # Architecture agent
-│   ├── 02-coder.md              # Implementation agent
-│   ├── 03-reviewer.md           # Code review agent
-│   ├── 04-tester.md             # Testing agent
-│   └── 05-devops.md             # DevOps / infrastructure agent
+├── .claude/                     # Claude Code config & skills
+│   ├── agents/                  # Subagent definitions
+│   │   ├── architect.md
+│   │   ├── coder.md
+│   │   ├── reviewer.md
+│   │   ├── tester.md
+│   │   ├── devops.md
+│   │   ├── ux.md
+│   │   └── analyst.md
+│   ├── skills/                  # Repeatable Claude Code skills
+│   │   ├── template-uplift/     # Promote fixes back into the template
+│   │   └── ponytail/            # YAGNI-first prompt injection
+│   └── settings.json            # Permission defaults
+│
+├── .kilo/                       # Kilo config & bundled skills
+│   └── skills/
+│       ├── github-cleanup/      # Merge legacy branches, delete stale refs
+│       ├── pr-auto-merge/       # Auto-resolve conflicts and merge PRs
+│       └── vercel-deploy/       # Deploy to Vercel with env switching
 │
 ├── .github/
 │   ├── workflows/               # CI/CD pipelines
@@ -368,44 +405,98 @@ This template integrates with orchestration platforms or kanban boards:
 │   │   ├── ghcr-push.yml        # Container image build & push (GHCR)
 │   │   ├── dependency-review.yml# Dependency review on PRs
 │   │   ├── dependabot-auto-merge.yml  # Auto-merge Dependabot PRs
-│   │   └── stale.yml            # Stale issue / PR management
+│   │   ├── stale.yml            # Stale issue / PR management
+│   │   ├── scorecard.yml        # OpenSSF Scorecard
+│   │   ├── actionlint.yml       # Workflow linting
+│   │   ├── gitleaks.yml         # Secret scanning
+│   │   ├── sbom.yml             # Software Bill of Materials
+│   │   └── slsa-provenance.yml  # SLSA provenance
 │   ├── ISSUE_TEMPLATE/          # Issue templates
 │   ├── PULL_REQUEST_TEMPLATE.md # PR template
 │   ├── dependabot.yml           # Dependency automation
+│   ├── renovate.json            # Renovate bot config
+│   ├── auto_assign.yml          # Auto-assign reviewers
 │   ├── CODEOWNERS               # Ownership & review routing
 │   └── rulesets/                # Branch protection rules-as-code
 │
 ├── docs/
 │   ├── agentic-sdlc.md          # Full Agentic SDLC protocol
 │   ├── architecture.md          # Architecture documentation
+│   ├── build-versioning.md      # Build provenance in the footer
+│   ├── ci-cd.md                 # Pipelines, permissions, supply-chain
+│   ├── claude-tooling.md        # .claude/ — agents, skills, hooks, MCP
+│   ├── component-structure.md   # App Router layout, data layer, styling
 │   ├── decisions/               # ADRs (Architecture Decision Records)
-│   └── getting-started.md       # Quick start guide
+│   ├── e2e-sdlc.md              # End-to-end testing protocol
+│   ├── getting-started.md       # Quick start guide
+│   ├── git-workflow.md          # Branching, commits, merging, force-push rules
+│   ├── github-standards.md      # Social card, metadata, issue forms, security
+│   ├── spec-driven-development.md # Spec-driven development artifacts
+│   ├── structure-for-ai.md      # Structured content for AI consumption
+│   ├── supply-chain-hardening.md # Supply chain security
+│   ├── template-lifecycle.md     # Two-way sync with repo-template
+│   ├── vercel-oidc.md           # Vercel OIDC setup
+│   ├── web-standards.md         # Responsive, a11y, SEO
+│   ├── website-polishing-standards.md # Site polish rules
+│   ├── wcag-aa-standards.md     # Accessibility standards
+│   └── 9router-integration.md   # 9Router AI gateway setup
+│
+├── rules/                       # Role-based agent skill files
+│   ├── README.md                # Role index
+│   ├── 01-architect.md          # Architecture agent
+│   ├── 02-coder.md              # Implementation agent
+│   ├── 03-reviewer.md           # Code review agent
+│   ├── 04-tester.md             # Testing agent
+│   ├── 05-devops.md             # DevOps / infrastructure agent
+│   ├── 06-ux.md                 # UX/CX & accessibility agent
+│   └── 07-analyst.md            # Requirements & acceptance agent
 │
 ├── scripts/
+│   ├── commit-and-clean.sh      # Lint, test, commit, and tidy
 │   ├── init-project.sh          # Initialize from this template
+│   ├── open-repo.sh             # Open repo in browser / editor
 │   ├── propagate-template.sh    # Update downstream projects
 │   ├── start-loop.sh            # Unattended agentic loop (Linux/macOS)
-│   └── start-loop.ps1           # Unattended agentic loop (Windows)
+│   ├── start-loop.ps1           # Unattended agentic loop (Windows)
+│   ├── setup-9router.ps1        # 9Router AI infrastructure setup
+│   ├── verify-action-pins.sh    # Verify SHA-pinned actions
+│   ├── worktree-create.sh       # Create git worktree
+│   ├── worktree-list.sh         # List git worktrees
+│   └── worktree-remove.sh       # Remove git worktree
+│
+├── templates/
+│   ├── components/
+│   │   ├── BuildInfo.tsx        # Build version footer component
+│   │   └── DecorLayer.tsx       # Visual decor layer
+│   ├── scripts/
+│   │   ├── audit-overflow.mjs   # Detect layout overflow
+│   │   └── generate-build-info.mjs # Generate build metadata
+│   ├── styles/
+│   │   └── dr-guard.css         # Digital Response guard styles
+│   └── social-preview.svg       # Social preview image template
 │
 ├── seeds/                       # Project type starter kits
 │   ├── dotnet/
 │   ├── nextjs/
 │   └── python/
 │
-├── .editorconfig                # Cross-editor consistency
-├── .gitattributes               # Git normalization
-├── .gitignore                   # Comprehensive ignore patterns
-├── .env.example                 # Documented environment variables
-├── .prettierrc                  # Code formatting (if JS/TS)
-├── docker-compose.yml           # Development environment
-├── Dockerfile                   # Container definition
-├── CHANGELOG.md                 # Version history
-├── PROGRESS.md                  # Agent loop progress tracker
-├── blockers.md                  # Agent loop blockers
-├── SECURITY.md                  # Security policy
-├── CODE_OF_CONDUCT.md           # Code of conduct
-├── LICENSE                      # MIT license
-└── README.md                    # This file
+├── planning/                    # Planning artifacts
+│   ├── ARCHITECTURE-DECISIONS.md
+│   ├── BACKLOG.md
+│   ├── COMPETITIVE-ANALYSIS.md
+│   ├── DEEP-RESEARCH-MULTI-AGENT-ORCHESTRATION.md
+│   ├── DEPENDENCIES-AND-BLOCKERS.md
+│   ├── DEVELOPMENT-PHASES.md
+│   ├── NEXT-PHASE-PLAN.md
+│   ├── RISK-MITIGATION.md
+│   ├── ROADMAP.md
+│   └── worklog.md
+│
+├── .devcontainer/               # Dev container config
+│   └── devcontainer.json
+│
+└── .kanban/                     # Kanban board config
+    └── README.md
 ```
 
 ---
@@ -478,78 +569,7 @@ Production deploys use GitHub environment protection rules. Configure required r
 
 ---
 
-## 7. Project Structure
-
-```
-.
-├── AGENTS.md                    # Master instructions for all AI agents
-├── CLAUDE.md                    # Claude Code / CLI configuration
-├── CODEX.md                     # OpenCode / Codex instructions
-├── COPILOT_INSTRUCTIONS.md      # GitHub Copilot context
-├── AI_CONTEXT.md                # One-page project summary
-├── .cursorrules                 # Cursor AI rules
-├── .windsurfrules               # Windsurf AI rules
-│
-├── rules/                       # Role-based agent skill files
-│   ├── 01-architect.md          # Architecture agent
-│   ├── 02-coder.md              # Implementation agent
-│   ├── 03-reviewer.md           # Code review agent
-│   ├── 04-tester.md             # Testing agent
-│   └── 05-devops.md             # DevOps / infrastructure agent
-│
-├── .github/
-│   ├── workflows/               # CI/CD pipelines
-│   │   ├── ci.yml               # Main CI workflow (lint, test, build)
-│   │   ├── codeql-analysis.yml  # Security scanning
-│   │   ├── security-scan.yml    # Container / dependency scanning
-│   │   ├── deploy-preview.yml   # Vercel preview deployments
-│   │   ├── deploy-prod.yml      # Vercel production deploy
-│   │   ├── ghcr-push.yml        # Container image build & push (GHCR)
-│   │   ├── dependency-review.yml# Dependency review on PRs
-│   │   ├── dependabot-auto-merge.yml  # Auto-merge Dependabot PRs
-│   │   └── stale.yml            # Stale issue / PR management
-│   ├── ISSUE_TEMPLATE/          # Issue templates
-│   ├── PULL_REQUEST_TEMPLATE.md # PR template
-│   ├── dependabot.yml           # Dependency automation
-│   ├── CODEOWNERS               # Ownership & review routing
-│   └── rulesets/                # Branch protection rules-as-code
-│
-├── docs/
-│   ├── agentic-sdlc.md          # Full Agentic SDLC protocol
-│   ├── architecture.md          # Architecture documentation
-│   ├── decisions/               # ADRs (Architecture Decision Records)
-│   └── getting-started.md       # Quick start guide
-│
-├── scripts/
-│   ├── init-project.sh          # Initialize from this template
-│   ├── propagate-template.sh    # Update downstream projects
-│   ├── start-loop.sh            # Unattended agentic loop (Linux/macOS)
-│   └── start-loop.ps1           # Unattended agentic loop (Windows)
-│
-├── seeds/                       # Project type starter kits
-│   ├── dotnet/
-│   ├── nextjs/
-│   └── python/
-│
-├── .editorconfig                # Cross-editor consistency
-├── .gitattributes               # Git normalization
-├── .gitignore                   # Comprehensive ignore patterns
-├── .env.example                 # Documented environment variables
-├── .prettierrc                  # Code formatting (if JS/TS)
-├── docker-compose.yml           # Development environment
-├── Dockerfile                   # Container definition
-├── CHANGELOG.md                 # Version history
-├── PROGRESS.md                  # Agent loop progress tracker
-├── blockers.md                  # Agent loop blockers
-├── SECURITY.md                  # Security policy
-├── CODE_OF_CONDUCT.md           # Code of conduct
-├── LICENSE                      # MIT license
-└── README.md                    # This file
-```
-
----
-
-## 8. Quick Start
+## 7. Quick Start
 
 ```bash
 # Use this template from GitHub
@@ -579,7 +599,7 @@ Stop conditions: create a `STOP` file, or write `DONE` to `PROGRESS.md`.
 
 ---
 
-## 9. Template Maintenance
+## 8. Template Maintenance
 
 This template is kept in sync across all your projects via the propagation script. See `scripts/propagate-template.sh` for the workflow.
 
@@ -587,6 +607,72 @@ This template is kept in sync across all your projects via the propagation scrip
 # After updating this template, propagate to downstream repos:
 bash scripts/propagate-template.sh /path/to/downstream-repo
 ```
+
+---
+
+## 9. GitHub Repo Hygiene
+
+Keep the repository tidy with the built-in cleanup skills and runbook.
+
+### Built-in Skills
+
+| Skill | Location | Trigger |
+|-------|----------|---------|
+| `github-cleanup` | `.kilo/skills/github-cleanup/` | "clean up this repo", "merge legacy branches", "tidy branches" |
+| `pr-auto-merge` | `.kilo/skills/pr-auto-merge/` | "auto-merge PRs", "resolve conflicts and merge" |
+
+### Cleanup Checklist
+
+Run this checklist at the start of any session or on a schedule:
+
+1. **Ensure `main` is the default branch**
+   ```bash
+   gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name'
+   ```
+   If it is not `main`, rename it:
+   ```bash
+   git branch -m <OLD> main
+   git push origin main
+   gh repo edit --default-branch main
+   git push origin --delete <OLD>
+   ```
+
+2. **Merge legacy branches into `main`**
+   ```bash
+   git ls-remote --heads origin | awk '{print $2}' | grep -Ei 'refs/heads/(master|Master|Mai)$'
+   ```
+   For each legacy branch:
+   ```bash
+   git checkout main && git pull origin main
+   git merge origin/<LEGACY> --no-commit --no-ff
+   git add -A && git commit -m "Merge <LEGACY> into main"
+   git push origin main
+   git push origin --delete <LEGACY>
+   ```
+
+3. **Delete stale merged branches**
+   ```bash
+   git branch -r --merged main | grep -vE 'origin/(main|HEAD)' | sed 's/origin\///' | xargs -I{} git push origin --delete {}
+   ```
+
+4. **Close stale issues and PRs**
+   ```bash
+   gh issue list --state open --label stale --limit 50
+   gh pr list --state open --label stale --limit 50
+   ```
+   Review and close anything that has gone quiet.
+
+5. **Verify the repo is clean**
+   ```bash
+   git status -sb
+   git stash list
+   git worktree list
+   ```
+
+### Automation
+
+- `scripts/commit-and-clean.sh` — lint, test, commit, and tidy in one step.
+- `CLEANUP.md` — project-specific cleanup runbook with repo inventory and progress.
 
 ---
 

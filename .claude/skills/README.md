@@ -19,5 +19,10 @@ Use a skill when a task is repeatable and has a clear trigger phrase (e.g. "depl
   "add this to the template" / "every project should do this", or after fixing a
   bug whose root cause would recur in any project built from the template.
 
+- **`github-cleanup/`** — keep the GitHub repo tidy: ensure `main` is the
+  default branch, merge legacy `master`/`Master` branches into `main`, and
+  delete stale merged branches. Fires on "clean up this repo", "tidy branches",
+  or "merge legacy branches".
+
 Add your own alongside it as the project accumulates repeatable workflows worth
 packaging.

@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.4.0] — 2026-08-09
+
+### Added
+- **Landing page:** New `docs/index.html` with dark theme, hero, feature grid, and explore pills for repo-template.bardenhagen.xyz
+- **GitHub Repo Hygiene section:** 5-step cleanup checklist in `README.md` covering default branch enforcement, legacy branch merging, stale branch deletion, issue triage, and clean-state verification
+- **`github-cleanup` Claude skill:** New `.claude/skills/github-cleanup/SKILL.md` enabling agents to run repo cleanup workflows directly
+
+### Changed
+- **README.md:** Restructured duplicate sections, expanded Project Structure diagram to reflect actual repository contents, updated TOC numbering
+- **docs/index.html:** Bumped browser tab title to `Repo Template — AI Agentic SDLC`
+
 ## [2.3.0] — 2026-08-08
 
 ### Added
