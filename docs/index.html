@@ -3,8 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="An opinionated starter template for modern software projects: naming conventions, git workflows, hardened CI/CD, and a full Agentic AI SDLC lifecycle.">
+  <meta name="theme-color" content="#0b0f19">
+  <meta property="og:title" content="Repo Template — AI Agentic SDLC">
+  <meta property="og:description" content="An opinionated starter template for modern software projects: naming conventions, git workflows, hardened CI/CD, and a full Agentic AI SDLC lifecycle.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://repo-template.bardenhagen.xyz/">
+  <meta property="og:image" content="https://repo-template.bardenhagen.xyz/templates/social-preview.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Repo Template — AI Agentic SDLC">
+  <meta name="twitter:description" content="An opinionated starter template for modern software projects: naming conventions, git workflows, hardened CI/CD, and a full Agentic AI SDLC lifecycle.">
+  <meta name="twitter:image" content="https://repo-template.bardenhagen.xyz/templates/social-preview.svg">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
   <title>Repo Template — AI Agentic SDLC</title>
-  <link rel="canonical" href="https://github.com/peterjbardenhagen/repo-template.bardenhagen.xyz">
+  <link rel="canonical" href="https://repo-template.bardenhagen.xyz/">
   <style>
     :root {
       --bg: #0b0f19;
@@ -31,6 +43,21 @@
 
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--accent);
+      color: var(--bg);
+      padding: 8px 16px;
+      z-index: 100;
+      font-weight: 600;
+      border-radius: 0 0 8px 0;
+    }
+    .skip-link:focus {
+      top: 0;
+    }
 
     .container {
       max-width: 1100px;
@@ -180,18 +207,20 @@
   </style>
 </head>
 <body>
+  <a href="#main" class="skip-link">Skip to content</a>
   <header>
     <div class="container">
       <div class="logo">repo-<span>template</span></div>
-      <nav>
+      <nav aria-label="Main navigation">
         <a href="https://github.com/peterjbardenhagen/repo-template.bardenhagen.xyz">GitHub</a>
         <a href="docs/getting-started.md">Docs</a>
         <a href="docs/agentic-sdlc.md">SDLC</a>
+        <a href="CONTRIBUTING.md">Contribute</a>
       </nav>
     </div>
   </header>
 
-  <main>
+  <main id="main">
     <section class="hero">
       <div class="container">
         <h1>Ship software with AI agents, not noise.</h1>
@@ -237,6 +266,28 @@
           <h3>📚 Docs & Standards</h3>
           <p>Web standards, accessibility, SEO, component structure, and spec-driven development guides.</p>
         </article>
+      </div>
+    </section>
+
+    <section class="container">
+      <p class="section-title">How to Contribute</p>
+      <div class="grid">
+        <article class="card">
+          <h3>📝 Open an Issue</h3>
+          <p>Found a bug or have an idea? Start with an issue so the approach can be discussed before code is written.</p>
+        </article>
+        <article class="card">
+          <h3>🔀 Branch from main</h3>
+          <p>Pull the latest main, create a short-lived feature branch, and commit using Conventional Commits.</p>
+        </article>
+        <article class="card">
+          <h3>✅ Pass CI & Review</h3>
+          <p>All PRs must pass lint, tests, build, CodeQL, and Dependency Review. Humans review strategy; agents execute tactics.</p>
+        </article>
+      </div>
+      <div class="cta" style="padding: 20px 0 80px;">
+        <a class="btn btn-primary" href="CONTRIBUTING.md">Read the Contributing Guide</a>
+        <a class="btn btn-secondary" href="https://github.com/peterjbardenhagen/repo-template.bardenhagen.xyz/issues">Open an Issue</a>
       </div>
     </section>
 
