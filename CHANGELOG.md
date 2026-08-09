@@ -1,5 +1,40 @@
 # Changelog
 
+## [2.6.0] — 2026-08-09
+
+### Added
+- **Dockerfile security hardening:** Added non-root user (`nodejs`), installed `jq` in build stage, set proper ownership on `/app`
+- **Pre-commit private key detection:** Added `detect-private-key` hook to `.pre-commit-config.yaml`
+- **Expanded HANDOFF.md:** Added concrete examples for In Flight, Next Picks, Blockers, and Recent Decisions sections
+- **Development docker-compose service:** Added commented `dev` service with bind mounts for live reload
+- **Expanded issue template config:** Added contact links for Discussions, Contributing Guide, and Template Uplift
+
+### Changed
+- **Vercel CLI pinned to v58:** Changed `vercel@latest` to `vercel@58` in both `deploy-preview.yml` and `deploy-prod.yml` for reproducible deploys
+- **docker-compose.yml:** Removed production volume bind-mount anti-pattern; app now runs from image only
+- **.devcontainer:** Updated base image from `node:20` to `node:25` to match project baseline
+- **.github/ISSUE_TEMPLATE/config.yml:** Added contact links for community resources
+
+### Fixed
+- **Dockerfile:** Fixed missing `jq` dependency that would cause `npm run build` check to fail
+- **Dockerfile:** Fixed root user execution in production stage (security best practice)
+
+## [2.5.0] — 2026-08-09
+
+### Added
+- **Vercel Analytics integration:** Added free Vercel Web Analytics and Speed Insights to `docs/index.html` and documented setup for both static sites and Next.js apps
+- **Website enhancements:** Added SEO meta tags (description, Open Graph, Twitter Card), favicon, skip-to-content link, and `aria-label` to navigation
+- **Contributing section on landing page:** New "How to Contribute" section in `docs/index.html` with CTAs to the Contributing Guide and GitHub Issues
+- **Expanded CONTRIBUTING.md:** Added structured sections for AI agents, architecture decisions, template propagation, and PR checklist
+- **How to Contribute in getting-started.md:** Added contribution guidance and template uplift instructions to the quick-start guide
+
+### Changed
+- **Canonical URL:** Updated from GitHub repo URL to `https://repo-template.bardenhagen.xyz/`
+- **docs/index.html navigation:** Added Contribute link alongside GitHub, Docs, and SDLC links
+- **docs/build-versioning.md:** Added Vercel Analytics section with Next.js and static HTML examples
+- **docs/website-polishing-standards.md:** Added Analytics section to the polishing standards
+- **README.md:** Added Vercel Analytics subsection under Vercel Integration with code examples
+
 ## [2.4.0] — 2026-08-09
 
 ### Added

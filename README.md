@@ -567,6 +567,38 @@ main ──feat/tenant-sso──PR──▶ main ──▶ Vercel prod auto-depl
 
 Production deploys use GitHub environment protection rules. Configure required reviewers in Settings → Environments → `production`.
 
+### Vercel Analytics (Free)
+
+Every Vercel project includes **Web Analytics** and **Speed Insights** at no cost. The template injects both via script tags in `docs/index.html` (or your app's root layout). No secrets or configuration required — Vercel auto-detects the project from the deployment.
+
+For Next.js apps, add to `app/layout.tsx`:
+
+```tsx
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        {children}
+        <Analytics />
+        <SpeedInsights />
+      </body>
+    </html>
+  );
+}
+```
+
+For static HTML or non-Next.js sites, add to the `<head>`:
+
+```html
+<script defer src="https://analytics.vercel.app/main.js"></script>
+<script defer src="https://analytics.vercel.app/speed-insights.js"></script>
+```
+
+Both are zero-config, privacy-friendly, and respect Do Not Track.
+
 ---
 
 ## 7. Quick Start

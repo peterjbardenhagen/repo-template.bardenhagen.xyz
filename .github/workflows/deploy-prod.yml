@@ -42,7 +42,7 @@ jobs:
           allow-same-org: true
 
       - name: Install Vercel CLI
-        run: npm install --global vercel@latest
+        run: npm install --global vercel@58
 
       - name: Pull Vercel environment
         run: vercel pull --yes --environment=production --token="${{ secrets.VERCEL_TOKEN }}"

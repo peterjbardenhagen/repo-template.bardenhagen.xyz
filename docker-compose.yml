@@ -9,9 +9,6 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=production
-    volumes:
-      - .:/app
-      - /app/node_modules
     restart: unless-stopped
 
   # Add additional services as needed:
@@ -25,6 +22,21 @@ services:
   #     - pgdata:/var/lib/postgresql/data
   #   ports:
   #     - "5432:5432"
+
+  # Development service — uses bind mounts for live reload
+  # Run with: docker compose -f docker-compose.yml -f docker-compose.dev.yml up
+  # dev:
+  #   build:
+  #     context: .
+  #     target: base
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #     - .:/app
+  #     - /app/node_modules
+  #   environment:
+  #     - NODE_ENV=development
+  #   command: npm run dev
 
 volumes:
   pgdata:

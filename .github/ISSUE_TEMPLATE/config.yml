@@ -1,5 +1,15 @@
 blank_issues_enabled: false
+
 contact_links:
   - name: Security Issue
     url: https://github.com/peterjbardenhagen/repo-template.bardenhagen.xyz/security
-    about: Report a security vulnerability
+    about: Report a security vulnerability privately
+  - name: Discussions
+    url: https://github.com/peterjbardenhagen/repo-template.bardenhagen.xyz/discussions
+    about: Ask questions, share ideas, or propose features
+  - name: Contributing Guide
+    url: https://github.com/peterjbardenhagen/repo-template.bardenhagen.xyz/blob/main/CONTRIBUTING.md
+    about: Read how to contribute before opening an issue
+  - name: Template Uplift
+    url: https://github.com/peterjbardenhagen/repo-template.bardenhagen.xyz/issues/new?template=template_uplift.yml
+    about: Propose promoting a fix from a downstream project into the template
