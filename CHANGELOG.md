@@ -1,5 +1,24 @@
 # Changelog
 
+## [2.6.0] — 2026-08-09
+
+### Added
+- **Dockerfile security hardening:** Added non-root user (`nodejs`), installed `jq` in build stage, set proper ownership on `/app`
+- **Pre-commit private key detection:** Added `detect-private-key` hook to `.pre-commit-config.yaml`
+- **Expanded HANDOFF.md:** Added concrete examples for In Flight, Next Picks, Blockers, and Recent Decisions sections
+- **Development docker-compose service:** Added commented `dev` service with bind mounts for live reload
+- **Expanded issue template config:** Added contact links for Discussions, Contributing Guide, and Template Uplift
+
+### Changed
+- **Vercel CLI pinned to v58:** Changed `vercel@latest` to `vercel@58` in both `deploy-preview.yml` and `deploy-prod.yml` for reproducible deploys
+- **docker-compose.yml:** Removed production volume bind-mount anti-pattern; app now runs from image only
+- **.devcontainer:** Updated base image from `node:20` to `node:25` to match project baseline
+- **.github/ISSUE_TEMPLATE/config.yml:** Added contact links for community resources
+
+### Fixed
+- **Dockerfile:** Fixed missing `jq` dependency that would cause `npm run build` check to fail
+- **Dockerfile:** Fixed root user execution in production stage (security best practice)
+
 ## [2.5.0] — 2026-08-09
 
 ### Added

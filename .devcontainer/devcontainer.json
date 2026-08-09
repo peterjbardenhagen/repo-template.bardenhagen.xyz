@@ -1,6 +1,6 @@
 {
   "name": "repo-template",
-  "image": "mcr.microsoft.com/devcontainers/base:node:20",
+  "image": "mcr.microsoft.com/devcontainers/base:node:25",
   "features": {
     "ghcr.io/devcontainers/features/github-cli:1": {},
     "ghcr.io/devcontainers/features/docker-in-docker:2": {}

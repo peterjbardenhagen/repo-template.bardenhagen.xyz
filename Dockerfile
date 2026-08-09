@@ -1,7 +1,10 @@
 # Use an official runtime as the base image
 # Replace with your project's actual base image and build steps.
-# Node 20 LTS is the current stable baseline; adjust to match your project's engine.
+# Node 25 is the current baseline; adjust to match your project's engine.
 FROM node:25-alpine AS base
+
+# Install build tools
+RUN apk add --no-cache jq
 
 # Set working directory
 WORKDIR /app
@@ -22,11 +25,21 @@ RUN if [ -f package.json ] && jq -e '.scripts.build' package.json >/dev/null 2>&
 
 # Production stage
 FROM node:25-alpine AS production
+
+# Create non-root user
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S nodejs -u 1001 -G nodejs
+
 WORKDIR /app
 
+# Copy dependencies and built assets
 COPY --from=base /app/node_modules ./node_modules
 COPY --from=base /app/dist ./dist
 COPY --from=base /app/package*.json ./
+
+# Set ownership and switch to non-root user
+RUN chown -R nodejs:nodejs /app
+USER nodejs
 
 EXPOSE 3000
 
