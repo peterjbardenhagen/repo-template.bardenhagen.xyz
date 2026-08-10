@@ -289,3 +289,102 @@ bash scripts/propagate-template.sh /path/to/downstream-repo
 ```
 
 Downstream repos should be rebased onto the template periodically to receive updates without losing their project-specific content.
+
+---
+
+## Harness Engineering & 2026 Production Patterns
+
+This section captures production-grade patterns from Anthropic, Deloitte, Alice Labs, and Augment Code research (2026).
+
+### Constraint Harnesses
+
+Harness engineering encodes correctness into the agent loop through three reinforcing layers:
+
+1. **Preventive Controls (Constraint Harnesses)** — Reduce the agent's solution space before generation begins.
+   - Rules files injected at session start (`always_apply`, `agent_requested`, `manual`)
+   - Architectural lint configurations with remediation-instruction error messages
+   - Type systems and schemas that make invalid states unrepresentable
+
+2. **Corrective Controls (Feedback Loops)** — Return structured error signals to the agent for self-correction.
+   - Lint/type-checker output fed back into agent reasoning as actionable prompts
+   - Test failure details (which test, what assertion, what line) for precise retries
+   - Plan-alignment checks: did the agent use the existing middleware or create a new one?
+
+3. **Quality Gates** — Prevent non-compliant code from merging.
+   - Deterministic CI gates (SAST, SCA, secrets, IaC, type-check, lint)
+   - Staleness gates for dependency strategy drift
+   - LLM-as-judge pre-screening for specification compliance and scope creep
+
+### Plan-Execute-Verify (PEV) Pattern
+
+```
+┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│   PLAN      │───▶│  EXECUTE    │───▶│   VERIFY    │
+│             │    │             │    │             │
+│ Decompose   │    │ Implement   │    │ Test suite  │
+│ acceptance  │    │ against     │    │ Type check  │
+│ criteria    │    │ plan        │    │ Lint        │
+│ Open qs     │    │ Iterate     │    │ Plan align  │
+└─────────────┘    └─────────────┘    └─────────────┘
+       ▲                   │                   │
+       └───────────────────┴───────────────────┘
+              Feedback loop on any failure
+```
+
+PEV enforces phase boundaries with gates at every transition. Unlike generate-and-check, planning is explicit and verified before code is written.
+
+### Multi-Agent Coordination Taxonomy (2026)
+
+| Tier | Pattern | Best For | Tools |
+|------|---------|----------|-------|
+| **Tier 1: Local Multi-Agent** | Multiple agents in isolated worktrees with dashboards, diff review, merge control | 3-10 agents on known codebases | Claude Code Agent Teams, Conductor, Antigravity |
+| **Tier 2: Managed Orchestration** | Platform manages agent lifecycle, context, and coordination | Teams needing governance without cloud lock-in | Vibe Kanban, OpenClaw + Antfarm, Gastown |
+| **Tier 3: Cloud Autonomous** | Fully cloud-hosted agents with API-level integration | End-to-end workflows with sandboxed execution | Claude Code Web, Copilot Coding Agent, Jules, Codex Web |
+
+**Key coordination patterns:**
+- Spec-driven decomposition
+- Worktree isolation for parallel execution
+- Coordinator/Specialist/Verifier roles
+- Per-task model routing (Opus for reasoning, Sonnet for routine, Haiku for simple)
+- Automated quality gates
+- Sequential merge with human approval on production touches
+
+### Context Engineering
+
+Context engineering is the discipline of systematically managing how AI systems process context.
+
+**Rules files** are persistent, repository-scoped instruction sets injected at session start:
+- `always_apply` — included in every prompt automatically
+- `agent_requested` — loaded when the agent determines relevance
+- `manual` — loaded only when explicitly invoked
+
+**Context lakes** provide one source of truth every agent reads from: service ownership, dependencies, runbooks, and architecture decisions.
+
+**Progressive disclosure** keeps token usage proportional to task complexity:
+1. Session start: `AGENTS.md` + `HANDOFF.md`
+2. Task start: phase-specific instructions
+3. Deep work: architecture, conventions, tech stack
+4. Review: PR contract and quality gates only
+
+### Cost Optimization & Model Routing
+
+Token economics vary dramatically across task types and models. Sustainable operation requires:
+- Intelligent model routing (Opus/Sonnet/Haiku) based on task complexity
+- Multi-runtime strategy (local integration vs. cost-efficient sandboxed execution)
+- Usage-based metering and budget caps
+- Caching strategies for repeated context
+
+### Verification Gates
+
+Tests are the ground truth. The test suite is what lets the agent close its own loop. Three properties make a test suite agent-ready:
+1. **Speed** — affected tests first, parallelize, cache; common case in seconds
+2. **Trustworthiness** — flaky tests poison the signal; fix before delegating to agents
+3. **Coverage** — gaps in tests are gaps in the agent's verification
+
+**Verification gate checklist:**
+- [ ] Affected tests pass
+- [ ] Full suite passes (no regressions)
+- [ ] Type checker clean
+- [ ] Linter clean
+- [ ] Plan alignment verified (architecture, conventions)
+- [ ] Human approval for production-touching changes

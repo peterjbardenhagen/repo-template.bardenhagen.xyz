@@ -1,5 +1,25 @@
 # Changelog
 
+## [2.7.0] — 2026-08-10
+
+### Added
+- **Harness Engineering:** Added constraint harness, feedback loop, and quality gate patterns to `docs/agentic-sdlc.md`
+- **Plan-Execute-Verify (PEV):** Documented three-phase agent architecture with explicit verification gates
+- **Multi-Agent Coordination Taxonomy:** Added 2026 platform patterns (local, managed, cloud) to `docs/agentic-sdlc.md`
+- **Context Engineering Best Practices:** Added progressive disclosure, rules files, and context lake guidance
+- **AI-Native Documentation Schema:** Updated `docs/structure-for-ai.md` with machine-readable metadata for agent consumption
+- **Web Standards 2026:** Updated `docs/web-standards.md` with Core Web Vitals, WCAG 2.2, and AI-content accessibility patterns
+- **Kanban Tasks:** Added 6 new high-value tasks covering roadmap cleanup, research, and platform acceleration
+- **Skills Pack:** Installed 19 skills from `skills.sh/p/RuPk5l3SiAv8BgSH` across all 76 agents
+
+### Changed
+- **Branch Hygiene:** Merged `dependabot/docker/node-26-alpine` and `dependabot/github_actions/github-actions-5e32b1bf7f` into `main`
+- **Agentic SDLC:** Enhanced protocol with 2026 production patterns from Anthropic, Deloitte, and Alice Labs research
+
+### Security
+- **Supply Chain:** Upstream Dependabot updates merged for Docker base image and GitHub Actions
+
+
 ## [2.6.0] — 2026-08-09
 
 ### Added

@@ -403,3 +403,51 @@ logger.critical('database_down', {
 - **Digital Response Standards:** [digitalresponse.com.au](https://digitalresponse.com.au)
 - **Techlight Reference:** [techlight.com.au](https://techlight.com.au)
 - **MDN: Responsive Web Design:** [developer.mozilla.org](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design)
+
+---
+
+## 2026 Updates & AI-Native Considerations
+
+### Core Web Vitals (2026 Thresholds)
+
+| Metric | Good | Needs Improvement | Poor |
+|--------|------|-------------------|------|
+| LCP | ≤ 2.0s | 2.0s – 4.0s | > 4.0s |
+| FID | ≤ 80ms | 80ms – 200ms | > 200ms |
+| CLS | ≤ 0.08 | 0.08 – 0.2 | > 0.2 |
+| INP | ≤ 150ms | 150ms – 400ms | > 400ms |
+
+**AI-generated content note:** Agents must optimise for INP (Interaction to Next Paint) when adding dynamic AI widgets, chatbots, or streaming responses. Debounce input handlers, skeleton-load states, and avoid layout shifts during async fetches.
+
+### WCAG 2.2 / 2.3 Essentials
+
+- **Target size:** Interactive elements must be at least 24x24 CSS pixels (WCAG 2.2 Level AAA)
+- **Dragging movements:** Provide single-pointer alternatives for all drag-and-drop interfaces
+- **Redundant entry:** Auto-fill or suggest previously entered information across multi-step forms
+- **Focus not obscured:** Ensure active focus indicators are not covered by sticky headers or modals
+- **Consistent help:** Help mechanisms in the same relative order across the whole site
+
+### AI Content Accessibility
+
+When agents generate content:
+- **Alt text:** Every meaningful image gets descriptive alt text; decorative images get `alt=""`
+- **Error messages:** LLM-generated errors must include plain-language cause, remediation steps, and support links
+- **Empty states:** Use `role="status"` or `aria-live="polite"` for dynamic empty-state content
+- **Color contrast:** Never rely on color alone. Use icons, labels, or patterns alongside color coding
+- **Language declaration:** Set `lang` attribute on `<html>` and update dynamically for multilingual agents
+
+### Responsive Patterns (2026)
+
+- **Container queries** preferred over media queries for component-level responsiveness
+- **`has()` selector** for parent-state styling without extra classes
+- **`field-sizing: content`** for auto-resizing form inputs
+- **CSS anchor positioning** for tooltips, popovers, and dropdowns without JS positioning libraries
+- **`:user-invalid`** and `:user-valid` for real-time form validation styling
+
+### Banned Patterns (Updated)
+
+- ❌ `overflow-x: hidden` — breaks `position: sticky`; use `overflow-x: clip`
+- ❌ Fixed-width layouts that exceed viewport at 320px
+- ❌ Auto-playing media without explicit user consent
+- ❌ `alert()` for user-facing messages; use accessible inline notifications
+- ❌ Placeholder text used as the only label

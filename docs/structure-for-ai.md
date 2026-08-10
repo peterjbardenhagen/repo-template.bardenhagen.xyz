@@ -76,3 +76,42 @@ Structured content files are validated by:
 - [Atlassian Design System: Context Engine](https://www.atlassian.com/blog/ai-at-work/atlassian-design-system-building-the-context-engine-for-the-ai-era)
 - [Spec-Driven Development with Coding Agents (DeepLearning.AI)](https://www.deeplearning.ai/short-courses/spec-driven-development-with-coding-agents/)
 - [sdd-template by angelotadres](https://github.com/angelotadres/sdd-template)
+
+---
+
+## 2026 Enhancements
+
+### Agent Consumption Patterns
+
+Structured content files should be optimised for the following 2026 agent behaviours:
+
+| Pattern | Description | Implementation |
+|---------|-------------|----------------|
+| **Context Lake** | Single source of truth for architecture, ownership, dependencies | Add `context-lake.md` with service map, data flow, and runbook index |
+| **Rules Files** | Hierarchical, scoped instructions loaded at session start | Use `always_apply`, `agent_requested`, `manual` rule types |
+| **Spec Contracts** | Verified interfaces between agent-generated code and the codebase | Enforce via PEV plan-alignment gates and CI schema checks |
+| **Evidence Chains** | Acceptance is verifiable, not claimed | Screenshots, test reports, and benchmark outputs committed to PRs |
+| **Provenance Gates** | Tamper-evident execution for regulated industries | Hash-chained work products and audit trails in `tests/reports/` |
+
+### Machine-Readable Metadata Schema
+
+Every top-level documentation file should include YAML frontmatter:
+
+```yaml
+---
+status: approved
+lastUpdated: 2026-08-10
+owner: agent-architect
+supersedes: []
+tags: [agentic-sdlc, harness-engineering, multi-agent]
+agentUsage: [architect, coder, reviewer, devops]
+---
+```
+
+### Validation Checklist
+
+- [ ] `status` is one of `draft`, `approved`, `deprecated`
+- [ ] `lastUpdated` is ISO 8601
+- [ ] `owner` is assigned
+- [ ] `tags` include at least one operational category
+- [ ] `agentUsage` lists the roles that rely on this file

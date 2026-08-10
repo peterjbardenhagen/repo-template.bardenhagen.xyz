@@ -1,5 +1,22 @@
 # Release Notes
 
+## v2.7.0 — 2026-08-10
+
+### Summary
+2026 platform acceleration: harness engineering, PEV loops, multi-agent coordination taxonomy, and supply chain updates.
+
+### Highlights
+- Adopted **harness engineering** discipline: constraint harnesses, feedback loops, and quality gates documented in `docs/agentic-sdlc.md`
+- Added **Plan-Execute-Verify (PEV)** pattern to enforce phase boundaries and plan-alignment verification
+- Documented **multi-agent coordination taxonomy** (local worktree isolation, managed orchestration, cloud autonomous) based on Q1 2026 production landscape
+- Updated **context engineering** guidance: rules files, context lakes, and progressive disclosure improvements
+- Updated `docs/structure-for-ai.md` with enhanced machine-readable schemas for agent consumption
+- Updated `docs/web-standards.md` with 2026 Core Web Vitals thresholds, WCAG 2.2 updates, and AI-generated content accessibility
+- Merged upstream Dependabot branches: Docker `node-26-alpine` and GitHub Actions bump
+- Installed 19 curated skills from `skills.sh/p/RuPk5l3SiAv8BgSH` to all agent runtimes
+- Added 6 kanban tasks for roadmap cleanup, research, and platform enhancements
+
+
 ## v2.3.0 — 2026-08-08
 
 ### Summary
