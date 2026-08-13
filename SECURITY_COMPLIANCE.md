@@ -99,7 +99,7 @@
 - [ ] **SOC 3** – Annual Type II audit preparation (external auditor engagement)
 - [ ] **ISO/IEC 27001** – Formal certification roadmap
 - [ ] **Continuous Compliance Dashboard** – Real-time compliance metrics in Grafana
-- [ ] **Automated Penetration Testing** – Monthly OWASP ZAP scans integrated into CI
+- [x] **Automated Penetration Testing** – Monthly OWASP ZAP scans integrated into CI
 - [ ] **Data Loss Prevention (DLP)** – Additional scanning for PII in code/logs
 
 ---
