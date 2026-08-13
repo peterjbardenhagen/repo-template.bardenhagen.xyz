@@ -123,6 +123,61 @@ jobs:
         run: echo "Replace — e.g. npm run build"
 
   # ---------------------------------------------------------------------------
+  # OWASP ZAP Baseline Security Scan
+  # Detects common vulnerabilities in web applications (XSS, SQLi, etc.)
+  # Integrates with ASD Essential Eight and OWASP Top 10 compliance
+  # ---------------------------------------------------------------------------
+  zap-scan:
+    name: OWASP ZAP Baseline Scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    needs: [build]
+    if: always()
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up OWASP ZAP
+        uses: zapro/zap-baseline-action@v0.15.0
+        with:
+          target: 'http://localhost:3000'  # Replace with your app URL
+          token: ${{ secrets.ZAP_API_TOKEN }}
+          fail-on: 'medium'  # Fail on medium severity+ vulnerabilities
+          fail-on-severity: 'medium'
+          rules: 'owasp-profiles/modified-risk'
+          # Generate HTML report
+          html: zap-report.html
+          # Generate JSON report
+          json: zap-report.json
+
+      - name: Upload ZAP Report as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: zap-scan-report
+          path: |
+            zap-report.html
+            zap-report.json
+
+      - name: Check for Critical Vulnerabilities
+        run: |
+          if [ -f zap-report.json ]; then
+            critical_count=$(python3 -c "
+import json
+with open('zap-report.json') as f:
+    data = json.load(f)
+    # Count alerts with critical severity
+    critical = [a for a in data.get('site']['alerts', []) if a.get('risk', '').lower() == 'critical']
+    print(len(critical))
+")
+            if [ \"$critical_count\" -gt 0 ]; then
+              echo "::error ::Critical vulnerabilities found: $critical_count"
+              exit 1
+            fi
+          fi
+
+  # ---------------------------------------------------------------------------
   # One stable required check. Point the branch ruleset at "CI Gate" alone —
   # then adding, renaming, or splitting a job above never means editing branch
   # protection. `if: always()` ensures the gate reports even when a need fails.
