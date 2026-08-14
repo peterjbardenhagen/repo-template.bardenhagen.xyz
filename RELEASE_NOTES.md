@@ -1,21 +1,20 @@
 # Release Notes
 
-## v2.7.0 — 2026-08-10
+## v2.8.0 — 2026-08-14
 
 ### Summary
-2026 platform acceleration: harness engineering, PEV loops, multi-agent coordination taxonomy, and supply chain updates.
+Production safety and observability uplift: agent loop health checks, security IR runbook, deployment verification, and 2026 CI/CD best practices.
 
 ### Highlights
-- Adopted **harness engineering** discipline: constraint harnesses, feedback loops, and quality gates documented in `docs/agentic-sdlc.md`
-- Added **Plan-Execute-Verify (PEV)** pattern to enforce phase boundaries and plan-alignment verification
-- Documented **multi-agent coordination taxonomy** (local worktree isolation, managed orchestration, cloud autonomous) based on Q1 2026 production landscape
-- Updated **context engineering** guidance: rules files, context lakes, and progressive disclosure improvements
-- Updated `docs/structure-for-ai.md` with enhanced machine-readable schemas for agent consumption
-- Updated `docs/web-standards.md` with 2026 Core Web Vitals thresholds, WCAG 2.2 updates, and AI-generated content accessibility
-- Merged upstream Dependabot branches: Docker `node-26-alpine` and GitHub Actions bump
-- Installed 19 curated skills from `skills.sh/p/RuPk5l3SiAv8BgSH` to all agent runtimes
-- Added 6 kanban tasks for roadmap cleanup, research, and platform enhancements
-
+- Added **agent observability** patterns to docs/agentic-sdlc.md: five signals (task completion, recursive loop detection, cost per output, hallucination rate, tool accuracy), eval gates in CI, and shadow/canary rollout patterns
+- Created **security incident response runbook** (docs/security-incident-response.md) with P0-P3 severity taxonomy, containment steps, and escalation matrix
+- Added **agent-loop-healthcheck.sh** with pre-iteration circuit breaker, CI verification, and cost-per-task spike detection
+- Updated **start-loop.sh** and **start-loop.ps1** to run health checks before each agent iteration
+- Added **verify-deployment.sh** for automated post-deploy HTTP, content, and security header validation
+- Added **sync-versions.sh** to keep README, CHANGELOG, and RELEASE_NOTES version badges synchronized
+- Updated **docs/ci-cd.md** with 2026 production patterns: immutable OIDC claims, actions/checkout safety defaults, GitHub Actions network firewall, and cost tracking guidance
+- Fixed **README version drift**: corrected stale 2.4.0 badge to 2.8.0
+- Refreshed **kanban board**: archived 9 completed backlog items and added 10 new tasks aligned to 2026 platform acceleration
 
 ## v2.3.0 — 2026-08-08
 

@@ -1,24 +1,25 @@
 # Changelog
 
-## [2.7.0] — 2026-08-10
+## [2.8.0] — 2026-08-14
 
 ### Added
-- **Harness Engineering:** Added constraint harness, feedback loop, and quality gate patterns to `docs/agentic-sdlc.md`
-- **Plan-Execute-Verify (PEV):** Documented three-phase agent architecture with explicit verification gates
-- **Multi-Agent Coordination Taxonomy:** Added 2026 platform patterns (local, managed, cloud) to `docs/agentic-sdlc.md`
-- **Context Engineering Best Practices:** Added progressive disclosure, rules files, and context lake guidance
-- **AI-Native Documentation Schema:** Updated `docs/structure-for-ai.md` with machine-readable metadata for agent consumption
-- **Web Standards 2026:** Updated `docs/web-standards.md` with Core Web Vitals, WCAG 2.2, and AI-content accessibility patterns
-- **Kanban Tasks:** Added 6 new high-value tasks covering roadmap cleanup, research, and platform acceleration
-- **Skills Pack:** Installed 19 skills from `skills.sh/p/RuPk5l3SiAv8BgSH` across all 76 agents
+- **Agent Observability:** Documented the five signals that matter (task completion rate, recursive loop detection, cost per output, hallucination rate, tool accuracy) in docs/agentic-sdlc.md
+- **Eval Gates in CI:** Added agent-native CI/CD patterns for prompt linting, offline eval, shadow evaluation, and canary rollouts
+- **Security Incident Response:** Created docs/security-incident-response.md with severity taxonomy, containment procedures, and escalation matrix
+- **Agent Loop Safety:** Added scripts/agent-loop-healthcheck.sh with circuit breaker, CI verification, and cost guard
+- **Deployment Verification:** Added scripts/verify-deployment.sh for post-deploy HTTP, content, and security header checks
+- **Version Sync:** Added scripts/sync-versions.sh to keep README, CHANGELOG, and RELEASE_NOTES aligned
+- **Kanban Refresh:** Moved completed backlog items to Done and added 10 new high-value tasks
 
 ### Changed
-- **Branch Hygiene:** Merged `dependabot/docker/node-26-alpine` and `dependabot/github_actions/github-actions-5e32b1bf7f` into `main`
-- **Agentic SDLC:** Enhanced protocol with 2026 production patterns from Anthropic, Deloitte, and Alice Labs research
+- **Unattended Loop:** Updated scripts/start-loop.sh and scripts/start-loop.ps1 to run pre-iteration health checks
+- **README:** Fixed stale version badge (2.4.0 to 2.8.0)
+- **CI/CD Docs:** Updated docs/ci-cd.md with 2026 best practices (immutable OIDC claims, actions/checkout safety, network firewall, cost tracking)
+- **Branch Hygiene:** Deleted stale remote branches claude/template-uplift-2026-08 and template/add-missing-template-files (already superseded by main)
 
 ### Security
-- **Supply Chain:** Upstream Dependabot updates merged for Docker base image and GitHub Actions
-
+- **OIDC Hardening:** Documented opt-in process for GitHub immutable subject claims to prevent repository-recycling attacks
+- **IR Runbook:** Added first-class security incident response procedures for supply chain, credential leakage, workflow drift, agent misbehavior, and deployment compromise
 
 ## [2.6.0] — 2026-08-09
 
