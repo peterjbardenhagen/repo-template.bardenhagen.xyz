@@ -9,65 +9,135 @@
     {
       "id": "1786230464",
       "title": "Add OpenSSF Scorecard workflow for supply chain security audit",
-      "status": "Backlog",
+      "status": "Done",
       "priority": "High",
       "created": "2026-08-08T23:07:44Z"
     },
     {
-      "id": "1786230464",
+      "id": "1786230465",
       "title": "Add SLSA provenance and cosign signing for release artifacts",
-      "status": "Backlog",
+      "status": "Done",
       "priority": "High",
       "created": "2026-08-08T23:07:44Z"
     },
     {
-      "id": "1786230464",
+      "id": "1786230466",
       "title": "Add gitleaks secret scanning workflow to catch leaked credentials",
-      "status": "Backlog",
+      "status": "Done",
       "priority": "High",
       "created": "2026-08-08T23:07:44Z"
     },
     {
-      "id": "1786230464",
+      "id": "1786230467",
       "title": "Add .mcp.json with pre-configured MCP servers (Context7, GitHub, Playwright)",
-      "status": "Backlog",
+      "status": "Done",
       "priority": "High",
       "created": "2026-08-08T23:07:44Z"
     },
     {
-      "id": "1786230464",
+      "id": "1786230468",
       "title": "Add Harden-Runner action to CI workflows for runtime security hardening",
-      "status": "Backlog",
+      "status": "Done",
       "priority": "Medium",
       "created": "2026-08-08T23:07:44Z"
     },
     {
-      "id": "1786230464",
+      "id": "1786230469",
       "title": "Add HANDOFF.md template for live working state documentation",
-      "status": "Backlog",
+      "status": "Done",
       "priority": "Medium",
       "created": "2026-08-08T23:07:44Z"
     },
     {
-      "id": "1786230464",
+      "id": "1786230470",
       "title": "Add SBOM generation with syft for supply chain transparency",
-      "status": "Backlog",
+      "status": "Done",
       "priority": "Medium",
       "created": "2026-08-08T23:07:44Z"
     },
     {
-      "id": "1786230464",
+      "id": "1786230471",
       "title": "Add specs/ directory structure for spec-driven development (SDD)",
-      "status": "Backlog",
+      "status": "Done",
       "priority": "High",
       "created": "2026-08-08T23:07:44Z"
     },
     {
-      "id": "1786230464",
+      "id": "1786230472",
       "title": "Add PR body validation workflow to enforce quality gates on PRs",
-      "status": "Backlog",
+      "status": "Done",
       "priority": "Medium",
       "created": "2026-08-08T23:07:44Z"
+    },
+    {
+      "id": "1755225601",
+      "title": "Sync README version badge to match CHANGELOG (currently stale 2.4.0 vs 2.7.0)",
+      "status": "Backlog",
+      "priority": "High",
+      "created": "2026-08-14T23:01:00Z"
+    },
+    {
+      "id": "1755225602",
+      "title": "Implement Vercel OIDC authentication for GitHub Actions deployments",
+      "status": "Backlog",
+      "priority": "High",
+      "created": "2026-08-14T23:01:00Z"
+    },
+    {
+      "id": "1755225603",
+      "title": "Add automated release notes generation from Conventional Commits in CI",
+      "status": "Backlog",
+      "priority": "Medium",
+      "created": "2026-08-14T23:01:00Z"
+    },
+    {
+      "id": "1755225604",
+      "title": "Add agent loop circuit breaker and health monitoring for autonomous sessions",
+      "status": "Backlog",
+      "priority": "High",
+      "created": "2026-08-14T23:01:00Z"
+    },
+    {
+      "id": "1755225605",
+      "title": "Add template propagation CI validation to detect drift between template and downstream",
+      "status": "Backlog",
+      "priority": "Medium",
+      "created": "2026-08-14T23:01:00Z"
+    },
+    {
+      "id": "1755225606",
+      "title": "Add security incident response (IR) runbook and escalation matrix",
+      "status": "Backlog",
+      "priority": "High",
+      "created": "2026-08-14T23:01:00Z"
+    },
+    {
+      "id": "1755225607",
+      "title": "Add Lighthouse CI performance benchmarking and Core Web Vitals gates",
+      "status": "Backlog",
+      "priority": "Medium",
+      "created": "2026-08-14T23:01:00Z"
+    },
+    {
+      "id": "1755225608",
+      "title": "Add automated dependency license compliance checking (FOSSA or licensee)",
+      "status": "Backlog",
+      "priority": "Medium",
+      "created": "2026-08-14T23:01:00Z"
+    },
+    {
+      "id": "1755225609",
+      "title": "Add AI-generated content accessibility audit automation (WCAG 2.2 for AI output)",
+      "status": "Backlog",
+      "priority": "Medium",
+      "created": "2026-08-14T23:01:00Z"
+    },
+    {
+      "id": "1755225610",
+      "title": "Add branch protection rules-as-code validation script for GitHub settings drift",
+      "status": "Backlog",
+      "priority": "Low",
+      "created": "2026-08-14T23:01:00Z"
     }
   ],
   "status": "default"

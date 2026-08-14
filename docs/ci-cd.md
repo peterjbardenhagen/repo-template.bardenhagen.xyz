@@ -130,3 +130,88 @@ Each workflow contains placeholder commands (e.g., `echo "Add your linter comman
 | Preview deploy not posting URL | Missing `issues: write` | Add `issues: write` to permissions |
 | Dependency Review blocks PR | High-severity vulnerability | Inspect alert, update dep, or adjust `fail-on-severity` |
 | Stale bot closing too fast | Default thresholds lenient | Adjust `days-before-stale` / `days-before-close` |
+## 2026 CI/CD Best Practices
+
+### Immutable OIDC Subject Claims
+
+GitHub Actions OIDC tokens now support immutable subject claims (opt-in available since April 2026, automatic for repos created after July 15, 2026). This prevents repository-recycling attacks where a renamed repo could mint tokens trusted by the old identity.
+
+**Action:** Opt in at the organization level:
+```bash
+gh api --method PUT /orgs/{org}/actions/oidc/settings/customizations/issuer \
+  -f include_enterprise_slug=false \
+  -f include_immutable_sub=true
+```
+
+Or via repository settings UI: **Settings → Actions → OIDC → Subject claim customization**.
+
+### Actions Checkout Safety Defaults
+
+As of June 2026, `actions/checkout` defaults to blocking untrusted code from forks in `pull_request_target` and similar triggers. Review your workflows for explicit opt-outs:
+
+```yaml
+# Only use if you understand the risk
+- uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+  with:
+    persist-credentials: false
+    # fetch-depth: 0  # Only if you need full history
+```
+
+### Eval Gates for Agentic Changes
+
+If your repository is modified by AI agents, add eval gates before merging:
+
+```yaml
+# Conceptual: agent eval gate
+- name: Agent eval gate
+  if: contains(github.event.pull_request.changed_files, 'prompts/') || contains(github.event.pull_request.changed_files, 'tools/')
+  run: |
+    # 1. Prompt lint (seconds)
+    npx prompt-lint prompts/
+    # 2. Offline eval on golden dataset (minutes)
+    npm run eval:offline -- --dataset tests/golden.json
+    # 3. Cost gate: block if cost per request increased >15%
+    npm run eval:cost -- --threshold 0.15
+```
+
+### Deployment Verification
+
+Always verify production health after deploy. Use `scripts/verify-deployment.sh` or inline checks:
+
+```yaml
+- name: Verify deployment
+  run: |
+    url=$(vercel ls --prod --token="${{ secrets.VERCEL_TOKEN }}" | head -n 1 | awk '{print $2}')
+    status=$(curl -s -o /dev/null -w "%{http_code}" "$url")
+    if [ "$status" != "200" ]; then
+      echo "Deployment verification failed: HTTP $status"
+      exit 1
+    fi
+```
+
+### Network Firewall for Actions (Preview)
+
+GitHub Actions network firewall logs all outbound traffic from workflow runs. Enable it to detect unusual behavior:
+
+```yaml
+- uses: step-security/harden-runner@b09bb98e06d4d774595224525879c09bc6e98c40 # v2.20.1
+  with:
+    egress-policy: block
+    allow-same-org: true
+    # egress-policy: audit  # Use 'audit' to log without blocking during migration
+```
+
+### Cost Tracking for Agent Runs
+
+Log Actions minutes and token estimates per workflow run. Set budget alerts in GitHub Settings → Billing.
+
+### Workflow Execution Policies
+
+GitHub now supports enterprise/org/repo-level policies controlling who can trigger workflows and what trigger types are allowed. Enable them to reduce attack surface:
+
+```bash
+# Example: restrict workflow triggers to maintainers only
+gh api --method PUT /repos/{owner}/{repo}/actions/permissions/workflow \
+  -f enabled=true \
+  -f allowed_actions=selected
+```

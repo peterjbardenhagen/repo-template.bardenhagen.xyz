@@ -388,3 +388,82 @@ Tests are the ground truth. The test suite is what lets the agent close its own 
 - [ ] Linter clean
 - [ ] Plan alignment verified (architecture, conventions)
 - [ ] Human approval for production-touching changes
+
+## Agent Observability & 2026 Production Safety
+
+### The Five Signals That Matter
+
+Standard monitoring (uptime, latency, error rates) catches none of the failure modes unique to AI agents. Production agent systems in 2026 require observability across these five signals:
+
+| Signal | What It Catches | Example Trigger |
+|--------|----------------|-----------------|
+| **Task Completion Rate** | Silent failures, skipped steps | Incident triage agent "completes" without assigning owner |
+| **Recursive Loop Detection** | Token waste, infinite cycles | Same 3 tool calls repeated 12 times in 2 minutes |
+| **Cost Per Successful Output** | Efficiency regressions | Cost jumps 30% week-over-week for same task type |
+| **Hallucination Rate** | Plausible wrong answers | Billing agent invents order numbers not in DB |
+| **Tool Accuracy** | Wrong tool for the job | Agent uses `grep` when `rg` was available and 10x faster |
+
+### Observability Stack (2026)
+
+The CNCF OpenTelemetry standard now has AI-specific semantic conventions. Use vendor-neutral instrumentation:
+
+- **Quick start:** OpenTelemetry + Arize Phoenix (open source) or Langfuse
+- **Enterprise:** Datadog LLM Obs, Arize AX, Braintrust
+- **Framework ecosystems:** LangSmith for LangChain/CrewAI
+
+**Layer mapping for agent operations tooling (2026 research):**
+
+| Layer | Coverage | What It Monitors |
+|-------|----------|------------------|
+| L1: Guardrails | 50% Full | Input/output filtering, PII scanning, policy enforcement |
+| L2: Emergence | 0% Full | Interaction graphs, cascade propagation, shared-state contamination |
+| L3: Oversight | 36% Full | Human-in-the-loop, approval gates, escalation thresholds |
+| L4: Observability | 41% Full | Traces, evals, cost tracking, decision graphs |
+
+### Eval Gates in CI/CD
+
+Treat agent behavior as a deployment artifact. Every PR touching prompts, tool definitions, or model versions triggers eval:
+
+```yaml
+# Conceptual eval gate pattern
+- name: Agent eval gate
+  run: |
+    trigger 50 predefined scenarios against staging
+    compare outputs to baseline embeddings
+    halt if >5% semantic drift detected
+    fail if hallucination rate > 2%
+```
+
+**Four foundational gates (agent-native CI/CD):**
+1. **Prompt lint** — catch disallowed patterns and schema errors in seconds
+2. **Offline eval** — golden dataset regression blocks (quality + cost thresholds)
+3. **Shadow evaluation** — replay production traces against candidate version
+4. **Canary rollout** — 5% → 25% → 100% with automatic rollback on SLO violation
+
+### Autonomous Loop Safety
+
+The unattended loop (`scripts/start-loop.sh`, `scripts/start-loop.ps1`) now includes:
+
+- **Circuit breaker:** Consecutive failure count resets the backoff interval and writes a structured incident to `blockers.md`
+- **Health checkpoint:** Before each iteration, verify `git status` is clean, `main` is reachable, and CI is green on the target branch
+- **Cost guard:** Track Actions minutes and token estimates per iteration; abort if the run exceeds 3x the rolling median
+
+### Human-in-the-Loop Thresholds
+
+| Workflow Type | Autonomy Level | Approval Required |
+|---------------|---------------|-------------------|
+| Documentation updates | Assisted | None |
+| Test scaffolding | Assisted | None |
+| CI log summarization | Assisted | None |
+| Dependency update PRs | Governed | Platform owner |
+| Workflow YAML changes | Governed | Platform owner + security scan |
+| Production deployment | Shadow → Governed | Human approval mandatory |
+| Secret or permission changes | Blocked | Never autonomous |
+
+### Immediate Actions for This Template
+
+1. **Adopt immutable OIDC claims** — GitHub now supports immutable subject claims. Opt in at the organization level to prevent repository-recycling attacks.
+2. **Add eval gates** — Start with prompt linting, then offline eval on golden datasets, then shadow evaluation.
+3. **Instrument cost tracking** — Log Actions minutes and token usage per agent run. Set alerts on 2x cost-per-task spikes.
+4. **Deploy with canary** — Even 5% canary for one hour catches most behavioral regressions before full rollout.
+5. **Require shadow mode** — Every candidate agent version should run in shadow mode for 24 hours against production traces before promotion.
