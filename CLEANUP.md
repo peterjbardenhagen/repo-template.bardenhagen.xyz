@@ -41,7 +41,6 @@ This cleanup covers all **99** repositories under `peterjbardenhagen`.
 | [barebones-starter](https://github.com/peterjbardenhagen/barebones-starter) | `main` | No |
 | [barebones-starter2](https://github.com/peterjbardenhagen/barebones-starter2) | `main` | No |
 | [bms.digitalresponse.com.au](https://github.com/peterjbardenhagen/bms.digitalresponse.com.au) | `main` | No |
-| [cartercapner.com.au](https://github.com/peterjbardenhagen/cartercapner.com.au) | `master` | No |
 | [CCL02-Staff-Training-Chatbot](https://github.com/peterjbardenhagen/CCL02-Staff-Training-Chatbot) | `master` | No |
 | [central.digitalresponse.com.au](https://github.com/peterjbardenhagen/central.digitalresponse.com.au) | `main` | Yes |
 | [classic.mydesk.digitalresponse.com.au](https://github.com/peterjbardenhagen/classic.mydesk.digitalresponse.com.au) | `(empty)` | No |
@@ -97,7 +96,6 @@ This cleanup covers all **99** repositories under `peterjbardenhagen`.
 | [pjb-local-ai](https://github.com/peterjbardenhagen/pjb-local-ai) | `master` | No |
 | [portfolio-pb](https://github.com/peterjbardenhagen/portfolio-pb) | `main` | No |
 | [purchases-ios](https://github.com/peterjbardenhagen/purchases-ios) | `main` | No |
-| [radixtimesheetimporter.cartercapner.com.au](https://github.com/peterjbardenhagen/radixtimesheetimporter.cartercapner.com.au) | `main` | No |
 | [react-software-architecture-2884265](https://github.com/peterjbardenhagen/react-software-architecture-2884265) | `main` | No |
 | [Recusant-Apps](https://github.com/peterjbardenhagen/Recusant-Apps) | `main` | No |
 | [Recusant-Intelligence](https://github.com/peterjbardenhagen/Recusant-Intelligence) | `main` | No |
