@@ -14,7 +14,7 @@ Use this guide to find the right standard, workflow, or setup instruction.
 
 Create a new repository from this template, then copy the prompt below into your preferred coding agent. The docs site supports copying code blocks using the copy icon.
 
-[**Create a repository and copy the agent prompt →**](engineering/make-this-your-repo-template.md) · [MCP and agent skills](engineering/mcp-and-agent-skills.md) · [Review MCP configuration](../.mcp.json)
+[**Create a repository and copy the agent prompt →**](engineering/make-this-your-repo-template.md) · [MCP and agent skills](engineering/mcp-and-agent-skills.md) · [Review MCP configuration](https://github.com/peterjbardenhagen/repo-template.bardenhagen.xyz/blob/main/.mcp.json)
 
 ```text
 Set up this repository using the Repo Template engineering contract. First read AGENTS.md, README.md, CONTRIBUTING.md, SECURITY.md and the relevant docs. Inspect the existing project before changing it. Adapt the template to the actual stack and requirements; do not blindly overwrite existing conventions. Identify the applicable skills under .agents/skills and follow their instructions. Keep secrets out of files and logs. Use least-privilege credentials and short-lived identity where supported. Propose a plan and acceptance criteria, implement on a feature branch, run relevant tests and security checks, and open a pull request with evidence. Do not bypass branch protections, approve your own PR, expose secrets, or deploy destructive changes without explicit human approval.
