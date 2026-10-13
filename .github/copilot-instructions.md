@@ -1,4 +1,4 @@
-# COPILOT_INSTRUCTIONS.md — GitHub Copilot Instructions
+# .github/copilot-instructions.md — GitHub Copilot Instructions
 
 ## Project Context
 

@@ -1,6 +1,28 @@
 # Repo Template — AI Agentic SDLC
 
-**Version:** 2.8.0
+**Version:** 3.0.0 · **Last updated:** 14 October 2026 · [Changelog](CHANGELOG.md)
+
+## Start here
+
+Read in this order:
+
+1. **[README.md](README.md)**: what this template is and how to use it (you are here).
+2. **[AGENTS.md](AGENTS.md)**: the single contract every AI agent follows.
+3. **[CLAUDE.md](CLAUDE.md)**: Claude Code specifics. It imports AGENTS.md. Other tools read AGENTS.md directly, and Copilot reads [.github/copilot-instructions.md](.github/copilot-instructions.md).
+4. **[CONTRIBUTING.md](CONTRIBUTING.md)**, **[SECURITY.md](SECURITY.md)**, **[CHANGELOG.md](CHANGELOG.md)**.
+5. **[docs/](docs/)**: everything else, by topic:
+
+| Folder | What's in it |
+|---|---|
+| [docs/agentic/](docs/agentic/) | Agentic SDLC, end-to-end SDLC, spec-driven development, agent tooling, dev environments, AI routing |
+| [docs/cloud/](docs/cloud/) | Enterprise AI platforms: Microsoft Foundry / Azure, Amazon Bedrock, Vertex AI / Gemini |
+| [docs/engineering/](docs/engineering/) | Architecture, components, git workflow, GitHub standards, CI/CD, versioning, template guide |
+| [docs/security/](docs/security/) | Security guide, compliance, incident response, supply chain, Vercel OIDC |
+| [docs/quality/](docs/quality/) | Accessibility and SEO |
+| [docs/marketing/](docs/marketing/) | Marketing standards, template and brand guidelines |
+| [docs/project/](docs/project/) | Project context and capabilities (fill these in for your project) |
+| [docs/status/](docs/status/) | Agent working state: progress, handoff, blockers |
+| [docs/decisions/](docs/decisions/) | Architecture decision records |
 
 > A comprehensive, opinionated starter template for modern software projects that covers **naming conventions**, **git workflows**, and the full **Agentic AI SDLC lifecycle**. Every file, rule, and workflow is designed to make AI coding tools (Claude Code, Codex, Cursor, Windsurf, GitHub Copilot) maximally effective from the first keystroke.
 
@@ -241,9 +263,9 @@ Every AI tool gets context tailored to it:
 |------|---------------|
 | `AGENTS.md` | **Master instructions** — read by ALL AI agents at session start |
 | `CLAUDE.md` | Claude Code / CLI — defines project commands & code style |
-| `CODEX.md` | OpenCode / Codex CLI — structured instructions |
-| `COPILOT_INSTRUCTIONS.md` | GitHub Copilot — inline completion context |
-| `AI_CONTEXT.md` | **One-page project summary** — for fast AI orientation |
+| `AGENTS.md` | OpenCode / Codex CLI — structured instructions |
+| `.github/copilot-instructions.md` | GitHub Copilot — inline completion context |
+| `docs/project/context.md` | **One-page project summary** — for fast AI orientation |
 | `.cursorrules` | Cursor AI — indexing & generation rules |
 | `.windsurfrules` | Windsurf — indexing & generation rules |
 
@@ -253,7 +275,7 @@ When an AI agent starts a session, it should follow this protocol:
 
 ```
 1. READ CONTEXT
-   └─ Read AGENTS.md → CLAUDE.md → AI_CONTEXT.md → .cursorrules
+   └─ Read AGENTS.md → CLAUDE.md → docs/project/context.md → .cursorrules
    └─ Identify role from rules/ (architect/coder/reviewer/tester/devops)
 
 2. ORIENT
@@ -347,20 +369,20 @@ This template integrates with orchestration platforms or kanban boards:
 .
 ├── AGENTS.md                    # Master instructions for all AI agents
 ├── CLAUDE.md                    # Claude Code / CLI configuration
-├── CODEX.md                     # OpenCode / Codex instructions
-├── COPILOT_INSTRUCTIONS.md      # GitHub Copilot context
-├── AI_CONTEXT.md                # One-page project summary
-├── CAPABILITIES.md              # Enterprise AI capabilities reference
+├── AGENTS.md                     # OpenCode / Codex instructions
+├── .github/copilot-instructions.md      # GitHub Copilot context
+├── docs/project/context.md                # One-page project summary
+├── docs/project/capabilities.md              # Enterprise AI capabilities reference
 ├── CHANGELOG.md                 # Version history
 ├── CLEANUP.md                   # Repo hygiene runbook
 ├── CONTRIBUTING.md              # Contribution guide
-├── HANDOFF.md                   # Live working state for agent sessions
-├── PROGRESS.md                  # Agent loop progress tracker
-├── RELEASE_NOTES.md             # Release history
+├── docs/status/handoff.md                   # Live working state for agent sessions
+├── docs/status/progress.md                  # Agent loop progress tracker
+├── docs/release-notes.md             # Release history
 ├── SECURITY.md                  # Security policy
-├── SUPPORT.md                   # Support & issue guidance
-├── blockers.md                  # Agent loop blockers
-├── CODE_OF_CONDUCT.md           # Code of conduct
+├── .github/SUPPORT.md                   # Support & issue guidance
+├── docs/status/blockers.md                  # Agent loop blockers
+├── .github/CODE_OF_CONDUCT.md           # Code of conduct
 ├── LICENSE                      # MIT license
 ├── README.md                    # This file
 ├── .cursorrules                 # Cursor AI rules
@@ -627,7 +649,7 @@ bash scripts/start-loop.sh
 .\scripts\start-loop.ps1
 ```
 
-Stop conditions: create a `STOP` file, or write `DONE` to `PROGRESS.md`.
+Stop conditions: create a `STOP` file, or write `DONE` to `docs/status/progress.md`.
 
 ---
 

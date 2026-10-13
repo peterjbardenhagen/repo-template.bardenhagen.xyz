@@ -12,7 +12,7 @@ if [ -f STOP ]; then
 fi
 
 # 2. Check for DONE marker
-if [ -f PROGRESS.md ] && grep -q '^DONE$' PROGRESS.md 2>/dev/null; then
+if [ -f docs/status/progress.md ] && grep -q '^DONE$' docs/status/progress.md 2>/dev/null; then
     echo "HEALTHCHECK PASSED: DONE marker found — loop should exit gracefully."
     exit 0
 fi

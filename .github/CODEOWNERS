@@ -8,12 +8,12 @@
 # Core configuration files
 AGENTS.md @peterjbardenhagen
 CLAUDE.md @peterjbardenhagen
-CODEX.md @peterjbardenhagen
-AI_CONTEXT.md @peterjbardenhagen
+AGENTS.md @peterjbardenhagen
+docs/project/context.md @peterjbardenhagen
 .cursorrules @peterjbardenhagen
 .windsurfrules @peterjbardenhagen
-PROGRESS.md @peterjbardenhagen
-blockers.md @peterjbardenhagen
+docs/status/progress.md @peterjbardenhagen
+docs/status/blockers.md @peterjbardenhagen
 
 # GitHub configuration
 .github/ @peterjbardenhagen

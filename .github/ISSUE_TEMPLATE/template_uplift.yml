@@ -58,11 +58,11 @@ body:
     attributes:
       label: Where should it live?
       options:
-        - docs/git-workflow.md — branching, commits, merging
-        - docs/ci-cd.md or .github/workflows/ — pipelines, permissions, supply chain
+        - docs/engineering/git-workflow.md — branching, commits, merging
+        - docs/engineering/ci-cd.md or .github/workflows/ — pipelines, permissions, supply chain
         - docs/web-standards.md — responsive, a11y, SEO
-        - docs/component-structure.md — React/Next structure, data layer
-        - docs/build-versioning.md — build provenance
+        - docs/engineering/component-structure.md — React/Next structure, data layer
+        - docs/engineering/versioning.md — build provenance
         - templates/ — a copyable script, component, or stylesheet
         - rules/ or .claude/agents/ — a role's responsibilities
         - AGENTS.md — a one-line rule every agent must follow

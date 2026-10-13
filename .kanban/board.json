@@ -43,7 +43,7 @@
     },
     {
       "id": "1786230469",
-      "title": "Add HANDOFF.md template for live working state documentation",
+      "title": "Add docs/status/handoff.md template for live working state documentation",
       "status": "Done",
       "priority": "Medium",
       "created": "2026-08-08T23:07:44Z"

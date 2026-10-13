@@ -11,4 +11,4 @@ gh api --method POST repos/<owner>/<repo>/rulesets \
 
 To update an existing ruleset, find its ID first (`gh api repos/<owner>/<repo>/rulesets`) then `PUT` to `repos/<owner>/<repo>/rulesets/<id>`.
 
-Why this matters for autonomous agent loops: an agent running unattended (see `docs/agentic-sdlc.md`) has no way to recover from a force-push or deleted branch on `main`. The ruleset makes that failure mode impossible instead of relying on the agent to remember not to do it.
+Why this matters for autonomous agent loops: an agent running unattended (see `docs/agentic/sdlc.md`) has no way to recover from a force-push or deleted branch on `main`. The ruleset makes that failure mode impossible instead of relying on the agent to remember not to do it.

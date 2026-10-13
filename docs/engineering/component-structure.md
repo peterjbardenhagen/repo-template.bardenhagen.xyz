@@ -121,7 +121,7 @@ rendered from `layout.tsx` — never re-implemented per page. When a page needs 
 variant, add a prop; do not fork the component.
 
 If shared chrome already renders the page title, the page body starts at `<h2>`.
-See [`web-standards.md`](./web-standards.md#heading-hierarchy).
+See [`web-standards.md`](../web-standards.md#heading-hierarchy).
 
 ## 5. Styling
 

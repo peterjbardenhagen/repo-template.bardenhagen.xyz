@@ -3,7 +3,7 @@
 # start-loop.sh — Unattended Agentic SDLC Loop (Linux/macOS)
 # ============================================================================
 # Runs the agentic SDLC loop with exponential backoff on consecutive failures.
-# Stop conditions: STOP file present, DONE marker in PROGRESS.md, time budget.
+# Stop conditions: STOP file present, DONE marker in docs/status/progress.md, time budget.
 # Pre-iteration health checks verify repo state before each agent run.
 # ============================================================================
 
@@ -14,7 +14,7 @@ INTERVAL=30
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 while [ ! -f STOP ]; do
-  if grep -q '^DONE$' PROGRESS.md 2>/dev/null; then
+  if grep -q '^DONE$' docs/status/progress.md 2>/dev/null; then
     echo "DONE marker found — stopping."
     break
   fi
@@ -38,7 +38,7 @@ while [ ! -f STOP ]; do
     fi
   fi
 
-  if claude -p "Continue the agentic SDLC loop: read PROGRESS.md, do the next task, checkpoint, commit." --dangerously-skip-permissions; then
+  if claude -p "Continue the agentic SDLC loop: read docs/status/progress.md, do the next task, checkpoint, commit." --dangerously-skip-permissions; then
     INTERVAL=30
   else
     interval=$(( INTERVAL * 2 < MAX_INTERVAL ? INTERVAL * 2 : MAX_INTERVAL ))

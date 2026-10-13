@@ -39,7 +39,7 @@ git add . && git commit -m "chore: bootstrap from repo-template"
 |------|--------|
 | `AGENTS.md` | AI agent operating instructions |
 | `CLAUDE.md` | Claude Code project context |
-| `AI_CONTEXT.md` | Quick project summary for AI tools |
+| `docs/project/context.md` | Quick project summary for AI tools |
 | `.cursorrules` | Cursor IDE rules |
 | `.pre-commit-config.yaml` | Git hooks for code quality |
 | `.github/workflows/ci.yml` | CI pipeline (lint, build, test) |
@@ -94,7 +94,7 @@ type(scope): description
 When an AI agent (Claude Code, Cline, Cursor) works on a task:
 
 ```
-1. READ context files (AGENTS.md, CLAUDE.md, AI_CONTEXT.md)
+1. READ context files (AGENTS.md, CLAUDE.md, docs/project/context.md)
 2. git pull --ff-only origin main
 3. git checkout -b feat/feature-name
 4. Implement changes (small, focused commits)
@@ -279,11 +279,11 @@ See `SECURITY.md` for:
 | `README.md` | Project overview, setup, usage | Everyone |
 | `AGENTS.md` | AI agent instructions | AI tools |
 | `CLAUDE.md` | Claude Code context | Claude |
-| `AI_CONTEXT.md` | Quick project summary | All AI tools |
+| `docs/project/context.md` | Quick project summary | All AI tools |
 | `CONTRIBUTING.md` | Contribution guidelines | Contributors |
 | `SECURITY.md` | Security policy | Security researchers |
 | `CHANGELOG.md` | Version history | Everyone |
-| `RELEASE_NOTES.md` | Release announcements | Users |
+| `docs/release-notes.md` | Release announcements | Users |
 | `docs/` | Detailed documentation | Developers |
 
 ### 7.2 Architecture Decision Records (ADRs)
@@ -392,7 +392,7 @@ gh pr create                       # Create PR
 /ponytail full                    # Enable lazy senior dev mode
 
 # Cline
-# Read AGENTS.md, CLAUDE.md, AI_CONTEXT.md at session start
+# Read AGENTS.md, CLAUDE.md, docs/project/context.md at session start
 
 # Cursor
 # .cursorrules loaded automatically
