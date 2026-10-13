@@ -20,6 +20,8 @@ Read in this order:
 |---|---|
 | [docs/agentic/](docs/agentic/) | Agentic SDLC, end-to-end SDLC, spec-driven development, agent tooling, dev environments, AI routing |
 | [Agentic AI ways of working](docs/agentic/ways-of-working.md) | End-to-end lifecycle, human/agent responsibilities, GitHub team model, review, release, security, definition of done, retrospectives |
+| [Dynamic Agentic Development Harness roadmap](docs/agentic/ultimate-agentic-harness-roadmap.md) | Phased evolution: MCP context, deterministic guardrails, evals, specialist agents and permission-aware memory |
+| [Repository architecture overview](docs/architecture.md) | Control-plane diagram, trust boundaries and project-specific architecture checklist |
 | [Using the template](docs/engineering/using-the-template.md) | Create a new repository from this template or retrospectively adopt its practices in an existing repo |
 | [GitHub settings and features](docs/engineering/github-settings-and-features.md) | GitHub Pages, Discussions, repository governance, security, and recommended settings |
 | [Make this your repo template](docs/engineering/make-this-your-repo-template.md) | Create a new repo and copy a setup prompt to any compatible coding agent |
