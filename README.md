@@ -15,6 +15,8 @@ Read in this order:
 | Folder | What's in it |
 |---|---|
 | [docs/agentic/](docs/agentic/) | Agentic SDLC, end-to-end SDLC, spec-driven development, agent tooling, dev environments, AI routing |
+| [Agentic AI ways of working](docs/agentic/ways-of-working.md) | End-to-end lifecycle, human/agent responsibilities, GitHub team model, review, release, security, definition of done, retrospectives |
+| [Using the template](docs/engineering/using-the-template.md) | Create a new repository from this template or retrospectively adopt its practices in an existing repo |
 | [docs/cloud/](docs/cloud/) | Enterprise AI platforms: Microsoft Foundry / Azure, Amazon Bedrock, Vertex AI / Gemini |
 | [docs/engineering/](docs/engineering/) | Architecture, components, git workflow, GitHub standards, CI/CD, versioning, template guide |
 | [docs/security/](docs/security/) | Security guide, compliance, incident response, supply chain, Vercel OIDC |
