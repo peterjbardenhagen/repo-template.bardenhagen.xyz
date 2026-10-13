@@ -88,6 +88,7 @@ nav:
       - Component structure: engineering/component-structure.md
       - Implementation checklist: engineering/implementation-checklist.md
       - Versioning: engineering/versioning.md
+      - Productised agile delivery: engineering/productised-agile-delivery.md
       - Template guide: engineering/template-guide.md
   - Security:
       - Security guide: security/guide.md
