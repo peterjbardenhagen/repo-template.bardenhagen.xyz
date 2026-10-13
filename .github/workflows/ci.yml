@@ -41,6 +41,7 @@ jobs:
         with:
           egress-policy: block
           allow-same-org: true
+          allowed-endpoints: github.com:443
       - name: Verify every pinned SHA matches its version comment
         run: ./scripts/verify-action-pins.sh
 
