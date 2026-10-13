@@ -24,6 +24,7 @@ Read in this order:
 | [GitHub Actions best practices](docs/engineering/github-actions-best-practices.md) | Secure, least-privilege agentic CI/CD workflows |
 | [Microsoft Foundry](docs/cloud/microsoft-foundry.md) | Preferred enterprise AI platform, lifecycle, evaluation and Azure Well-Architected guidance |
 | [AI security testing](docs/security/ai-agent-security-testing.md) | Agent/MCP threat testing, dependency scanning and security gates |
+| [Agent skills catalogue](docs/engineering/mcp-and-agent-skills.md) | Find and assess skills for frontend design, code review, Microsoft Foundry, Azure Well-Architected and security |
 | [docs/cloud/](docs/cloud/) | Enterprise AI platforms: Microsoft Foundry / Azure, Amazon Bedrock, Vertex AI / Gemini |
 | [docs/engineering/](docs/engineering/) | Architecture, components, git workflow, GitHub standards, CI/CD, versioning, template guide |
 | [docs/security/](docs/security/) | Security guide, compliance, incident response, supply chain, Vercel OIDC |
