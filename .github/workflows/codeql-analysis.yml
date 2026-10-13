@@ -5,6 +5,11 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+    paths-ignore:
+      - '**/*.md'
+      - 'docs/**'
+      - 'mkdocs.yml'
+      - 'requirements-docs.txt'
   schedule:
     - cron: '0 12 * * 1'  # Weekly: every Monday at noon
 
