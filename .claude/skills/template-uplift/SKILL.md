@@ -67,11 +67,11 @@ rot. The downstream fix is evidence; the template needs the *rule*.
 
 | Kind of improvement | Goes in |
 |---|---|
-| Branching, commits, merging, force-push | `docs/git-workflow.md` |
-| Pipelines, permissions, supply chain | `docs/ci-cd.md` + `.github/workflows/` |
+| Branching, commits, merging, force-push | `docs/engineering/git-workflow.md` |
+| Pipelines, permissions, supply chain | `docs/engineering/ci-cd.md` + `.github/workflows/` |
 | Responsive, layout, a11y, SEO | `docs/web-standards.md` |
-| React/Next structure, data layer | `docs/component-structure.md` |
-| Build provenance | `docs/build-versioning.md` |
+| React/Next structure, data layer | `docs/engineering/component-structure.md` |
+| Build provenance | `docs/engineering/versioning.md` |
 | A copyable file (script/component/CSS) | `templates/<kind>/` |
 | A short rule every agent must follow | `AGENTS.md` (and `CLAUDE.md` if Claude-specific) |
 | A repeatable multi-step workflow | a new `.claude/skills/<name>/SKILL.md` |

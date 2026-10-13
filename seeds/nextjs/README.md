@@ -12,8 +12,8 @@ npx create-next-app@latest . --typescript --tailwind --app --src-dir
 
 - [ ] Run `bash scripts/init-project.sh <project-name>` or use GitHub template clone
 - [ ] `npx create-next-app@latest . --typescript --tailwind --app --src-dir`
-- [ ] Update `AI_CONTEXT.md` — stack to "Next.js / TypeScript / Node.js 20+"
-- [ ] Update `docs/architecture.md` — document app router structure, route groups, layouts
+- [ ] Update `docs/project/context.md` — stack to "Next.js / TypeScript / Node.js 20+"
+- [ ] Update `docs/engineering/architecture.md` — document app router structure, route groups, layouts
 - [ ] Add your Next.js env vars to `.env.example` (NEXT_PUBLIC_*, etc.)
 - [ ] Configure `vercel link` to link the local repo to your Vercel project
 - [ ] Verify preview deployments by opening a feature branch PR

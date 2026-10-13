@@ -7,7 +7,7 @@ tools: Read, Write, Edit, Grep, Glob, Bash
 Role: Feature Implementation & Bug Fixing. See `rules/02-coder.md` for the full skill file — read it before starting.
 
 Workflow:
-1. Read `AI_CONTEXT.md`, `AGENTS.md`, and any relevant rule files
+1. Read `docs/project/context.md`, `AGENTS.md`, and any relevant rule files
 2. `git pull --ff-only` to sync
 3. Understand the task from the spec or issue
 4. Write/update code in small, focused commits

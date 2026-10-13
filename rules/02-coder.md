@@ -13,7 +13,7 @@
 
 ## Workflow
 
-1. Read `AI_CONTEXT.md`, `AGENTS.md`, and any relevant rule files
+1. Read `docs/project/context.md`, `AGENTS.md`, and any relevant rule files
 2. `git pull --ff-only` to sync
 3. Understand the task from the specification or issue
 4. Write/update code

@@ -16,8 +16,8 @@ dotnet sln add MyApp.Web MyApp.Tests
 - [ ] Run `bash scripts/init-project.sh <project-name>` or use GitHub template clone
 - [ ] `dotnet new sln -n MyApp && dotnet new webapi -n MyApp.Web`
 - [ ] `dotnet new xunit -n MyApp.Tests && dotnet sln add MyApp.Tests`
-- [ ] Update `AI_CONTEXT.md` — stack to "C# / .NET 10 / ASP.NET Core"
-- [ ] Update `docs/architecture.md` — document clean/vertical slices, layers
+- [ ] Update `docs/project/context.md` — stack to "C# / .NET 10 / ASP.NET Core"
+- [ ] Update `docs/engineering/architecture.md` — document clean/vertical slices, layers
 - [ ] Add `launchSettings.json` profiles to `.gitignore` (already done)
 - [ ] Configure `docker-compose.yml` for SQL Server, Postgres, or test containers
 - [ ] Add `Directory.Packages.props` for centralized package management
