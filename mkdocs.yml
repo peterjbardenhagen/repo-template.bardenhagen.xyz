@@ -43,9 +43,27 @@ markdown_extensions:
   - tables
   - toc:
       permalink: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
 
 plugins:
   - search
+
+extra:
+  social:
+    - icon: fontawesome/solid/globe
+      link: https://peter.bardenhagen.xyz/
+      name: Peter Bardenhagen — profile
+    - icon: fontawesome/brands/linkedin
+      link: https://au.linkedin.com/in/peterbardenhagen
+      name: Peter Bardenhagen on LinkedIn
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mermaid@11.12.0/dist/mermaid.min.js
+  - javascripts/mermaid-init.js
 
 nav:
   - Home: index.md
@@ -60,6 +78,9 @@ nav:
   - Engineering:
       - Template adoption: engineering/using-the-template.md
       - GitHub settings and features: engineering/github-settings-and-features.md
+      - Agent-framework-agnostic development: engineering/agent-framework-agnostic.md
+      - MCP and agent skills: engineering/mcp-and-agent-skills.md
+      - GitHub Actions best practices: engineering/github-actions-best-practices.md
       - GitHub standards: engineering/github-standards.md
       - Git workflow: engineering/git-workflow.md
       - Architecture: engineering/architecture.md
@@ -70,6 +91,8 @@ nav:
       - Template guide: engineering/template-guide.md
   - Security:
       - Security guide: security/guide.md
+      - Privacy, governance and security: security/privacy-governance-and-security.md
+      - AI agent security testing: security/ai-agent-security-testing.md
       - Compliance: security/compliance.md
       - Incident response: security/incident-response.md
       - Supply chain: security/supply-chain.md
@@ -79,6 +102,9 @@ nav:
       - SEO: quality/seo.md
       - WCAG AA standards: wcag-aa-standards.md
       - Web standards: web-standards.md
+  - Cloud and AI:
+      - Microsoft Foundry: cloud/microsoft-foundry.md
+      - Local LLM platforms: cloud/local-llm-platforms.md
   - Architecture decisions:
       - Overview: decisions/README.md
       - ADR-001: decisions/ADR-001-record-architecture-decisions.md
