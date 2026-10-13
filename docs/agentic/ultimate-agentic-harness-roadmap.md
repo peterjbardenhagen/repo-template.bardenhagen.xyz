@@ -115,6 +115,5 @@ Start with sequential handoffs and explicit files. Add parallel agents only for 
 1. Prefer small PRs and a green, deployable `main`.
 2. Agents execute within scope; humans own business outcomes, risk acceptance and production authority.
 3. An agent never approves its own PR or bypasses required protections.
-4. Auto-merge is permitted only under explicitly configured policy after all required checks and independent approvals pass.
 5. Measure outcomes, escaped defects, lead time, rework, reliability and cost—not generated lines of code.
 6. Every phase ends with evidence, a retrospective and a named next action.
