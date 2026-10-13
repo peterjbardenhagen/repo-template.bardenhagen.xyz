@@ -130,19 +130,18 @@ jobs:
   # ---------------------------------------------------------------------------
   zap-scan:
     name: OWASP ZAP Baseline Scan
-    if: vars.ZAP_TARGET != ''
+    if: always() && vars.ZAP_TARGET != ''
     runs-on: ubuntu-latest
     timeout-minutes: 30
     needs: [build]
-    if: always()
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
 
       - name: Set up OWASP ZAP
-        uses: zapro/zap-baseline-action@v0.15.0
+        uses: zapro/zap-baseline-action@<REVIEWED_SHA> # v0.15.0
         with:
           target: ${{ vars.ZAP_TARGET }} # Set repository variable ZAP_TARGET to a reachable test deployment
           token: ${{ secrets.ZAP_API_TOKEN }}
@@ -155,7 +154,7 @@ jobs:
           json: zap-report.json
 
       - name: Upload ZAP Report as Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: zap-scan-report
           path: |
