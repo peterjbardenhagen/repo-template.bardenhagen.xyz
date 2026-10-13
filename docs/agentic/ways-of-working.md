@@ -270,3 +270,45 @@ Turn conclusions into concrete issues, tests, runbook changes, ADRs, or updated 
 - [GitHub: About CODEOWNERS](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners)
 - [GitHub Flow](https://docs.github.com/en/get-started/using-github/github-flow)
 - [GitHub Copilot: Responsible use](https://docs.github.com/en/copilot/responsible-use-of-github-copilot-features)
+
+## 11. Five-phase lifecycle and GitHub conventions
+
+The operational stages above map to five management phases:
+
+1. **Discovery and inception:** the human defines business intent, users, domain boundaries and acceptance criteria; the agent inspects context, identifies unknowns and drafts a plan.
+2. **Design and architecture:** the human reviews material decisions and contracts; the agent drafts ADRs, schemas, API contracts, threat models and test plans.
+3. **Execution and refinement:** the human resolves ambiguity and oversees scope; the agent decomposes work into atomic tasks, implements within approved boundaries, and updates tests/docs continuously.
+4. **Verification and deployment:** the human reviews the PR and accepts residual risk; the agent runs lint, tests, security, accessibility and evaluation checks and assembles evidence. Production deployment remains subject to the project's human approval policy.
+5. **Governance and evolution:** the human validates outcomes and approves policy changes; the agent proposes improvements from defects, metrics, retrospectives and instruction drift.
+
+See the [dynamic harness roadmap](ultimate-agentic-harness-roadmap.md) for phased implementation.
+
+### Branch strategy
+
+- `main`: shared integration branch; keep deployable and protect with meaningful required checks and human review appropriate to risk.
+- `feat/<issue-id>-<short-description>` and `fix/<issue-id>-<short-description>`: normal short-lived work branches.
+- `agent/<agent-name>/<issue-id>`: optional agent-owned execution branches for clearly scoped multi-step work.
+- Do not force-push shared/protected branches or rewrite repository history as routine maintenance.
+
+### Commit traceability
+
+Use Conventional Commits: `<type>(<scope>): <short description>`. For agent-authored work, record provenance in the PR body or commit body when useful and supported by policy, for example:
+
+```text
+Co-authored-by: <agent-name> <agent@bardenhagen.xyz>
+AI-Context: docs/specs/<specification>.md
+```
+
+Do not invent an agent identity or email, or add attribution that misrepresents authorship. The issue and PR remain the primary links between intent, implementation and evidence.
+
+### GitHub control plane
+
+- Root `AGENTS.md` is the canonical global instruction contract.
+- `.github/copilot-instructions.md` contains Copilot-specific guidance; `.github/instructions/` contains scoped rules.
+- `.github/agents/` contains optional specialist role definitions; these prompts are not security sandboxes.
+- `.github/ISSUE_TEMPLATE/` standardises task context; `.github/PULL_REQUEST_TEMPLATE.md` standardises acceptance and verification evidence.
+- Branch protections, rulesets, environment approvals and token permissions must be configured in GitHub settings. Documentation alone does not enforce them.
+
+### Retrospective adoption
+
+Use [the existing-repository adoption guide](../engineering/using-the-template.md#d-retrospectively-adopt-the-ways-of-working-in-an-existing-repository) to assess an existing codebase before changing it. Preserve existing work and project-specific controls; categorise recommendations as keep, adopt, adapt, human decision, or do not adopt.
