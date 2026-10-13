@@ -55,6 +55,9 @@ The repository's `.agents/skills/` folder already includes useful starter skills
 | `codebase-design` | Architecture and codebase design decisions |
 | `code-review` | Review changes for correctness, risk and maintainability |
 | `microsoft-foundry` | Foundry agents, models, evaluations, deployment and troubleshooting |
+| `azure-well-architected` | Assess Azure architecture against the five pillars and AI workload safeguards |
+| `ai-security-testing` | Threat-model and test AI agents, MCP tools, prompts and dependencies |
+| `github-actions-security` | Review CI/CD permissions, trust boundaries, action pins and deployments |
 | `create-github-action-workflow-specification` | Specify workflows before implementing them |
 | `create-github-pull-request-from-specification` | Turn an approved specification into a PR |
 | `enterprise-architecture` | Business-first architecture and traceability |
