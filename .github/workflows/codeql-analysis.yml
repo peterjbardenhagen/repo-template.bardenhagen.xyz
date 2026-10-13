@@ -5,11 +5,21 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
-    paths-ignore:
-      - '**/*.md'
-      - 'docs/**'
-      - 'mkdocs.yml'
-      - 'requirements-docs.txt'
+    paths:
+      - 'src/**'
+      - 'app/**'
+      - 'lib/**'
+      - 'packages/**'
+      - '**/*.js'
+      - '**/*.jsx'
+      - '**/*.ts'
+      - '**/*.tsx'
+      - '**/*.py'
+      - '**/*.cs'
+      - '**/*.go'
+      - '**/*.java'
+      - '**/*.kt'
+      - '**/*.rb'
   schedule:
     - cron: '0 12 * * 1'  # Weekly: every Monday at noon
 
