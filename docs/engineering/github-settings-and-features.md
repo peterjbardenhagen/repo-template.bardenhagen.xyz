@@ -48,7 +48,7 @@ Keep the boundary clear:
 - **Issue:** track a specific bug, task, or accepted piece of work.
 - **Pull Request:** propose and review a concrete change to the repository.
 
-Pin a welcome announcement linking to the README, contribution guide, security policy, and documentation. Explain that security vulnerabilities must be reported using the private process in [SECURITY.md](../../SECURITY.md), not posted publicly.
+Pin a welcome announcement linking to the README, contribution guide, security policy, and documentation. Explain that security vulnerabilities must be reported using the private process in [SECURITY.md](https://github.com/peterjbardenhagen/repo-template.bardenhagen.xyz/blob/main/SECURITY.md), not posted publicly.
 
 ### Welcome post starter
 
