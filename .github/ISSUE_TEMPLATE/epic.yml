@@ -1,0 +1,60 @@
+name: Epic
+description: A measurable business outcome delivered through multiple features
+title: "epic: "
+labels: ["epic"]
+body:
+  - type: markdown
+    attributes:
+      value: "Plan the outcome first, then link features and tasks. Do not duplicate the canonical roadmap across multiple files."
+  - type: input
+    id: owner
+    attributes:
+      label: Accountable product owner
+      description: Role or person responsible for the outcome
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Problem and outcome
+      description: Who has the problem, what changes, and why now?
+    validations:
+      required: true
+  - type: textarea
+    id: measures
+    attributes:
+      label: Success measures and baseline
+      description: Observable metrics, baseline, target and measurement window
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope and non-goals
+      description: Boundaries, supported environments and explicit exclusions
+    validations:
+      required: true
+  - type: textarea
+    id: features
+    attributes:
+      label: Features and dependencies
+      description: Link feature issues by stable issue ID; list dependencies and sequence
+    validations:
+      required: true
+  - type: textarea
+    id: risk
+    attributes:
+      label: Architecture, security, privacy and operational risks
+      description: Data classification, threat boundaries, cost, support, migration and rollback
+  - type: input
+    id: release
+    attributes:
+      label: Target release / version window
+      description: SemVer target or release window; do not invent a version before the release policy is agreed
+  - type: textarea
+    id: exit
+    attributes:
+      label: Epic exit criteria
+      description: Evidence required to close the business outcome
+    validations:
+      required: true
