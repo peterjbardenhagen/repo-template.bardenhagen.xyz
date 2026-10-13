@@ -25,7 +25,7 @@ A single AI agent follows this loop for autonomous feature development:
 │              │    │              │    │              │    │              │    │              │
 │ AGENTS.md    │    │ git pull     │    │ State        │    │ Code one     │    │ Run tests    │
 │ CLAUDE.md    │    │ Check issues │    │ approach     │    │ change at a  │    │ Run linter   │
-│ AI_CONTEXT.md│    │ Check PRs    │    │ Write ADR?   │    │ time         │    │ Build check  │
+│ docs/project/context.md│    │ Check PRs    │    │ Write ADR?   │    │ time         │    │ Build check  │
 │ .cursorrules │    │ Read docs/   │    │              │    │ Commit with  │    │              │
 └──────────────┘    └──────────────┘    └──────────────┘    │ conventional │    │ Update       │
        ▲                                                    │ commit       │    │ CHANGELOG.md │
@@ -58,12 +58,12 @@ Each handoff produces an artifact (ADR, code, PR, test report) that the next age
 
 This release introduces several enhancements based on leading agentic AI and software platform research:
 
-1. **Structured Content for AI** — See `docs/structure-for-ai.md` for machine-readable context schema. Agents reason about the codebase programmatically rather than scanning raw text.
-2. **Spec-Driven Development** — See `docs/spec-driven-development.md` for lightweight SDD methodology. Write specs before code; keep them in the repo; organize them as a constitution plus per-phase spec trio.
+1. **Structured Content for AI** — See `docs/agentic/agent-tooling.md` for machine-readable context schema. Agents reason about the codebase programmatically rather than scanning raw text.
+2. **Spec-Driven Development** — See `docs/agentic/spec-driven-development.md` for lightweight SDD methodology. Write specs before code; keep them in the repo; organize them as a constitution plus per-phase spec trio.
 3. **Dual-Model Review** — Generate with one model (e.g., Claude Code), review with another (e.g., Codex CLI). Separation of duties catches errors that single-model review misses.
 4. **Evidence-Chain Acceptance** — Browser QA with Playwright MCP produces screenshots and reports. Evidence is committed to the PR or `tests/reports/` so acceptance is verifiable, not claimed.
 5. **Worktree Parallelism** — Use `scripts/worktree-create.sh` to isolate parallel pipelines. Each worktree gets its own branch, port range, and `.claude/.sdlc-config`.
-6. **Live Working State** — `HANDOFF.md` is the single source of truth for what is in flight, what to pick up next, and what is ignored by default.
+6. **Live Working State** — `docs/status/handoff.md` is the single source of truth for what is in flight, what to pick up next, and what is ignored by default.
 7. **MCP Servers** — `.mcp.json` pre-wires Context7 (live library docs), GitHub (issues/PRs), and Playwright (browser QA) so agents have live tool access without manual setup.
 8. **Supply Chain Hardening** — OpenSSF Scorecard, Gitleaks, actionlint, SBOM, and SLSA provenance workflows provide defense-in-depth against supply chain attacks.
 
@@ -91,8 +91,8 @@ This release introduces several enhancements based on leading agentic AI and sof
 |-----------|---------|---------|
 | ADR | Architecture decisions | `docs/decisions/` |
 | Spec | Feature specification | `docs/specs/` |
-| Progress | Autonomous loop progress | `PROGRESS.md` |
-| Blockers | Items needing human input | `blockers.md` |
+| Progress | Autonomous loop progress | `docs/status/progress.md` |
+| Blockers | Items needing human input | `docs/status/blockers.md` |
 | PR | Code change description | GitHub PR |
 | Test plan | Test strategy | `tests/` or `docs/test-plans/` |
 | CI workflow | Build/test/deploy | `.github/workflows/` |
@@ -186,9 +186,9 @@ When a human delegates "complete the planned work" with no further check-ins, us
 
 ### Operating principles
 
-- **State lives in files, not model memory.** Checkpoint progress to `PROGRESS.md` and blockers to `blockers.md` at the repo root. A new session (or a crashed/restarted one) must be able to resume purely from these files.
-- **Non-blocking first.** When a task can't proceed (missing credential, ambiguous requirement, failing external dependency), write it to `blockers.md` with enough detail for a human to act on later, then move to the next non-blocked task. Never idle waiting on a blocker.
-- **Pull before every iteration.** `git pull --ff-only origin main`. If this fails (diverged history), stop and write to `blockers.md` — do not force-push or reset.
+- **State lives in files, not model memory.** Checkpoint progress to `docs/status/progress.md` and blockers to `docs/status/blockers.md` at the repo root. A new session (or a crashed/restarted one) must be able to resume purely from these files.
+- **Non-blocking first.** When a task can't proceed (missing credential, ambiguous requirement, failing external dependency), write it to `docs/status/blockers.md` with enough detail for a human to act on later, then move to the next non-blocked task. Never idle waiting on a blocker.
+- **Pull before every iteration.** `git pull --ff-only origin main`. If this fails (diverged history), stop and write to `docs/status/blockers.md` — do not force-push or reset.
 - **Commit at least every phase.** Small, frequent, conventional commits. A crash mid-loop should lose at most one phase of work.
 - **Auto-merge to keep `main` moving**, gated on CI passing. Do not merge on a red pipeline.
 - **Fix forward.** There is no recovery from a force-push once it lands (the `repo-safety-no-destructive-actions.json` ruleset — see `.github/rulesets/README.md` — blocks force-push and branch deletion on `main`/`master` at the platform level). If something is broken, commit a fix; never rewrite history to hide it.
@@ -198,18 +198,18 @@ When a human delegates "complete the planned work" with no further check-ins, us
 Each iteration:
 
 1. `git pull --ff-only origin main`
-2. Read `PROGRESS.md` — resume from the last checkpoint
+2. Read `docs/status/progress.md` — resume from the last checkpoint
 3. Pick the next non-blocked task
 4. Execute it (plan → code → test → lint)
 5. Commit with a conventional commit message
-6. Update `PROGRESS.md` (what changed, what's next) and, if applicable, `blockers.md`
+6. Update `docs/status/progress.md` (what changed, what's next) and, if applicable, `docs/status/blockers.md`
 7. Push; if CI passes and the change is safe to land, merge to `main`
 
 ### Stop conditions
 
 Stop the loop on any of:
 
-- A `DONE` marker written to `PROGRESS.md`
+- A `DONE` marker written to `docs/status/progress.md`
 - A `STOP` sentinel file present at the repo root
 - A configured time budget elapsed
 - Manual kill by a human
@@ -228,12 +228,12 @@ param(
 
 $interval = $InitialIntervalSeconds
 while (-not (Test-Path "STOP")) {
-    if (Select-String -Path "PROGRESS.md" -Pattern "^DONE$" -Quiet -ErrorAction SilentlyContinue) {
+    if (Select-String -Path "docs/status/progress.md" -Pattern "^DONE$" -Quiet -ErrorAction SilentlyContinue) {
         Write-Host "DONE marker found — stopping."
         break
     }
 
-    claude -p "Continue the agentic SDLC loop: read PROGRESS.md, do the next task, checkpoint, commit." --dangerously-skip-permissions
+    claude -p "Continue the agentic SDLC loop: read docs/status/progress.md, do the next task, checkpoint, commit." --dangerously-skip-permissions
     if ($LASTEXITCODE -eq 0) {
         $interval = $InitialIntervalSeconds
     } else {
@@ -255,12 +255,12 @@ max_interval=3600
 interval=30
 
 while [ ! -f STOP ]; do
-    if grep -q '^DONE$' PROGRESS.md 2>/dev/null; then
+    if grep -q '^DONE$' docs/status/progress.md 2>/dev/null; then
         echo "DONE marker found — stopping."
         break
     fi
 
-    if claude -p "Continue the agentic SDLC loop: read PROGRESS.md, do the next task, checkpoint, commit." --dangerously-skip-permissions; then
+    if claude -p "Continue the agentic SDLC loop: read docs/status/progress.md, do the next task, checkpoint, commit." --dangerously-skip-permissions; then
         interval=30
     else
         interval=$(( interval * 2 < max_interval ? interval * 2 : max_interval ))
@@ -361,7 +361,7 @@ Context engineering is the discipline of systematically managing how AI systems 
 **Context lakes** provide one source of truth every agent reads from: service ownership, dependencies, runbooks, and architecture decisions.
 
 **Progressive disclosure** keeps token usage proportional to task complexity:
-1. Session start: `AGENTS.md` + `HANDOFF.md`
+1. Session start: `AGENTS.md` + `docs/status/handoff.md`
 2. Task start: phase-specific instructions
 3. Deep work: architecture, conventions, tech stack
 4. Review: PR contract and quality gates only
@@ -444,7 +444,7 @@ Treat agent behavior as a deployment artifact. Every PR touching prompts, tool d
 
 The unattended loop (`scripts/start-loop.sh`, `scripts/start-loop.ps1`) now includes:
 
-- **Circuit breaker:** Consecutive failure count resets the backoff interval and writes a structured incident to `blockers.md`
+- **Circuit breaker:** Consecutive failure count resets the backoff interval and writes a structured incident to `docs/status/blockers.md`
 - **Health checkpoint:** Before each iteration, verify `git status` is clean, `main` is reachable, and CI is green on the target branch
 - **Cost guard:** Track Actions minutes and token estimates per iteration; abort if the run exceeds 3x the rolling median
 

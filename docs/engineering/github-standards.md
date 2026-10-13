@@ -55,9 +55,9 @@ the issue and PR UI.
 | `README.md` | What, why, how to run | ✅ |
 | `LICENSE` | Terms of use | ✅ |
 | `CONTRIBUTING.md` | How to contribute | ✅ |
-| `CODE_OF_CONDUCT.md` | Behavioural expectations | ✅ |
+| `.github/CODE_OF_CONDUCT.md` | Behavioural expectations | ✅ |
 | `SECURITY.md` | How to report a vulnerability privately | ✅ |
-| `SUPPORT.md` | Where to ask questions | ✅ |
+| `.github/SUPPORT.md` | Where to ask questions | ✅ |
 | `.github/CODEOWNERS` | Automatic review routing | ✅ |
 | `CITATION.cff` | How to cite | Add only for research/published work |
 | `.github/FUNDING.yml` | Sponsor links | Add only if accepting sponsorship |

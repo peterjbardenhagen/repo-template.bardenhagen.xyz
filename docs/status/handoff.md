@@ -13,7 +13,7 @@ Never rely on model memory for state — the next session cannot read your mind.
 
 - [ ] **Implement feature X** — Owner: agent (session abc123)
   - Status: In progress. ADR drafted in `docs/decisions/ADR-002.md`.
-  - Next: write unit tests, then update `docs/build-versioning.md`.
+  - Next: write unit tests, then update `docs/engineering/versioning.md`.
 
 ## Next Picks
 

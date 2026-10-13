@@ -35,7 +35,7 @@
 | **Application Architecture** | Vercel Edge Functions + Cloudflare Workers (via Vercel) for serverless compute |
 | **Technology Architecture** | PSPF-aligned: minimal attack surface; Vercel OIDC for external auth |
 | **Integration Architecture** | `deploy-preview.yml` / `deploy-prod.yml` provide decoupled deployment pipelines |
-| **Governance Architecture** | `SECURITY_COMPLIANCE.md` + `team_mission_log` for audit trails |
+| **Governance Architecture** | `docs/security/compliance.md` + `team_mission_log` for audit trails |
 
 ### 3.2 NIST CSF Mapping
 

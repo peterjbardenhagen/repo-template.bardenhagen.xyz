@@ -14,14 +14,14 @@ This project is based on the **Repo Template** (`repo-template.bardenhagen.xyz`)
 
 ## AI Agent Operating Principles
 
-1. **Read context files first** — Check AGENTS.md, CLAUDE.md, AI_CONTEXT.md, and .cursorrules at the start of every session.
+1. **Read context files first** — Check AGENTS.md, CLAUDE.md, docs/project/context.md, and .cursorrules at the start of every session.
 2. **Follow the Agentic SDLC** — See the README for the full autonomous development lifecycle protocol.
 3. **State lives in files, not in model memory** — Write decisions, progress, and blockers to files. Do not assume the next session has context from this one.
 4. **Commit frequently** — After every logical phase of work. Keep history clean and recoverable.
 5. **Pull before working** — Always sync from origin before making changes. Use `git pull --ff-only`.
 6. **No fake completion** — Never mark work done that isn't actually complete. Report blockers honestly.
 7. **Conventional commits** — Use `type(scope): description` (e.g., `feat(auth): add OAuth2 flow`).
-9. **Load structured context first** — Check `HANDOFF.md` for live state, then load phase-specific instructions. Do not load every file into context; use progressive disclosure.
+9. **Load structured context first** — Check `docs/status/handoff.md` for live state, then load phase-specific instructions. Do not load every file into context; use progressive disclosure.
 8. **Answer both questions** — "Did we build it correctly" *and* "did we build the right thing". The second is the expensive one and no test can check it. Define acceptance criteria before you code and verify against the original request before you call it done (`rules/07-analyst.md`). If it has a user-facing surface, apply `rules/06-ux.md` too.
 
 ## Ponytail — Lazy Senior Dev Mode
@@ -48,13 +48,13 @@ This keeps every safety guard while reducing unnecessary code.
 ```
 .
 ├── AGENTS.md              # This file — master agent instructions
-├── CAPABILITIES.md        # Enterprise AI capabilities reference (BytePlus ↔ Claude mapping)
+├── docs/project/capabilities.md        # Enterprise AI capabilities reference (BytePlus ↔ Claude mapping)
 ├── CLAUDE.md              # Claude-specific configuration
-├── CODEX.md               # Codex-specific instructions
-├── COPILOT_INSTRUCTIONS.md# GitHub Copilot instructions
-├── AI_CONTEXT.md          # Project context summary (all agents)
+├── AGENTS.md               # Codex-specific instructions
+├── .github/copilot-instructions.md# GitHub Copilot instructions
+├── docs/project/context.md          # Project context summary (all agents)
 ├── .mcp.json              # MCP server configuration (Context7, GitHub, Playwright)
-├── HANDOFF.md             # Live working state for agent sessions
+├── docs/status/handoff.md             # Live working state for agent sessions
 ├── specs/                 # Spec-driven development artifacts
 ├── CODEOWNERS             # Auto-review assignment
 ├── .windsurfrules         # Windsurf AI rules
@@ -106,7 +106,7 @@ or checklist that is faster to scan than the bug it prevents is to debug.
 
 **State lives in files, not in model memory.** Agents MUST use progressive disclosure to avoid loading the entire repository into context:
 
-1. **Session start** — Load only `AGENTS.md`, `HANDOFF.md`, and the phase index (`docs/agentic-sdlc.md`).
+1. **Session start** — Load only `AGENTS.md`, `docs/status/handoff.md`, and the phase index (`docs/agentic/sdlc.md`).
 2. **Task start** — Load the relevant skill or role file (`rules/01-architect.md`, etc.) only when that role is active.
 3. **Deep work** — Load architecture, conventions, and tech stack only when implementing a specific component.
 4. **Review** — Load PR contract and quality gates only when reviewing.
@@ -115,7 +115,7 @@ This keeps token usage proportional to task complexity and prevents context wind
 
 ## Structured Content for AI Consumption
 
-When authoring documentation, follow the schema in `docs/structure-for-ai.md`. Structured content enables agents to:
+When authoring documentation, follow the schema in `docs/agentic/agent-tooling.md`. Structured content enables agents to:
 - Reason about the codebase programmatically
 - Validate artifacts against schemas
 - Trace requirements from intent to implementation
@@ -123,7 +123,7 @@ When authoring documentation, follow the schema in `docs/structure-for-ai.md`. S
 Key files for structured context:
 - `specs/mission.md` — Project constitution (what we build, who we serve)
 - `specs/tech-stack.md` — Stack constraints and rationale
-- `HANDOFF.md` — Live working state (in flight, next picks, blockers)
+- `docs/status/handoff.md` — Live working state (in flight, next picks, blockers)
 - `.mcp.json` — MCP server configuration for live tool access
 
 ## Architecture Decisions
@@ -169,11 +169,11 @@ Key files for structured context:
 - Architecture decisions go in `docs/decisions/` as ADR files.
 - Update `CHANGELOG.md` with every significant change.
 
-Full branching, commit, and merge rules: [`docs/git-workflow.md`](docs/git-workflow.md).
+Full branching, commit, and merge rules: [`docs/engineering/git-workflow.md`](docs/engineering/git-workflow.md).
 
 ## Agentic SDLC Protocol
 
-1. **Read context** — AGENTS.md → CLAUDE.md → AI_CONTEXT.md → .cursorrules
+1. **Read context** — AGENTS.md → CLAUDE.md → docs/project/context.md → .cursorrules
 2. **Orient** — `git fetch origin`, branch off `origin/main`, check issues/PRs/task
 3. **Plan** — State approach before coding. Write/update ADR if architect role.
 4. **Execute** — One logical change, run linters, commit.
@@ -214,7 +214,7 @@ This prevents accidentally committing files with `<<<<<<< HEAD` markers and catc
 - [ ] Updated docs (including this file's sections above, if they went stale)
 - [ ] Ran the full build
 - [ ] Tested manually if the change has a UI or user-facing surface
-- [ ] For tool/config changes: reviewed `docs/TOOL-FILE-STRUCTURE.md` to ensure consistency
+- [ ] For tool/config changes: reviewed `docs/agentic/agent-tooling.md` to ensure consistency
 
 ## Version
 
@@ -222,11 +222,28 @@ This template is versioned. See `CHANGELOG.md` for the current version and relea
 
 ## Available Skills
 
-- **template-uplift**: Promote an improvement from this project back into `repo-template.bardenhagen.xyz` so every future project inherits it. Use when told "add this to the template" / "every project should do this", or after fixing a bug whose root cause would recur in any project built from the template. See `.claude/skills/template-uplift/SKILL.md`.
-- **kilo-config**: Guide for Kilo configuration: config paths, kilo.json fields, commands, agents, skills, permissions, MCPs, providers, TUI settings, plus Agent Manager worktree setup/run scripts, workflows, and state. Use for Kilo config questions, locating loaded config, changing settings, or Agent Manager questions about run/setup scripts, worktree setup/workflows, apply/merge/PR/conflicts, missing sessions/worktrees, and agent-manager.json recovery. See `.kilo/skills/kilo-config/SKILL.md`.
-- **pr-auto-merge**: Automatically resolve merge conflicts, approve, merge, and delete branches for open pull requests. See `.kilo/skills/pr-auto-merge/SKILL.md`.
-- **github-cleanup**: Clean up GitHub repositories by ensuring main branch is default, merging legacy master/Main/Master branches into main, and removing stale branches. See `.kilo/skills/github-cleanup/SKILL.md`.
-- **vercel-deploy**: Deploy to Vercel with environment switching (prod/dev/preview). Creates site if needed, ensures build works, and verifies accessibility. Installs Vercel CLI if missing. See `.kilo/skills/vercel-deploy/SKILL.md`.
+The canonical skill set lives in `.agents/skills/` and is pinned there. Every supported agent folder (`.claude`, `.windsurf`, `.kiro`, `.roo` …) symlinks the same set. Add skills with `npx skills add <owner/repo@skill>`, and use one whenever it fits the task.
+
+| Area | Skills |
+|---|---|
+| Discover | `find-skills` |
+| Think before building | `grill-me`, `codebase-design`, `solution-architecture`, `enterprise-architecture` |
+| Build and verify | `tdd`, `code-review`, `vercel-react-best-practices`, `using-git-worktrees` |
+| Design and UX | `frontend-design`, `impeccable`, `design-taste-frontend`, `web-design-guidelines`, `ui-ux-pro-max`, `ux-copy`, `brand-guidelines-generator` |
+| Git and GitHub | `git-commit`, `git-flow-branch-creator`, `git-guardrails-claude-code`, `github-issues`, `create-github-*` (issues, PRs, workflow specs) |
+| Cloud AI | `microsoft-foundry` (see also `docs/cloud/enterprise-ai-platforms.md`) |
+
+Repo-specific skills: **template-uplift** (`.claude/skills/template-uplift/`) promotes an improvement back into this template; **github-cleanup**, **pr-auto-merge** and **vercel-deploy** live under `.kilo/skills/`.
+
+## Agentic development practices (reviewed October 2026)
+
+- **Context is the product.** Keep `AGENTS.md` short and current, link to `docs/` for depth, and give agents the exact commands to lint, typecheck, test and build.
+- **Spec, then plan, then code.** For non-trivial work, write a short spec with acceptance criteria (`docs/agentic/spec-driven-development.md`), get the plan reviewed, and then implement in slices that each fit one PR.
+- **Harness over memory.** Anything that must always happen (formatting, secret scanning, tests before finishing, branch protection) is enforced by hooks, CI and rulesets, not by asking the model to remember it.
+- **Parallel agents, isolated work.** One git worktree or branch per agent. Never let two agents share a working tree, and never commit to `main` directly.
+- **Evals are tests.** Prompt, model and agent changes run an eval set in CI. Track task success, cost per task, tool accuracy and loop or stall rate (`docs/agentic/sdlc.md`).
+- **Least privilege for agents.** Scope tool permissions and MCP servers per task, use secretless authentication (OIDC, workload identity), and keep humans approving anything external or irreversible.
+- **Enterprise AI clouds.** Follow `docs/cloud/enterprise-ai-platforms.md` for Microsoft Foundry, Amazon Bedrock and Vertex AI / Gemini.
 
 ## 9Router AI Infrastructure
 

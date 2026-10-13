@@ -1,11 +1,24 @@
 # Changelog
 
+## [3.0.0] — 2026-10-14
+
+### Changed (breaking: file locations)
+- **Documentation consolidated.** Root markdown cut from 18 files to 6 (README, AGENTS, CLAUDE, CONTRIBUTING, SECURITY, CHANGELOG). Everything else moved into topic folders under `docs/` (agentic, cloud, engineering, security, quality, marketing, project, status, decisions); overlapping guides merged.
+- `AI_CONTEXT.md` moved to `docs/project/context.md`, and `PROGRESS.md`, `HANDOFF.md` and `blockers.md` to `docs/status/`. Scripts updated to match.
+- `COPILOT_INSTRUCTIONS.md` moved to `.github/copilot-instructions.md` (the path Copilot reads), and `CODE_OF_CONDUCT.md` and `SUPPORT.md` to `.github/`. `CODEX.md` removed, because Codex reads `AGENTS.md`.
+- **Agent folders** cut from about 55 to the top 10 enterprise and top 10 open-source/personal agents. A single curated canonical skill set (24 skills) lives in `.agents/skills`.
+
+### Added
+- `docs/cloud/enterprise-ai-platforms.md`: best practices for Microsoft Foundry / Azure, Amazon Bedrock and Vertex AI / Gemini / AI Studio.
+- AGENTS.md: refreshed Available Skills, plus agentic development practices reviewed October 2026.
+- README: version, last-updated date and a "Start here" reading order with a docs map.
+
 ## [2.8.0] — 2026-08-14
 
 ### Added
-- **Agent Observability:** Documented the five signals that matter (task completion rate, recursive loop detection, cost per output, hallucination rate, tool accuracy) in docs/agentic-sdlc.md
+- **Agent Observability:** Documented the five signals that matter (task completion rate, recursive loop detection, cost per output, hallucination rate, tool accuracy) in docs/agentic/sdlc.md
 - **Eval Gates in CI:** Added agent-native CI/CD patterns for prompt linting, offline eval, shadow evaluation, and canary rollouts
-- **Security Incident Response:** Created docs/security-incident-response.md with severity taxonomy, containment procedures, and escalation matrix
+- **Security Incident Response:** Created docs/security/incident-response.md with severity taxonomy, containment procedures, and escalation matrix
 - **Agent Loop Safety:** Added scripts/agent-loop-healthcheck.sh with circuit breaker, CI verification, and cost guard
 - **Deployment Verification:** Added scripts/verify-deployment.sh for post-deploy HTTP, content, and security header checks
 - **Version Sync:** Added scripts/sync-versions.sh to keep README, CHANGELOG, and RELEASE_NOTES aligned
@@ -14,7 +27,7 @@
 ### Changed
 - **Unattended Loop:** Updated scripts/start-loop.sh and scripts/start-loop.ps1 to run pre-iteration health checks
 - **README:** Fixed stale version badge (2.4.0 to 2.8.0)
-- **CI/CD Docs:** Updated docs/ci-cd.md with 2026 best practices (immutable OIDC claims, actions/checkout safety, network firewall, cost tracking)
+- **CI/CD Docs:** Updated docs/engineering/ci-cd.md with 2026 best practices (immutable OIDC claims, actions/checkout safety, network firewall, cost tracking)
 - **Branch Hygiene:** Deleted stale remote branches claude/template-uplift-2026-08 and template/add-missing-template-files (already superseded by main)
 
 ### Security
@@ -26,7 +39,7 @@
 ### Added
 - **Dockerfile security hardening:** Added non-root user (`nodejs`), installed `jq` in build stage, set proper ownership on `/app`
 - **Pre-commit private key detection:** Added `detect-private-key` hook to `.pre-commit-config.yaml`
-- **Expanded HANDOFF.md:** Added concrete examples for In Flight, Next Picks, Blockers, and Recent Decisions sections
+- **Expanded docs/status/handoff.md:** Added concrete examples for In Flight, Next Picks, Blockers, and Recent Decisions sections
 - **Development docker-compose service:** Added commented `dev` service with bind mounts for live reload
 - **Expanded issue template config:** Added contact links for Discussions, Contributing Guide, and Template Uplift
 
@@ -52,7 +65,7 @@
 ### Changed
 - **Canonical URL:** Updated from GitHub repo URL to `https://repo-template.bardenhagen.xyz/`
 - **docs/index.html navigation:** Added Contribute link alongside GitHub, Docs, and SDLC links
-- **docs/build-versioning.md:** Added Vercel Analytics section with Next.js and static HTML examples
+- **docs/engineering/versioning.md:** Added Vercel Analytics section with Next.js and static HTML examples
 - **docs/website-polishing-standards.md:** Added Analytics section to the polishing standards
 - **README.md:** Added Vercel Analytics subsection under Vercel Integration with code examples
 
@@ -71,16 +84,16 @@
 
 ### Added
 - **Supply chain security hardening:** OpenSSF Scorecard, Gitleaks, actionlint, SBOM generation, and SLSA provenance workflows
-- **Structured content for AI:** `docs/structure-for-ai.md` defines machine-readable context schema for agents
-- **Spec-driven development:** `docs/spec-driven-development.md` with lightweight SDD methodology and two-way door test
+- **Structured content for AI:** `docs/agentic/agent-tooling.md` defines machine-readable context schema for agents
+- **Spec-driven development:** `docs/agentic/spec-driven-development.md` with lightweight SDD methodology and two-way door test
 - **MCP configuration:** `.mcp.json` with Context7, GitHub, and Playwright MCP servers pre-configured
 - **PR body validation:** Enforces Conventional Commits format and linked issues on pull requests
 - **CODEOWNERS:** Automatic review assignment for key directories
 - **Worktree scripts:** `scripts/worktree-create.sh`, `worktree-list.sh`, `worktree-remove.sh` for parallel agent development
 - **Harden-Runner:** Runtime security hardening added to CI and deploy workflows
-- **HANDOFF.md:** Live working state template for agent session continuity
+- **docs/status/handoff.md:** Live working state template for agent session continuity
 - **specs/ directory:** Constitution scaffold (`mission.md`, `tech-stack.md`, `initiatives/`) for spec-driven development
-- **docs/supply-chain-hardening.md:** Comprehensive supply chain security reference
+- **docs/security/supply-chain.md:** Comprehensive supply chain security reference
 
 ### Changed
 - **CI workflow:** Added Harden-Runner step, updated node baseline from 20 to 25, added YAML anchors for reusable steps
@@ -104,7 +117,7 @@
 
 ### Added
 - `.pre-commit-config.yaml` with hooks to detect merge conflicts, YAML/JSON validation, trailing whitespace, and Markdown linting
-- `docs/TOOL-FILE-STRUCTURE.md` — clarifies source of truth for AI tool configurations (.claude/ vs rules/ vs IDE-specific files)
+- `docs/agentic/agent-tooling.md` — clarifies source of truth for AI tool configurations (.claude/ vs rules/ vs IDE-specific files)
 - Pre-commit installation instructions in AGENTS.md
 
 ### Changed
@@ -116,17 +129,17 @@
 ## [2.0.0] — 2026-07-21
 - Hardened GitHub Actions workflows: least-privilege permissions, SHA-pinned actions, concurrency cancellation
 - New workflows: `dependency-review.yml`, `deploy-prod.yml`, `ghcr-push.yml`, `stale.yml`
-- Security docs: `SECURITY.md`, `CODE_OF_CONDUCT.md`
+- Security docs: `SECURITY.md`, `.github/CODE_OF_CONDUCT.md`
 - Autonomous loop scripts: `scripts/start-loop.sh`, `scripts/start-loop.ps1`
-- Loop state files: `PROGRESS.md`, `blockers.md`
+- Loop state files: `docs/status/progress.md`, `docs/status/blockers.md`
 - `.devcontainer/devcontainer.json` for GitHub Codespaces
 - `.github/renovate.json` as alternative dependency automation
 - Expanded `dependabot.yml` to cover npm, pip, cargo, gomod, nuget
-- `docs/vercel-oidc.md` — Vercel OIDC Federation setup guide
-- `docs/ci-cd.md` — Workflow index, permissions model, and troubleshooting
+- `docs/security/vercel-oidc.md` — Vercel OIDC Federation setup guide
+- `docs/engineering/ci-cd.md` — Workflow index, permissions model, and troubleshooting
 - Enhanced seeds for Next.js, Python, and .NET with checklists and recommended packages
-- Improved `docs/getting-started.md` with template clone, GitHub setup, and Vercel steps
-- Expanded `docs/architecture.md` with observability section
+- Improved `docs/engineering/template-guide.md` with template clone, GitHub setup, and Vercel steps
+- Expanded `docs/engineering/architecture.md` with observability section
 - Rewrote `CONTRIBUTING.md` with PR checklist and commit conventions
 
 ### Changed
@@ -135,7 +148,7 @@
 - Dependabot auto-merge workflow upgraded to `v2.5.0`
 - CodeQL analysis upgraded to `v3.27.1`
 - README.md restructured with new GitHub Actions & Vercel Integration sections
-- AI_CONTEXT.md updated with GH Actions and Vercel conventions
+- docs/project/context.md updated with GH Actions and Vercel conventions
 - AGENTS.md file structure overview updated for new files
 
 ## [2.0.0] — 2026-07-21
@@ -161,7 +174,7 @@
 
 ### Added
 - Initial template structure: AI agent configs, role-based rules, GitHub workflows
-- AGENTS.md, CLAUDE.md, CODEX.md, COPILOT_INSTRUCTIONS.md, AI_CONTEXT.md
+- AGENTS.md, CLAUDE.md, AGENTS.md, .github/copilot-instructions.md, docs/project/context.md
 - Role-based agent skill files (architect, coder, reviewer, tester, devops)
 - CI/CD workflows, issue/PR templates, dependabot config
 - Documentation structure with ADR support

@@ -8,7 +8,7 @@ Use this file to track progress during an autonomous agent session. A new agent 
 - Update the `Last Updated` timestamp after each phase.
 - Mark completed items with `[x]`.
 - Write a `DONE` marker on its own line when the overall task is complete.
-- If you encounter a blocker, record it in `blockers.md` and move to the next non-blocked task.
+- If you encounter a blocker, record it in `docs/status/blockers.md` and move to the next non-blocked task.
 
 ## Template
 

@@ -1,10 +1,64 @@
-# Technology Architecture
+# Architecture
 
-## Cloud-Native Infrastructure
+> *Replace this with your project's architecture documentation.*
+
+This document describes the system architecture, key design decisions, and component relationships.
+
+## Overview
+
+*Brief description of the system and its purpose.*
+
+## Architecture Diagram
+
+```mermaid
+graph TD
+    Client[Client] --> Gateway[API Gateway]
+    Gateway --> ServiceA[Service A]
+    Gateway --> ServiceB[Service B]
+    ServiceA --> DB[(Database)]
+    ServiceB --> DB
+```
+
+## Core Components
+
+### [Component 1]
+- **Purpose:**
+- **Technology:**
+- **Location:**
+
+### [Component 2]
+- **Purpose:**
+- **Technology:**
+- **Location:**
+
+## Data Flow
+
+*Describe the primary data flows through the system.*
+
+## Deployment
+
+- **Hosting:**
+- **CDN / Edge:**
+- **CI/CD:** See `.github/workflows/`
+- **Environment Variables:** See `.env.example`
+
+## Observability
+
+- **Logging:** [e.g., structured JSON to stdout, Loki, CloudWatch]
+- **Metrics:** [e.g., Prometheus, Datadog, Vercel Analytics]
+- **Tracing:** [e.g., OpenTelemetry, Jaeger, Vercel Speed Insights]
+
+## Decisions
+
+See `docs/decisions/` for Architecture Decision Records (ADRs) that document key technical choices.
+
+## Technology architecture
+
+### Cloud-Native Infrastructure
 
 This document defines the cloud-native infrastructure stack spanning multiple cloud providers, including AWS, Azure, Google Cloud, and Vercel.
 
-## AWS
+### AWS
 
 Amazon Web Services (AWS) provides the foundational compute, storage, and networking layer for our platform. Key services include:
 
@@ -13,7 +67,7 @@ Amazon Web Services (AWS) provides the foundational compute, storage, and networ
 - **Networking**: VPC, ALB/NLB, Route 53 DNS, CloudFront CDN
 - **Security**: IAM roles, KMS, GuardDuty, WAF
 
-## Azure
+### Azure
 
 Microsoft Azure complements our AWS infrastructure with hybrid cloud capabilities:
 
@@ -22,7 +76,7 @@ Microsoft Azure complements our AWS infrastructure with hybrid cloud capabilitie
 - **Networking**: VPN Gateway, ExpressRoute, Azure Front Door
 - **Security**: Azure AD, Key Vault, Defender for Cloud
 
-## Google Cloud Platform (GCP)
+### Google Cloud Platform (GCP)
 
 Google Cloud adds advanced data analytics and machine learning capabilities:
 
@@ -31,7 +85,7 @@ Google Cloud adds advanced data analytics and machine learning capabilities:
 - **Networking**: Cloud Load Balancing, Cloud CDN
 - **Analytics**: BigQuery, Pub/Sub, Dataflow
 
-## Vercel
+### Vercel
 
 Vercel serves as our modern frontend and CI/CD platform, enabling:
 
@@ -40,17 +94,17 @@ Vercel serves as our modern frontend and CI/CD platform, enabling:
 - **Deployment Automation**: GitHub Actions integrated with Vercel OIDC for secure token-based authentication
 - **Edge Networking**: Global CDN distribution with automatic SSL
 
-## Integration Patterns
+### Integration Patterns
 
-### AWS ↔ Azure ↔ GCP
+#### AWS ↔ Azure ↔ GCP
 
 Cross-cloud service mesh using Istio for unified observability and traffic management.
 
-### Vercel ↔ Cloud Providers
+#### Vercel ↔ Cloud Providers
 
 Vercel OIDC tokens can be exchanged for AWS/GCP/Azure IAM roles, enabling seamless authentication across environments.
 
-## Architecture Principles
+### Architecture Principles
 
 - **Microservices**: Decoupled services communicating via REST/gRPC
 - **Event-Driven**: Asynchronous processing with Kafka/PubSub
@@ -58,14 +112,14 @@ Vercel OIDC tokens can be exchanged for AWS/GCP/Azure IAM roles, enabling seamle
 - **Observability**: Centralized logging (CloudWatch/Stackdriver), metrics (Prometheus), tracing (Jaeger)
 - **Security**: Zero-trust network design, encryption at rest/in-transit, regular penetration testing
 
-## Current State
+### Current State
 
 - **Primary**: AWS (compute & storage), Azure (hybrid connectivity), GCP (analytics)
 - **Frontend**: Vercel (Next.js, edge functions)
 - **CI/CD**: GitHub Actions with Vercel OIDC authentication
 - **Monitoring**: Unified dashboards across all cloud providers
 
-## Next Steps
+### Next Steps
 
 - Evaluate GCP migration for ML workloads
 - Enhance Vercel-to-Azure IAM integration

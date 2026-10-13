@@ -3,7 +3,7 @@
 # start-loop.ps1 — Unattended Agentic SDLC Loop (Windows/PowerShell)
 # ============================================================================
 # Runs the agentic SDLC loop with exponential backoff on consecutive failures.
-# Stop conditions: STOP file present, DONE marker in PROGRESS.md, time budget.
+# Stop conditions: STOP file present, DONE marker in docs/status/progress.md, time budget.
 # Pre-iteration health checks verify repo state before each agent run.
 # ============================================================================
 
@@ -16,7 +16,7 @@ $interval = $InitialIntervalSeconds
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 while (-not (Test-Path "STOP")) {
-    if (Select-String -Path "PROGRESS.md" -Pattern "^DONE$" -Quiet -ErrorAction SilentlyContinue) {
+    if (Select-String -Path "docs/status/progress.md" -Pattern "^DONE$" -Quiet -ErrorAction SilentlyContinue) {
         Write-Host "DONE marker found — stopping."
         break
     }
@@ -41,7 +41,7 @@ while (-not (Test-Path "STOP")) {
         }
     }
 
-    claude -p "Continue the agentic SDLC loop: read PROGRESS.md, do the next task, checkpoint, commit." --dangerously-skip-permissions
+    claude -p "Continue the agentic SDLC loop: read docs/status/progress.md, do the next task, checkpoint, commit." --dangerously-skip-permissions
     if ($LASTEXITCODE -eq 0) {
         $interval = $InitialIntervalSeconds
     } else {

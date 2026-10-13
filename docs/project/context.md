@@ -1,4 +1,4 @@
-# AI_CONTEXT.md — Quick Project Context
+# docs/project/context.md — Quick Project Context
 
 **One-page summary of this project for AI agent orientation.** Read this first, then AGENTS.md, then the role-specific rule file.
 
@@ -38,11 +38,11 @@ This is the **Repo Template** (`repo-template.bardenhagen.xyz`) — a comprehens
 
 ## Session Protocol
 
-1. Read AGENTS.md, CLAUDE.md, AI_CONTEXT.md, and .cursorrules
+1. Read AGENTS.md, CLAUDE.md, docs/project/context.md, and .cursorrules
 2. `git pull --ff-only origin main`
 3. Check existing issues, PRs, or the explicitly stated task
 4. Review docs/decisions/ for prior architecture decisions
-5. Review PROGRESS.md for autonomous loop state
+5. Review docs/status/progress.md for autonomous loop state
 6. State approach before writing code
 7. Commit after every logical phase using conventional commits
 8. Run tests and verify before considering work complete

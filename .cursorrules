@@ -6,13 +6,13 @@
 @rules = [
   // Always read project context first
   (file == "AGENTS.md") => "Must read AGENTS.md at session start for master agent instructions",
-  (file == "AI_CONTEXT.md") => "Read for fast project orientation",
+  (file == "docs/project/context.md") => "Read for fast project orientation",
   (file == "CLAUDE.md") => "Claude-specific configuration for this project",
   
   // Agentic SDLC workflow
   (action == "start_session") => {
     "instructions": [
-      "Read AGENTS.md, AI_CONTEXT.md, and .cursorrules",
+      "Read AGENTS.md, docs/project/context.md, and .cursorrules",
       "Run git pull --ff-only to sync with origin"
     ]
   },

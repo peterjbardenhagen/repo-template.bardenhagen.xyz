@@ -42,9 +42,9 @@ TEMPLATE_FILES=(
   # AI Agent configs
   "AGENTS.md"
   "CLAUDE.md"
-  "CODEX.md"
-  "COPILOT_INSTRUCTIONS.md"
-  "AI_CONTEXT.md"
+  "AGENTS.md"
+  ".github/copilot-instructions.md"
+  "docs/project/context.md"
   ".cursorrules"
   ".windsurfrules"
   ".cursor/rules/project-rules.mdc"
@@ -79,18 +79,18 @@ TEMPLATE_FILES=(
   "rules/07-analyst.md"
 
   # Documentation
-  "docs/agentic-sdlc.md"
-  "docs/architecture.md"
+  "docs/agentic/sdlc.md"
+  "docs/engineering/architecture.md"
   "docs/decisions/README.md"
   "docs/decisions/ADR-001-record-architecture-decisions.md"
-  "docs/getting-started.md"
-  "docs/git-workflow.md"
-  "docs/build-versioning.md"
-  "docs/component-structure.md"
+  "docs/engineering/template-guide.md"
+  "docs/engineering/git-workflow.md"
+  "docs/engineering/versioning.md"
+  "docs/engineering/component-structure.md"
   "docs/web-standards.md"
-  "docs/github-standards.md"
-  "docs/claude-tooling.md"
-  "docs/template-lifecycle.md"
+  "docs/engineering/github-standards.md"
+  "docs/agentic/agent-tooling.md"
+  "docs/engineering/template-guide.md"
   "CHANGELOG.md"
 
   # Claude Code skills
@@ -209,7 +209,7 @@ propagate_to_repo() {
       # For AI agent configs and rules, template always wins (overwrite)
       # For other files, only copy if the repo doesn't have its own version
       case "$tfile" in
-        AGENTS.md|CLAUDE.md|CODEX.md|COPILOT_INSTRUCTIONS.md|AI_CONTEXT.md)
+        AGENTS.md|CLAUDE.md|.github/copilot-instructions.md|docs/project/context.md)
           cp "$src" "$dst"
           log_ok "Updated ${tfile} (template overrides project)"
           changes_made=true
@@ -233,7 +233,7 @@ propagate_to_repo() {
         # design, so the template wins — otherwise a doc lands once and then
         # silently diverges, and downstream repos keep following superseded
         # guidance forever. Project-specific docs stay in the docs/* branch below.
-        docs/git-workflow.md|docs/build-versioning.md|docs/component-structure.md|docs/web-standards.md|docs/github-standards.md|docs/claude-tooling.md|docs/template-lifecycle.md|docs/agentic-sdlc.md)
+        docs/engineering/git-workflow.md|docs/engineering/versioning.md|docs/engineering/component-structure.md|docs/web-standards.md|docs/engineering/github-standards.md|docs/agentic/agent-tooling.md|docs/engineering/template-guide.md|docs/agentic/sdlc.md)
           cp "$src" "$dst"
           log_ok "Updated ${tfile} (template overrides project)"
           changes_made=true

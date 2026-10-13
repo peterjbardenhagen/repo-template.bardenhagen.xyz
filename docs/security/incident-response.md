@@ -62,7 +62,7 @@ This runbook defines the escalation matrix, containment procedures, and post-inc
 3. Confirm least-privilege: `contents: read` by default, expanded only where needed
 
 **Post-incident:**
-- Update `docs/ci-cd.md` with the new workflow pattern
+- Update `docs/engineering/ci-cd.md` with the new workflow pattern
 - Add the permission pattern to `rules/05-devops.md`
 
 ### 4. Agent Misbehavior (Autonomous Loop)
@@ -74,14 +74,14 @@ This runbook defines the escalation matrix, containment procedures, and post-inc
 - Cost-per-task spikes 3x above rolling median
 
 **Containment:**
-1. Kill the loop (`touch STOP` or write `DONE` to `PROGRESS.md`)
+1. Kill the loop (`touch STOP` or write `DONE` to `docs/status/progress.md`)
 2. Revert the agent's last N commits (identify via conventional commit prefix `feat(agent):`)
-3. Review `blockers.md` and `PROGRESS.md` for root cause
+3. Review `docs/status/blockers.md` and `docs/status/progress.md` for root cause
 4. If scope violation: add the forbidden paths to `CLAUDE.md` / `AGENTS.md` `ignored_paths`
 5. If flaky tests: quarantine the test, file a bug, and update the test plan
 
 **Post-incident:**
-- Update `docs/agentic-sdlc.md` with the new guardrail
+- Update `docs/agentic/sdlc.md` with the new guardrail
 - Adjust the agent's role file in `rules/02-coder.md` or `rules/05-devops.md`
 
 ### 5. Deployment Compromise
@@ -98,8 +98,8 @@ This runbook defines the escalation matrix, containment procedures, and post-inc
 4. Notify downstream consumers via GitHub Discussions / status page
 
 **Post-incident:**
-- Update `RELEASE_NOTES.md` with the incident summary
-- Add canary deployment step to `docs/ci-cd.md` if not already present
+- Update `docs/release-notes.md` with the incident summary
+- Add canary deployment step to `docs/engineering/ci-cd.md` if not already present
 
 ## Escalation Matrix
 

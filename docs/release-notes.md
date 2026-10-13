@@ -1,18 +1,25 @@
 # Release Notes
 
+## v3.0.0 — 2026-10-14
+
+- **Cleaner starting point:** six root documents (README, then AGENTS, then CLAUDE, plus CONTRIBUTING, SECURITY and CHANGELOG), with everything else under topic folders in `docs/`.
+- **Fewer, better agent folders:** the top 10 enterprise and top 10 open-source agents, all sharing one curated set of 24 skills (find-skills, grill-me, TDD, code review, design and architecture, Microsoft Foundry).
+- **Enterprise AI clouds:** new guide for Microsoft Foundry, Amazon Bedrock and Vertex AI / Gemini.
+- **Breaking:** files moved. Update links to `AI_CONTEXT.md`, `PROGRESS.md`, `HANDOFF.md`, `blockers.md` and `RELEASE_NOTES.md` (see CHANGELOG).
+
 ## v2.8.0 — 2026-08-14
 
 ### Summary
 Production safety and observability uplift: agent loop health checks, security IR runbook, deployment verification, and 2026 CI/CD best practices.
 
 ### Highlights
-- Added **agent observability** patterns to docs/agentic-sdlc.md: five signals (task completion, recursive loop detection, cost per output, hallucination rate, tool accuracy), eval gates in CI, and shadow/canary rollout patterns
-- Created **security incident response runbook** (docs/security-incident-response.md) with P0-P3 severity taxonomy, containment steps, and escalation matrix
+- Added **agent observability** patterns to docs/agentic/sdlc.md: five signals (task completion, recursive loop detection, cost per output, hallucination rate, tool accuracy), eval gates in CI, and shadow/canary rollout patterns
+- Created **security incident response runbook** (docs/security/incident-response.md) with P0-P3 severity taxonomy, containment steps, and escalation matrix
 - Added **agent-loop-healthcheck.sh** with pre-iteration circuit breaker, CI verification, and cost-per-task spike detection
 - Updated **start-loop.sh** and **start-loop.ps1** to run health checks before each agent iteration
 - Added **verify-deployment.sh** for automated post-deploy HTTP, content, and security header validation
 - Added **sync-versions.sh** to keep README, CHANGELOG, and RELEASE_NOTES version badges synchronized
-- Updated **docs/ci-cd.md** with 2026 production patterns: immutable OIDC claims, actions/checkout safety defaults, GitHub Actions network firewall, and cost tracking guidance
+- Updated **docs/engineering/ci-cd.md** with 2026 production patterns: immutable OIDC claims, actions/checkout safety defaults, GitHub Actions network firewall, and cost tracking guidance
 - Fixed **README version drift**: corrected stale 2.4.0 badge to 2.8.0
 - Refreshed **kanban board**: archived 9 completed backlog items and added 10 new tasks aligned to 2026 platform acceleration
 
@@ -29,10 +36,10 @@ Supply chain hardening, structured content for AI agents, and spec-driven develo
 - Added Harden-Runner runtime security hardening to CI and deploy workflows
 - Added CODEOWNERS for automatic review assignment
 - Added `specs/` directory with mission.md, tech-stack.md, and initiatives/ scaffold
-- Added `HANDOFF.md` template for live working state documentation
-- Added `docs/structure-for-ai.md` defining machine-readable context schema for agents
-- Added `docs/spec-driven-development.md` with lightweight SDD methodology
-- Added `docs/supply-chain-hardening.md` comprehensive security reference
+- Added `docs/status/handoff.md` template for live working state documentation
+- Added `docs/agentic/agent-tooling.md` defining machine-readable context schema for agents
+- Added `docs/agentic/spec-driven-development.md` with lightweight SDD methodology
+- Added `docs/security/supply-chain.md` comprehensive security reference
 - Added worktree parallelism scripts (`worktree-create.sh`, `worktree-list.sh`, `worktree-remove.sh`)
 - Updated CI workflow with Harden-Runner and YAML anchors for reusable steps
 - Updated deploy workflows with Harden-Runner, bare expression fixes, and per-step VERCEL_TOKEN guards
@@ -68,9 +75,9 @@ Major rewrite consolidating naming conventions, git workflows, and the Agentic A
 - All GitHub Actions references pinned to SHAs or stable v4/v5+ tags
 - Least-privilege permissions model across all workflows
 - New workflows: dependency-review, deploy-prod, ghcr-push, stale
-- Security docs: SECURITY.md, CODE_OF_CONDUCT.md
+- Security docs: SECURITY.md, .github/CODE_OF_CONDUCT.md
 - Autonomous loop scripts: start-loop.sh, start-loop.ps1
-- Loop state files: PROGRESS.md, blockers.md
+- Loop state files: docs/status/progress.md, docs/status/blockers.md
 - .devcontainer config for GitHub Codespaces
 - Renovate config as alternative to Dependabot
 - Expanded Dependabot config (npm, pip, cargo, gomod, nuget)
@@ -85,7 +92,7 @@ Major rewrite consolidating naming conventions, git workflows, and the Agentic A
 Initial template structure with AI agent configs, role-based rules, GitHub workflows, and propagation scripts.
 
 ### What's New
-- AGENTS.md, CLAUDE.md, CODEX.md, COPILOT_INSTRUCTIONS.md, AI_CONTEXT.md
+- AGENTS.md, CLAUDE.md, AGENTS.md, .github/copilot-instructions.md, docs/project/context.md
 - Role-based agent skill files (architect, coder, reviewer, tester, devops)
 - CI/CD workflows, issue/PR templates, Dependabot config
 - Documentation structure with ADR support
