@@ -5,6 +5,28 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+    paths:
+      - 'src/**'
+      - 'app/**'
+      - 'lib/**'
+      - 'packages/**'
+      - 'apps/**'
+      - 'services/**'
+      - 'functions/**'
+      - 'api/**'
+      - 'components/**'
+      - 'server/**'
+      - 'scripts/**'
+      - '*.js'
+      - '*.jsx'
+      - '*.ts'
+      - '*.tsx'
+      - '*.py'
+      - '*.cs'
+      - '*.go'
+      - '*.java'
+      - '*.kt'
+      - '*.rb'
   schedule:
     - cron: '0 12 * * 1'  # Weekly: every Monday at noon
 
@@ -37,7 +59,7 @@ jobs:
         run: |
           langs=()
           files=$(git ls-files)
-          has() { printf '%s\n' "$files" | grep -qE "$1"; }
+          has() { printf '%s\n' "$files" | grep -E "$1" >/dev/null; }
 
           # 'actions' analyses the workflow files themselves for injection and
           # supply-chain issues — always applicable in a repo with workflows.

@@ -2,6 +2,10 @@
 
 **Version:** 3.0.0 · **Last updated:** 14 October 2026 · [Changelog](CHANGELOG.md)
 
+**Maintainer:** [Peter Bardenhagen — profile](https://peter.bardenhagen.xyz/) · [LinkedIn](https://au.linkedin.com/in/peterbardenhagen)
+
+**Use this template:** [Create a repository and copy the agent prompt](https://peterjbardenhagen.github.io/repo-template.bardenhagen.xyz/engineering/make-this-your-repo-template/)
+
 ## Start here
 
 Read in this order:
@@ -18,6 +22,10 @@ Read in this order:
 | [Agentic AI ways of working](docs/agentic/ways-of-working.md) | End-to-end lifecycle, human/agent responsibilities, GitHub team model, review, release, security, definition of done, retrospectives |
 | [Using the template](docs/engineering/using-the-template.md) | Create a new repository from this template or retrospectively adopt its practices in an existing repo |
 | [GitHub settings and features](docs/engineering/github-settings-and-features.md) | GitHub Pages, Discussions, repository governance, security, and recommended settings |
+| [Make this your repo template](docs/engineering/make-this-your-repo-template.md) | Create a new repo and copy a setup prompt to any compatible coding agent |
+| [GitHub CLI and secret management](docs/engineering/github-cli-and-secret-management.md) | Secure CLI authentication, Azure Key Vault, Doppler and credential rotation |
+| [Vercel, Node.js and AI Gateway](docs/cloud/vercel-nodejs-ai-gateway.md) | Vercel deployment, Node.js and provider-neutral AI integration |
+| [Privacy, governance and security](docs/security/privacy-governance-and-security.md) | Privacy by design, data classification, Australian guidance and AI controls |
 | [docs/cloud/](docs/cloud/) | Enterprise AI platforms: Microsoft Foundry / Azure, Amazon Bedrock, Vertex AI / Gemini |
 | [docs/engineering/](docs/engineering/) | Architecture, components, git workflow, GitHub standards, CI/CD, versioning, template guide |
 | [docs/security/](docs/security/) | Security guide, compliance, incident response, supply chain, Vercel OIDC |
@@ -27,7 +35,7 @@ Read in this order:
 | [docs/status/](docs/status/) | Agent working state: progress, handoff, blockers |
 | [docs/decisions/](docs/decisions/) | Architecture decision records |
 
-> A comprehensive, opinionated starter template for modern software projects that covers **naming conventions**, **git workflows**, and the full **Agentic AI SDLC lifecycle**. Every file, rule, and workflow is designed to make AI coding tools (Claude Code, Codex, Cursor, Windsurf, GitHub Copilot) maximally effective from the first keystroke.
+> A comprehensive, opinionated starter template for modern software projects that covers **naming conventions**, **git workflows**, and the full **Agentic AI SDLC lifecycle**. The template is agent-framework agnostic: use Claude Code, Codex, Cursor, Windsurf, GitHub Copilot, OpenCode, Aider or any compatible agent—or work manually—using the shared repository contract.
 
 ---
 
