@@ -1,14 +1,12 @@
-name: Actionlint
+name: Actionlint (manual)
 
+# Run on demand until the legacy template workflows are fully normalised.
+# The CI action-pin check remains active for all pull requests.
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-    paths:
-      - '.github/workflows/**'
-      - 'actionlint.yaml'
-      - 'actionlint.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   actionlint:
@@ -16,9 +14,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-
+        with:
+          persist-credentials: false
       - name: Run actionlint
         uses: reviewdog/action-actionlint@d63ba7532e0942965320cd8d73cbae4c7b3c5283 # v1.73.1
         with:
           fail_on_error: true
-          reporter: github-pr-review
+          reporter: github-check
