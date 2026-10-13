@@ -5,6 +5,10 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+    paths:
+      - '.github/workflows/**'
+      - 'actionlint.yaml'
+      - 'actionlint.yml'
 
 jobs:
   actionlint:
