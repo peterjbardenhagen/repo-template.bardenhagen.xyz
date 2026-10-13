@@ -20,13 +20,6 @@ theme:
     - search.highlight
     - content.action.edit
     - content.code.copy
-  social:
-    - icon: fontawesome/solid/globe
-      link: https://peter.bardenhagen.xyz/
-      name: Peter Bardenhagen — profile
-    - icon: fontawesome/brands/linkedin
-      link: https://au.linkedin.com/in/peterbardenhagen
-      name: Peter Bardenhagen on LinkedIn
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -42,6 +35,20 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
+
+
+extra:
+  social:
+    - icon: fontawesome/solid/globe
+      link: https://peter.bardenhagen.xyz/
+      name: Peter Bardenhagen — profile
+    - icon: fontawesome/brands/linkedin
+      link: https://au.linkedin.com/in/peterbardenhagen
+      name: Peter Bardenhagen on LinkedIn
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mermaid@11.12.0/dist/mermaid.min.js
+  - javascripts/mermaid-init.js
 
 markdown_extensions:
   - pymdownx.superfences:
