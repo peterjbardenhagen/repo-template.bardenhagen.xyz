@@ -1,0 +1,91 @@
+site_name: Repo Template — Agentic AI SDLC
+site_description: Practical standards for agentic software delivery, engineering, security, and repository governance.
+site_url: https://peterjbardenhagen.github.io/repo-template.bardenhagen.xyz/
+repo_url: https://github.com/peterjbardenhagen/repo-template.bardenhagen.xyz
+repo_name: peterjbardenhagen/repo-template.bardenhagen.xyz
+edit_uri: edit/main/docs/
+
+docs_dir: docs
+site_dir: site
+
+theme:
+  name: material
+  language: en
+  features:
+    - navigation.instant
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - content.action.edit
+    - content.code.copy
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: cyan
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: cyan
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - tables
+  - toc:
+      permalink: true
+
+plugins:
+  - search
+
+nav:
+  - Home: index.md
+  - Agentic AI:
+      - Ways of working: agentic/ways-of-working.md
+      - Agentic SDLC: agentic/sdlc.md
+      - End-to-end SDLC: agentic/e2e-sdlc.md
+      - Spec-driven development: agentic/spec-driven-development.md
+      - Agent tooling: agentic/agent-tooling.md
+      - Development environments: agentic/environments.md
+      - AI routing: agentic/9router.md
+  - Engineering:
+      - Template adoption: engineering/using-the-template.md
+      - GitHub settings and features: engineering/github-settings-and-features.md
+      - GitHub standards: engineering/github-standards.md
+      - Git workflow: engineering/git-workflow.md
+      - Architecture: engineering/architecture.md
+      - CI/CD: engineering/ci-cd.md
+      - Component structure: engineering/component-structure.md
+      - Implementation checklist: engineering/implementation-checklist.md
+      - Versioning: engineering/versioning.md
+      - Template guide: engineering/template-guide.md
+  - Security:
+      - Security guide: security/guide.md
+      - Compliance: security/compliance.md
+      - Incident response: security/incident-response.md
+      - Supply chain: security/supply-chain.md
+      - Vercel OIDC: security/vercel-oidc.md
+  - Quality:
+      - Accessibility: quality/accessibility.md
+      - SEO: quality/seo.md
+      - WCAG AA standards: wcag-aa-standards.md
+      - Web standards: web-standards.md
+  - Architecture decisions:
+      - Overview: decisions/README.md
+      - ADR-001: decisions/ADR-001-record-architecture-decisions.md
+  - Project:
+      - Context: project/context.md
+      - Capabilities: project/capabilities.md
+  - Operations:
+      - Workflows: workflows.md
+      - Release notes: release-notes.md
+      - Status: status/progress.md
