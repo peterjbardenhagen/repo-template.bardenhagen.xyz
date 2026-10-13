@@ -20,6 +20,7 @@ permissions:
 jobs:
   deploy-preview:
     name: Build & deploy preview
+    if: vars.VERCEL_DEPLOY_ENABLED == 'true'
     runs-on: ubuntu-latest
     environment:
       name: preview
