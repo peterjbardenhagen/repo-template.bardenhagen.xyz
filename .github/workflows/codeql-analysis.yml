@@ -42,7 +42,7 @@ jobs:
         run: |
           langs=()
           files=$(git ls-files)
-          has() { printf '%s\n' "$files" | grep -qE "$1"; }
+          has() { printf '%s\n' "$files" | grep -E "$1" >/dev/null; }
 
           # 'actions' analyses the workflow files themselves for injection and
           # supply-chain issues — always applicable in a repo with workflows.
