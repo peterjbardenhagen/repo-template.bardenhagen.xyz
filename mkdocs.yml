@@ -36,6 +36,21 @@ theme:
         icon: material/brightness-4
         name: Switch to light mode
 
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+plugins:
+  - search
 
 extra:
   social:
@@ -45,26 +60,6 @@ extra:
     - icon: fontawesome/brands/linkedin
       link: https://au.linkedin.com/in/peterbardenhagen
       name: Peter Bardenhagen on LinkedIn
-
-extra_javascript:
-  - https://cdn.jsdelivr.net/npm/mermaid@11.12.0/dist/mermaid.min.js
-  - javascripts/mermaid-init.js
-
-markdown_extensions:
-  - pymdownx.superfences:
-      custom_fences:
-        - name: mermaid
-          class: mermaid
-          format: !!python/name:pymdownx.superfences.fence_code_format
-  - admonition
-  - attr_list
-  - def_list
-  - tables
-  - toc:
-      permalink: true
-
-plugins:
-  - search
 
 nav:
   - Home: index.md
@@ -78,7 +73,10 @@ nav:
       - AI routing: agentic/9router.md
   - Engineering:
       - Template adoption: engineering/using-the-template.md
+      - Make this your repo template: engineering/make-this-your-repo-template.md
+      - GitHub CLI and secret management: engineering/github-cli-and-secret-management.md
       - GitHub settings and features: engineering/github-settings-and-features.md
+      - Agent-framework-agnostic development: engineering/agent-framework-agnostic.md
       - MCP and agent skills: engineering/mcp-and-agent-skills.md
       - GitHub Actions best practices: engineering/github-actions-best-practices.md
       - GitHub standards: engineering/github-standards.md
@@ -91,6 +89,7 @@ nav:
       - Template guide: engineering/template-guide.md
   - Security:
       - Security guide: security/guide.md
+      - Privacy, governance and security: security/privacy-governance-and-security.md
       - AI agent security testing: security/ai-agent-security-testing.md
       - Compliance: security/compliance.md
       - Incident response: security/incident-response.md
@@ -103,6 +102,8 @@ nav:
       - Web standards: web-standards.md
   - Cloud and AI:
       - Microsoft Foundry: cloud/microsoft-foundry.md
+      - Local LLM platforms: cloud/local-llm-platforms.md
+      - Vercel, Node.js and AI Gateway: cloud/vercel-nodejs-ai-gateway.md
   - Architecture decisions:
       - Overview: decisions/README.md
       - ADR-001: decisions/ADR-001-record-architecture-decisions.md
