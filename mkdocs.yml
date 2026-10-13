@@ -77,6 +77,8 @@ nav:
       - AI routing: agentic/9router.md
   - Engineering:
       - Template adoption: engineering/using-the-template.md
+      - Make this your repo template: engineering/make-this-your-repo-template.md
+      - GitHub CLI and secret management: engineering/github-cli-and-secret-management.md
       - GitHub settings and features: engineering/github-settings-and-features.md
       - Agent-framework-agnostic development: engineering/agent-framework-agnostic.md
       - MCP and agent skills: engineering/mcp-and-agent-skills.md
@@ -105,6 +107,7 @@ nav:
   - Cloud and AI:
       - Microsoft Foundry: cloud/microsoft-foundry.md
       - Local LLM platforms: cloud/local-llm-platforms.md
+      - Vercel, Node.js and AI Gateway: cloud/vercel-nodejs-ai-gateway.md
   - Architecture decisions:
       - Overview: decisions/README.md
       - ADR-001: decisions/ADR-001-record-architecture-decisions.md
