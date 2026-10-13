@@ -20,6 +20,13 @@ theme:
     - search.highlight
     - content.action.edit
     - content.code.copy
+  social:
+    - icon: fontawesome/solid/globe
+      link: https://peter.bardenhagen.xyz/
+      name: Peter Bardenhagen — profile
+    - icon: fontawesome/brands/linkedin
+      link: https://au.linkedin.com/in/peterbardenhagen
+      name: Peter Bardenhagen on LinkedIn
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -37,6 +44,11 @@ theme:
         name: Switch to light mode
 
 markdown_extensions:
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
   - admonition
   - attr_list
   - def_list
@@ -60,6 +72,8 @@ nav:
   - Engineering:
       - Template adoption: engineering/using-the-template.md
       - GitHub settings and features: engineering/github-settings-and-features.md
+      - MCP and agent skills: engineering/mcp-and-agent-skills.md
+      - GitHub Actions best practices: engineering/github-actions-best-practices.md
       - GitHub standards: engineering/github-standards.md
       - Git workflow: engineering/git-workflow.md
       - Architecture: engineering/architecture.md
@@ -70,6 +84,7 @@ nav:
       - Template guide: engineering/template-guide.md
   - Security:
       - Security guide: security/guide.md
+      - AI agent security testing: security/ai-agent-security-testing.md
       - Compliance: security/compliance.md
       - Incident response: security/incident-response.md
       - Supply chain: security/supply-chain.md
@@ -79,6 +94,8 @@ nav:
       - SEO: quality/seo.md
       - WCAG AA standards: wcag-aa-standards.md
       - Web standards: web-standards.md
+  - Cloud and AI:
+      - Microsoft Foundry: cloud/microsoft-foundry.md
   - Architecture decisions:
       - Overview: decisions/README.md
       - ADR-001: decisions/ADR-001-record-architecture-decisions.md
