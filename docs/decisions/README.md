@@ -24,4 +24,5 @@ When making a significant architectural decision:
 
 | ADR | Title | Date | Status |
 |-----|-------|------|--------|
+| ADR-000 | Adopt the Agentic AI SDLC and GitHub Control Plane | 2026-10-14 | Accepted as template default |
 | ADR-001 | Record Architecture Decisions | 2026-07-20 | Accepted |
