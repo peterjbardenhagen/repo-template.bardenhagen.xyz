@@ -64,3 +64,12 @@ total loss. See rules/07-analyst.md.
 - [ ] Code follows project conventions
 - [ ] No secrets/credentials in code
 - [ ] Environment variables documented in .env.example (if new)
+
+## Agent provenance (when applicable)
+
+- **Agent/tool and model:**
+- **Context/spec/issue:**
+- **Human decisions or approvals obtained:**
+- **Independent review:**
+
+Do not invent attribution or include credentials, internal reasoning traces, or sensitive prompts. Summarise relevant implementation context and evidence only.
