@@ -16,8 +16,8 @@ pip freeze > requirements.txt
 - [ ] `python -m venv .venv && source .venv/bin/activate`
 - [ ] `pip install fastapi uvicorn pytest ruff`
 - [ ] Create `src/` or `app/` package directory
-- [ ] Update `AI_CONTEXT.md` — stack to "Python / FastAPI / Python 3.12+"
-- [ ] Update `docs/architecture.md` — document service layers, routers, DTOs
+- [ ] Update `docs/project/context.md` — stack to "Python / FastAPI / Python 3.12+"
+- [ ] Update `docs/engineering/architecture.md` — document service layers, routers, DTOs
 - [ ] Add `.env` variables to `.env.example` (DATABASE_URL, CORS_ORIGINS, etc.)
 - [ ] Configure `docker-compose.yml` for local Postgres / Redis
 - [ ] Create `pyproject.toml` or `requirements-dev.txt` for test deps

@@ -55,6 +55,6 @@ Use this file to track product phases, milestones, and key deliverables. Replace
 | Resource | Path |
 |----------|------|
 | Architecture Decisions | `docs/decisions/` |
-| CI/CD Reference | `docs/ci-cd.md` |
-| Git Workflow | `docs/git-workflow.md` |
-| Getting Started | `docs/getting-started.md` |
+| CI/CD Reference | `docs/engineering/ci-cd.md` |
+| Git Workflow | `docs/engineering/git-workflow.md` |
+| Getting Started | `docs/engineering/template-guide.md` |

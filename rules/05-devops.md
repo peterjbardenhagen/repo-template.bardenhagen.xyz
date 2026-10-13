@@ -51,7 +51,7 @@ jobs:
 - **Preview:** `deploy-preview.yml` deploys every PR and comments the URL
 - **Production:** `deploy-prod.yml` deploys `main` with environment protection rules
 - **Secrets:** Configure `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`
-- **OIDC:** See `docs/vercel-oidc.md` for Vercel OIDC Federation setup
+- **OIDC:** See `docs/security/vercel-oidc.md` for Vercel OIDC Federation setup
 
 ## Container Registry
 

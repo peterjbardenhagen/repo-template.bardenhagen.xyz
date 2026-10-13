@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This project was generated from the **Repo Template** (`repo-template.bardenhagen.xyz`). See `AGENTS.md` for master agent instructions, `AI_CONTEXT.md` for a quick project summary, and the README for detailed conventions and the agentic SDLC protocol.
+This project was generated from the **Repo Template** (`repo-template.bardenhagen.xyz`). See `AGENTS.md` for master agent instructions, `docs/project/context.md` for a quick project summary, and the README for detailed conventions and the agentic SDLC protocol.
 
 ## Tech Stack
 
@@ -17,7 +17,7 @@ This project was generated from the **Repo Template** (`repo-template.bardenhage
 ```
 ├── AGENTS.md              # Master agent instructions
 ├── CLAUDE.md              # This file
-├── AI_CONTEXT.md          # Quick project context
+├── docs/project/context.md          # Quick project context
 ├── rules/                 # Role-based agent skill files
 ├── docs/                  # Documentation & ADRs
 ├── .github/workflows/     # CI/CD pipelines
@@ -56,7 +56,7 @@ docker compose down      # Stop environment
 
 ## Git Workflow
 
-Full rules in [`docs/git-workflow.md`](docs/git-workflow.md). The short version:
+Full rules in [`docs/engineering/git-workflow.md`](docs/engineering/git-workflow.md). The short version:
 
 - `main` is the trunk — always green, always deployable. **Never commit to it directly.**
 - Branches are short-lived (hours/days). Agent branches: `claude/<feature>-<short-code>`
@@ -68,7 +68,7 @@ Full rules in [`docs/git-workflow.md`](docs/git-workflow.md). The short version:
 
 ## AI Agent Protocol
 
-1. Read AGENTS.md, CLAUDE.md, and AI_CONTEXT.md at session start
+1. Read AGENTS.md, CLAUDE.md, and docs/project/context.md at session start
 2. Pull latest before making changes (`git pull --ff-only origin main`)
 3. State approach before writing code
 4. Run tests before considering work done

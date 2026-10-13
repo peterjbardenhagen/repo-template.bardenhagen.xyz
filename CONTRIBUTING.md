@@ -118,9 +118,9 @@ template. Open the ADR in the same PR as the change it justifies.
 
 This template is designed for AI coding agents. If you are an agent:
 
-1. Read `AGENTS.md`, `AI_CONTEXT.md`, and the relevant `rules/` file for your
+1. Read `AGENTS.md`, `docs/project/context.md`, and the relevant `rules/` file for your
    role before starting.
-2. Write decisions and progress to files (`HANDOFF.md`, `docs/decisions/`,
+2. Write decisions and progress to files (`docs/status/handoff.md`, `docs/decisions/`,
    specs/). Do not assume the next session has your context.
 3. Commit after every logical phase of work.
 4. Run `bash scripts/verify-action-pins.sh` before committing if you touched
