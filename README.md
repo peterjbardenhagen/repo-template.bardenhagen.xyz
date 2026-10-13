@@ -2,6 +2,8 @@
 
 **Version:** 3.0.0 · **Last updated:** 14 October 2026 · [Changelog](CHANGELOG.md)
 
+**Maintainer:** [Peter Bardenhagen — profile](https://peter.bardenhagen.xyz/) · [LinkedIn](https://au.linkedin.com/in/peterbardenhagen)
+
 ## Start here
 
 Read in this order:
@@ -18,6 +20,10 @@ Read in this order:
 | [Agentic AI ways of working](docs/agentic/ways-of-working.md) | End-to-end lifecycle, human/agent responsibilities, GitHub team model, review, release, security, definition of done, retrospectives |
 | [Using the template](docs/engineering/using-the-template.md) | Create a new repository from this template or retrospectively adopt its practices in an existing repo |
 | [GitHub settings and features](docs/engineering/github-settings-and-features.md) | GitHub Pages, Discussions, repository governance, security, and recommended settings |
+| [MCP and agent skills](docs/engineering/mcp-and-agent-skills.md) | MCP setup, secure tool access, and finding/installing skills |
+| [GitHub Actions best practices](docs/engineering/github-actions-best-practices.md) | Secure, least-privilege agentic CI/CD workflows |
+| [Microsoft Foundry](docs/cloud/microsoft-foundry.md) | Preferred enterprise AI platform, lifecycle, evaluation and Azure Well-Architected guidance |
+| [AI security testing](docs/security/ai-agent-security-testing.md) | Agent/MCP threat testing, dependency scanning and security gates |
 | [docs/cloud/](docs/cloud/) | Enterprise AI platforms: Microsoft Foundry / Azure, Amazon Bedrock, Vertex AI / Gemini |
 | [docs/engineering/](docs/engineering/) | Architecture, components, git workflow, GitHub standards, CI/CD, versioning, template guide |
 | [docs/security/](docs/security/) | Security guide, compliance, incident response, supply chain, Vercel OIDC |
@@ -30,6 +36,11 @@ Read in this order:
 > A comprehensive, opinionated starter template for modern software projects that covers **naming conventions**, **git workflows**, and the full **Agentic AI SDLC lifecycle**. Every file, rule, and workflow is designed to make AI coding tools (Claude Code, Codex, Cursor, Windsurf, GitHub Copilot) maximally effective from the first keystroke.
 
 ---
+
+## Maintainer
+
+- Website and profile: [peter.bardenhagen.xyz](https://peter.bardenhagen.xyz/)
+- LinkedIn: [Peter Bardenhagen](https://au.linkedin.com/in/peterbardenhagen)
 
 ## Table of Contents
 
