@@ -270,3 +270,37 @@ $env:NINEROUTER_KEY = "sk-..."  # From dashboard
 Profiles updated automatically:
 - `.hermes/profiles/default-profile.json` - Uses 9router as primary
 - `.hermes/profiles/omniroute-profile.json` - OmniRoute with 9router fallback
+
+## Claude Code environment for agentic development
+
+Every repository is set up so any agent (Claude Code first; Codex, Gemini, Cursor, Copilot and others via this file) starts with the same context, guardrails and tools.
+
+**Instruction files**
+- `AGENTS.md` is the single contract. `CLAUDE.md` imports it with `@AGENTS.md` and adds only Claude-specific notes; it must never contradict it.
+- Keep both short and current: they are loaded into every session, so stale or bloated instructions cost tokens and mislead agents. Put long procedures in `docs/` and link to them.
+
+**`.claude/` (committed)**
+- `settings.json`: shared permissions. Allow routine read/build/test commands; **deny** destructive ones (`git push --force`, `git reset --hard`, `rm -rf`, reading `.env*` or key files). Personal overrides go in `settings.local.json`, which stays git-ignored.
+- `hooks` in `settings.json` enforce what must always happen. Hooks are run by the harness, not left to the model's memory. Minimum set: format or lint changed files after edits, block writes containing secrets, and run the fast test or typecheck before the agent stops.
+- `agents/`: project subagents for focused roles (reviewer, tester, architect, designer). Give each a narrow tool list.
+- `skills/`: project skills, pinned in `skills-lock.json` and installed with `npx skills add <owner/repo@skill>`. Use a skill when one fits instead of improvising its method.
+
+**MCP servers**
+- Declare them in `.mcp.json` with **no secrets**. Pull credentials from the environment, the secret store (Doppler) or OAuth. Never commit a token, even to a private repo.
+- Prefer one aggregated server (for example the Neocortex MCP) over many overlapping ones; fewer tools means better tool selection.
+
+**Working practices**
+- Plan before large or ambiguous changes (plan mode, or a written plan in the task or issue). Split epics into slices that each fit one reviewable PR.
+- Always work on a branch or worktree, never on `main`. Use git worktrees for parallel agents so they never share a working tree.
+- Verify, don't assume: run the project's lint, typecheck, tests and build, and look at UI changes at phone and desktop widths. Report failures honestly, including ones that were already there.
+- Review your own diff (`/code-review` or the reviewer subagent) before opening a PR, and check for secrets, generated files and unrelated changes.
+- Keep context lean: read only the files you need, delegate wide searches to a subagent, and record durable decisions in docs or ADRs, not chat.
+- Track work on the board: anything unfinished or blocked is written down with the exact blocker and next step before the session ends.
+
+**New repository checklist**
+1. `AGENTS.md` + `CLAUDE.md` (`@AGENTS.md`) present.
+2. `.claude/settings.json` with permissions, deny list and hooks; `settings.local.json` git-ignored.
+3. `.mcp.json` with no secrets; secrets in the secret store.
+4. Skills installed and pinned in `skills-lock.json`.
+5. Lint, typecheck, test and build scripts that an agent can run without prompts.
+6. CI runs the same gates on every PR.
