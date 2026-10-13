@@ -61,10 +61,6 @@ extra:
       link: https://au.linkedin.com/in/peterbardenhagen
       name: Peter Bardenhagen on LinkedIn
 
-extra_javascript:
-  - https://cdn.jsdelivr.net/npm/mermaid@11.12.0/dist/mermaid.min.js
-  - javascripts/mermaid-init.js
-
 nav:
   - Home: index.md
   - Agentic AI:
