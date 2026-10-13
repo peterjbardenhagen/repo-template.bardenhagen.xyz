@@ -29,7 +29,7 @@ Read in this order:
 | [Vercel, Node.js and AI Gateway](docs/cloud/vercel-nodejs-ai-gateway.md) | Vercel deployment, Node.js and provider-neutral AI integration |
 | [Privacy, governance and security](docs/security/privacy-governance-and-security.md) | Privacy by design, data classification, Australian guidance and AI controls |
 | [docs/cloud/](docs/cloud/) | Enterprise AI platforms: Microsoft Foundry / Azure, Amazon Bedrock, Vertex AI / Gemini |
-| [docs/engineering/](docs/engineering/) | Architecture, components, git workflow, GitHub standards, CI/CD, versioning, template guide |
+| [docs/engineering/](docs/engineering/) | Architecture, components, git workflow, GitHub standards, CI/CD, versioning, template guide, productised Agile delivery |
 | [docs/security/](docs/security/) | Security guide, compliance, incident response, supply chain, Vercel OIDC |
 | [docs/quality/](docs/quality/) | Accessibility and SEO |
 | [docs/marketing/](docs/marketing/) | Marketing standards, template and brand guidelines |
