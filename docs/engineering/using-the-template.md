@@ -121,3 +121,10 @@ A repository created from a template is independent after creation. To benefit f
 5. Merge through the target repository's normal PR policy.
 
 Avoid periodic wholesale copies: they can erase product decisions, introduce irrelevant automation, or weaken controls.
+
+
+## F. Map the control plane to your project
+
+The starter includes optional role prompts in `.github/agents/`, path-specific guidance in `.github/instructions/`, and task/bug/feature issue templates in `.github/ISSUE_TEMPLATE/`. These are reusable starting points, not hard security boundaries. Keep root `AGENTS.md` as the canonical policy, adapt examples to the actual stack, and ensure no conflicting instructions are introduced.
+
+For the five-phase lifecycle and phased next-evolution strategy, see [Agentic AI Ways of Working](../agentic/ways-of-working.md) and the [Dynamic Agentic Development Harness roadmap](../agentic/ultimate-agentic-harness-roadmap.md).

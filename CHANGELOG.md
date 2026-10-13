@@ -1,5 +1,14 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+- Five-phase Agentic AI SDLC mapping, branch/commit provenance conventions, and phased dynamic harness roadmap.
+- GitHub control-plane index, path-specific instructions, Architect/Developer/Reviewer/SecOps role prompts, and structured issue templates.
+- Repository architecture overview, ADR-000, and optional evaluation/benchmark scaffolding.
+
+
+
 ## [3.0.0] — 2026-10-14
 
 ### Changed (breaking: file locations)

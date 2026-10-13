@@ -66,6 +66,7 @@ nav:
   - Agentic AI:
       - Ways of working: agentic/ways-of-working.md
       - Agentic SDLC: agentic/sdlc.md
+      - Dynamic harness roadmap: agentic/ultimate-agentic-harness-roadmap.md
       - End-to-end SDLC: agentic/e2e-sdlc.md
       - Spec-driven development: agentic/spec-driven-development.md
       - Agent tooling: agentic/agent-tooling.md
@@ -82,6 +83,7 @@ nav:
       - GitHub standards: engineering/github-standards.md
       - Git workflow: engineering/git-workflow.md
       - Architecture: engineering/architecture.md
+      - Repository architecture overview: architecture.md
       - CI/CD: engineering/ci-cd.md
       - Component structure: engineering/component-structure.md
       - Implementation checklist: engineering/implementation-checklist.md
@@ -106,6 +108,7 @@ nav:
       - Vercel, Node.js and AI Gateway: cloud/vercel-nodejs-ai-gateway.md
   - Architecture decisions:
       - Overview: decisions/README.md
+      - ADR-000 Agentic SDLC: decisions/ADR-000-agentic-sdlc-standard.md
       - ADR-001: decisions/ADR-001-record-architecture-decisions.md
   - Project:
       - Context: project/context.md
