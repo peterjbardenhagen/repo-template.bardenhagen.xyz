@@ -129,6 +129,7 @@ jobs:
   # ---------------------------------------------------------------------------
   zap-scan:
     name: OWASP ZAP Baseline Scan
+    if: vars.ZAP_TARGET != ''
     runs-on: ubuntu-latest
     timeout-minutes: 30
     needs: [build]
@@ -142,7 +143,7 @@ jobs:
       - name: Set up OWASP ZAP
         uses: zapro/zap-baseline-action@v0.15.0
         with:
-          target: 'http://localhost:3000'  # Replace with your app URL
+          target: ${{ vars.ZAP_TARGET }} # Set repository variable ZAP_TARGET to a reachable test deployment
           token: ${{ secrets.ZAP_API_TOKEN }}
           fail-on: 'medium'  # Fail on medium severity+ vulnerabilities
           fail-on-severity: 'medium'
