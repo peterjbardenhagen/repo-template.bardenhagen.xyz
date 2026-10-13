@@ -16,10 +16,10 @@ Use this guide to find the right standard, workflow, or setup instruction.
 
 ## Engineering
 
-- [Engineering standards](engineering/)
-- [Agentic SDLC](agentic/)
-- [Security](security/)
-- [Quality and accessibility](quality/)
+- [Git workflow](engineering/git-workflow.md)
+- [Agentic SDLC](agentic/sdlc.md)
+- [Security guide](security/guide.md)
+- [Accessibility](quality/accessibility.md)
 - [Architecture decisions](decisions/)
 
 ## How to use this documentation
