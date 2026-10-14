@@ -321,3 +321,10 @@ Every repository is set up so any agent (Claude Code first; Codex, Gemini, Curso
 4. Skills installed and pinned in `skills-lock.json`.
 5. Lint, typecheck, test and build scripts that an agent can run without prompts.
 6. CI runs the same gates on every PR.
+
+
+## Productised delivery and lifecycle safety
+
+Plan work from business outcomes through epics, features, tasks/defects and versioned releases. Every repository should be productised from day zero at an appropriately thin level: configuration rather than environment-specific hard-coding, tests, security/privacy, observability, documentation, local development, deployment and rollback. Follow [Productised agile delivery](docs/engineering/productised-agile-delivery.md) for release/semantic versioning, hotfixes, readiness/done criteria and reversible data lifecycle practices.
+
+Do not hard-delete business data or related records by default. Prefer soft-delete/archive, explicit retention, auditability and separately authorised purge where lawful. Secrets and compromised credentials are an exception: revoke/rotate promptly. Never bypass required checks or claim verification without evidence.

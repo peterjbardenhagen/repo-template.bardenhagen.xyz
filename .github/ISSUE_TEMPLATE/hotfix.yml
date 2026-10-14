@@ -1,0 +1,70 @@
+name: Hotfix / urgent remediation
+description: A narrowly scoped urgent fix for a production or supported release
+title: "hotfix: "
+labels: ["hotfix", "priority:high"]
+body:
+  - type: markdown
+    attributes:
+      value: "Use only for urgent remediation. Preserve evidence, avoid unrelated refactors, and never bypass required security checks without an authorised, documented risk decision."
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options:
+        - Critical
+        - High
+        - Medium
+        - Low
+    validations:
+      required: true
+  - type: input
+    id: affected
+    attributes:
+      label: Affected product versions / deployed commit
+      description: Exact version, release tag or deployed commit SHA
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Customer and business impact
+      description: Affected users, data, services, risk and current mitigation
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Reproduction and evidence
+      description: Redacted logs, traces, screenshots or minimal reproduction. Never include secrets or sensitive customer data.
+    validations:
+      required: true
+  - type: textarea
+    id: fix
+    attributes:
+      label: Minimal correction and regression coverage
+      description: Proposed narrow fix and test that will prevent recurrence
+    validations:
+      required: true
+  - type: textarea
+    id: rollout
+    attributes:
+      label: Verification, rollout and rollback
+      description: Targeted tests, mandatory gates, owner, deployment checks and rollback trigger
+    validations:
+      required: true
+  - type: input
+    id: patch
+    attributes:
+      label: Patch release
+      description: Proposed PATCH version, if applicable
+  - type: checkboxes
+    id: followup
+    attributes:
+      label: Post-incident follow-up
+      options:
+        - label: Forward-port or cherry-pick to main and supported release branches
+          required: true
+        - label: Create a regression test and dated follow-up tasks
+          required: true
+        - label: Obtain explicit authorisation for production or irreversible actions
+          required: true
