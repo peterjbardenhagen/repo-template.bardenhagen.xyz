@@ -328,3 +328,14 @@ Every repository is set up so any agent (Claude Code first; Codex, Gemini, Curso
 Plan work from business outcomes through epics, features, tasks/defects and versioned releases. Every repository should be productised from day zero at an appropriately thin level: configuration rather than environment-specific hard-coding, tests, security/privacy, observability, documentation, local development, deployment and rollback. Follow [Productised agile delivery](docs/engineering/productised-agile-delivery.md) for release/semantic versioning, hotfixes, readiness/done criteria and reversible data lifecycle practices.
 
 Do not hard-delete business data or related records by default. Prefer soft-delete/archive, explicit retention, auditability and separately authorised purge where lawful. Secrets and compromised credentials are an exception: revoke/rotate promptly. Never bypass required checks or claim verification without evidence.
+
+
+## Pull request freshness and change-loss prevention (mandatory)
+
+- Before merging any pull request into the default branch, update the PR head branch with the latest base branch using the repository-approved strategy. A mergeable flag or absence of textual conflicts does not prove the branch is current or safe.
+- Resolve conflicts by understanding and preserving intended changes from both the PR and the latest base branch. Never blindly choose one side or discard changes without review.
+- After updating, run the relevant build, tests, lint, type checks and security checks. Review the final diff against the updated base for unexpected deletions, reversions, overwritten features and generated-file churn.
+- Immediately before merge, recheck the base commit SHA. If the base moved since validation, update and validate again.
+- Never force-push, reset hard, or use destructive clean-up to make a branch appear current. Preserve work on a safety branch before any repair.
+- If freshness, conflict resolution, validation, or change preservation cannot be verified, leave the PR open and record the exact blocker. Do not merge around failed or missing required checks.
+- This policy applies to every agent, automated sync job, native CI/CD runner, and manual merge process.
