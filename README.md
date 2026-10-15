@@ -24,6 +24,7 @@ Read in this order:
 | [Repository architecture overview](docs/architecture.md) | Control-plane diagram, trust boundaries and project-specific architecture checklist |
 | [Using the template](docs/engineering/using-the-template.md) | Create a new repository from this template or retrospectively adopt its practices in an existing repo |
 | [GitHub settings and features](docs/engineering/github-settings-and-features.md) | GitHub Pages, Discussions, repository governance, security, and recommended settings |
+| [GitHub recommendations for agentic engineering](docs/engineering/github-recommendations-2026.md) | Current recommendations for rulesets, PR freshness, AI agents, MCP, security, and automation |
 | [Make this your repo template](docs/engineering/make-this-your-repo-template.md) | Create a new repo and copy a setup prompt to any compatible coding agent |
 | [GitHub CLI and secret management](docs/engineering/github-cli-and-secret-management.md) | Secure CLI authentication, Azure Key Vault, Doppler and credential rotation |
 | [Vercel, Node.js and AI Gateway](docs/cloud/vercel-nodejs-ai-gateway.md) | Vercel deployment, Node.js and provider-neutral AI integration |
@@ -52,6 +53,7 @@ Read in this order:
 7. [Quick Start](#7-quick-start)
 8. [GitHub Repo Hygiene](#8-github-repo-hygiene)
 9. [Template Maintenance](#9-template-maintenance)
+10. [GitHub Recommendations](#10-github-recommendations)
 
 ---
 
@@ -742,6 +744,11 @@ Run this checklist at the start of any session or on a schedule:
 - `CLEANUP.md` — project-specific cleanup runbook with repo inventory and progress.
 
 ---
+
+
+## 10. GitHub Recommendations
+
+Use the maintained [GitHub recommendations for agentic engineering](docs/engineering/github-recommendations-2026.md) when creating or reviewing repositories. It covers rulesets, fresh-branch merge discipline, required validation, least-privilege Actions, repository security, MCP governance, safe agentic workflows, and a reusable PR checklist. Verify plan eligibility and active settings; documentation alone does not mean a control is enabled.
 
 ## Version History
 
