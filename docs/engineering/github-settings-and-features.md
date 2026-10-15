@@ -162,3 +162,8 @@ GitHub plan availability varies. If a control is unavailable, document the gap a
 - [Protected branches](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches)
 - [CODEOWNERS](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners)
 - [Dependabot alerts](https://docs.github.com/en/code-security/dependabot/dependabot-alerts/about-dependabot-alerts)
+
+
+## 7. Current recommendations for agentic engineering
+
+Use the [GitHub recommendations for agentic engineering](./github-recommendations-2026.md) as the current cross-cutting baseline for repository visibility, rulesets, branch freshness, required validation, Actions permissions, dependency and secret security, MCP integrations, and agentic workflows. The guide distinguishes deterministic required checks from AI-assisted automation and includes a reusable PR checklist. Confirm the actual plan, repository eligibility, and active settings before claiming any control is enforced.
