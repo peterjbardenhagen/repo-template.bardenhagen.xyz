@@ -1,0 +1,7 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    { "source": "/engineering/template-guide.md", "destination": "/engineering/template-guide/" },
+    { "source": "/agentic/sdlc.md", "destination": "/agentic/sdlc/" }
+  ]
+}
