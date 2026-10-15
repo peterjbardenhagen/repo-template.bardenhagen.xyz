@@ -24,6 +24,7 @@ Read in this order:
 | [Repository architecture overview](docs/architecture.md) | Control-plane diagram, trust boundaries and project-specific architecture checklist |
 | [Using the template](docs/engineering/using-the-template.md) | Create a new repository from this template or retrospectively adopt its practices in an existing repo |
 | [GitHub settings and features](docs/engineering/github-settings-and-features.md) | GitHub Pages, Discussions, repository governance, security, and recommended settings |
+| [GitHub recommendations for agentic engineering](docs/engineering/github-recommendations-2026.md) | Current recommendations for rulesets, PR freshness, AI agents, MCP, security, and automation |
 | [Make this your repo template](docs/engineering/make-this-your-repo-template.md) | Create a new repo and copy a setup prompt to any compatible coding agent |
 | [GitHub CLI and secret management](docs/engineering/github-cli-and-secret-management.md) | Secure CLI authentication, Azure Key Vault, Doppler and credential rotation |
 | [Vercel, Node.js and AI Gateway](docs/cloud/vercel-nodejs-ai-gateway.md) | Vercel deployment, Node.js and provider-neutral AI integration |
@@ -52,6 +53,7 @@ Read in this order:
 7. [Quick Start](#7-quick-start)
 8. [GitHub Repo Hygiene](#8-github-repo-hygiene)
 9. [Template Maintenance](#9-template-maintenance)
+10. [GitHub Recommendations](#10-github-recommendations)
 
 ---
 
