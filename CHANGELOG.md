@@ -4,8 +4,6 @@
 
 ### Added
 - Added October 2026 GitHub recommendations for rulesets, PR freshness, agentic workflows, MCP governance, security automation, and safe AI-assisted engineering.
-
-### Added
 - Five-phase Agentic AI SDLC mapping, branch/commit provenance conventions, and phased dynamic harness roadmap.
 - GitHub control-plane index, path-specific instructions, Architect/Developer/Reviewer/SecOps role prompts, and structured issue templates.
 - Repository architecture overview, ADR-000, and optional evaluation/benchmark scaffolding.
