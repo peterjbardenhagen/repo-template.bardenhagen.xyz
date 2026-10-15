@@ -745,6 +745,11 @@ Run this checklist at the start of any session or on a schedule:
 
 ---
 
+
+## 10. GitHub Recommendations
+
+Use the maintained [GitHub recommendations for agentic engineering](docs/engineering/github-recommendations-2026.md) when creating or reviewing repositories. It covers rulesets, fresh-branch merge discipline, required validation, least-privilege Actions, repository security, MCP governance, safe agentic workflows, and a reusable PR checklist. Verify plan eligibility and active settings; documentation alone does not mean a control is enabled.
+
 ## Version History
 
 See `CHANGELOG.md` for the full version history.
