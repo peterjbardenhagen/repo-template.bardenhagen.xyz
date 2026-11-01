@@ -1,46 +1,32 @@
-# Use an official runtime as the base image
-# Replace with your project's actual base image and build steps.
-# Node 25 is the current baseline; adjust to match your project's engine.
+# Use an official Node runtime. Override the major version to match the target project.
 FROM node:26-alpine AS base
 
-# Install build tools
 RUN apk add --no-cache jq
-
-# Set working directory
 WORKDIR /app
 
-# Copy package files
-COPY package*.json ./
-
-# Install dependencies
-# The template has no package.json — guard so the image still builds.
-RUN if [ -f package.json ]; then npm ci --only=production; else echo "No package.json — skipping npm ci"; fi
-
-# Copy application code
+# Copy the repository first: package*.json is optional in this multi-stack template.
 COPY . .
 
-# Build the application
-# The template has no build script — guard so the image still builds.
-RUN if [ -f package.json ] && jq -e '.scripts.build' package.json >/dev/null 2>&1; then npm run build; else echo "No build script — skipping npm run build"; fi
+# Install production dependencies only when a Node manifest exists.
+RUN if [ -f package.json ]; then \
+      if [ -f package-lock.json ]; then npm ci --omit=dev; \
+      else npm install --omit=dev; fi; \
+    else echo "No package.json found; skipping npm dependency installation"; fi
 
-# Production stage
+# Run the build script when supplied. Keep a minimal health-serving entry point
+# for an otherwise empty starter template so the image remains runnable.
+RUN if [ -f package.json ] && jq -e '.scripts.build' package.json >/dev/null 2>&1; then npm run build; fi \
+    && if [ ! -f dist/index.js ]; then \
+         mkdir -p dist; \
+         printf '%s\n' 'const http = require("node:http");' 'const server = http.createServer((_req, res) => { res.writeHead(200, { "content-type": "text/plain; charset=utf-8" }); res.end("Template container is running\\n"); });' 'server.listen(process.env.PORT || 3000, "0.0.0.0");' > dist/index.js; \
+       fi
+
 FROM node:26-alpine AS production
-
-# Create non-root user
-RUN addgroup -g 1001 -S nodejs && \
-    adduser -S nodejs -u 1001 -G nodejs
-
+ENV NODE_ENV=production
 WORKDIR /app
 
-# Copy dependencies and built assets
-COPY --from=base /app/node_modules ./node_modules
-COPY --from=base /app/dist ./dist
-COPY --from=base /app/package*.json ./
-
-# Set ownership and switch to non-root user
-RUN chown -R nodejs:nodejs /app
-USER nodejs
-
+# Copy the complete prepared application; no optional paths are assumed.
+COPY --from=base --chown=node:node /app /app
+USER node
 EXPOSE 3000
-
 CMD ["node", "dist/index.js"]

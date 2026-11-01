@@ -18,3 +18,38 @@ tab_width = 4
 
 [Makefile]
 indent_style = tab
+
+# JavaScript / TypeScript / frontend
+[*.{js,jsx,ts,tsx,mjs,cjs,css,scss,sass,less,html,htm,json,jsonc,yaml,yml,toml,vue,svelte}]
+indent_style = space
+indent_size = 2
+
+# C# / .NET and PowerShell
+[*.{cs,csx,razor,cshtml,csproj,fsproj,vbproj,props,targets,sln,ps1,psm1,psd1}]
+indent_style = space
+indent_size = 4
+
+# SQL
+[*.sql]
+indent_style = space
+indent_size = 4
+
+# Shell scripts
+[*.{sh,bash}]
+indent_style = space
+indent_size = 2
+
+# Windows command scripts
+[*.{bat,cmd}]
+end_of_line = crlf
+indent_style = space
+indent_size = 2
+
+# Docker / infrastructure
+[Dockerfile]
+indent_style = space
+indent_size = 2
+
+[*.{tf,hcl}]
+indent_style = space
+indent_size = 2
