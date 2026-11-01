@@ -23,7 +23,6 @@
 *.jpeg binary
 *.gif binary
 *.ico binary
-*.svg binary
 *.woff binary
 *.woff2 binary
 *.eot binary
@@ -39,3 +38,59 @@
 
 # Linguist overrides
 *.md linguist-detectable=true
+
+# Additional source and configuration formats
+*.jsonc text eol=lf
+*.mdx text eol=lf
+*.mjs text eol=lf
+*.cjs text eol=lf
+*.psm1 text eol=lf
+*.psd1 text eol=lf
+*.sql text eol=lf
+*.xml text eol=lf
+*.toml text eol=lf
+*.csproj text eol=lf
+*.sln text eol=lf
+*.props text eol=lf
+*.targets text eol=lf
+*.razor text eol=lf
+*.cshtml text eol=lf
+*.graphql text eol=lf
+*.gql text eol=lf
+
+# Windows command scripts
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# SVG is text, not a binary image
+*.svg text eol=lf diff merge
+
+# Additional binary formats
+*.webp binary
+*.bmp binary
+*.tif binary
+*.tiff binary
+*.mp3 binary
+*.mp4 binary
+*.mov binary
+*.webm binary
+*.wav binary
+*.avi binary
+*.exe binary
+*.dll binary
+*.so binary
+*.dylib binary
+*.bin binary
+*.db binary
+*.sqlite binary
+*.sqlite3 binary
+*.psd binary
+*.ai binary
+*.sketch binary
+*.fig binary
+
+# Git LFS: uncomment only for large binary assets deliberately tracked with LFS
+# *.psd filter=lfs diff=lfs merge=lfs -text
+# *.mp4 filter=lfs diff=lfs merge=lfs -text
+# *.mov filter=lfs diff=lfs merge=lfs -text
+# *.gguf filter=lfs diff=lfs merge=lfs -text

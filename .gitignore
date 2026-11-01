@@ -295,14 +295,12 @@ function.local.settings.json
 
 # ==============================================
 # GCP
-# ==============================================
+# Ignore local cloud credentials, not ordinary project JSON files.
 .mcp.json
-*.json
-!**/*.example.json
-!seeds/**/.mcp.json
-*.json
 .service-account.json
+service-account*.json
 application_default_credentials.json
+credentials.json
 .gcloud/
 
 # ==============================================
@@ -423,3 +421,22 @@ trivy-cache/
 # Local AI environment (do not commit)
 .kilocode/
 .agents/
+
+# Additional environment files (keep safe templates versioned)
+.env.*
+!.env.example
+!.env.template
+!.env.sample
+
+# Local model weights and inference data — never commit downloaded weights
+*.gguf
+*.ggml
+*.safetensors
+*.onnx
+*.pt
+*.pth
+*.ckpt
+/.local-models/
+/model-cache/
+/ollama-data/
+/foundry-local/
