@@ -1,0 +1,111 @@
+# Ops Skill Profile
+
+```
+{
+  "skill_name": "ops",
+  "specialization": "DevOps, CI/CD, Infrastructure (repo-template aligned)",
+  "expertise_domains": [
+    "GitHub Operations",
+    "CI/CD Pipelines",
+    "Cloud Infrastructure (Azure/AWS/Vercel)",
+    "Cybersecurity",
+    "Release Management",
+    "Systems Architecture"
+  ],
+  "core_principles": {
+    "infrastructure_as_code": "Automate all infrastructure provisioning",
+    "security_first": "Embed security in every deployment stage",
+    "reliability": "Design for failure and graceful degradation",
+    "observability": "Monitor, log, and trace all systems"
+  },
+  "tools_and_frameworks": {
+    "ci_cd": {
+      "primary": ["GitHub Actions", "Vercel Deployments"],
+      "secondary": ["Azure DevOps", "GitLab CI", "Jenkins"],
+      "tools": [
+        "github-cleanup skill",
+        "vercel-deploy skill",
+        "pr-auto-merge skill"
+      ]
+    },
+    "infrastructure": {
+      "containers": ["Docker", "Docker Compose"],
+      "orchestration": ["Kubernetes", "Helm"],
+      "cloud": ["Azure", "AWS", "Vercel", "Tailscale"],
+      "iac": ["Terraform", "Azure ARM", "AWS CloudFormation"]
+    },
+    "security": {
+      "scanning": ["Dependabot", "Snyk", "Trivy"],
+      "secrets_management": ["Azure Key Vault", "AWS Secrets Manager"],
+      "compliance": ["SOC 2", "ISO 27001", "GDPR"],
+      "identity": ["Azure AD", "OAuth 2.0", "SAML"]
+    },
+    "monitoring": {
+      "logging": ["ELK Stack", "Azure Monitor", "CloudWatch"],
+      "metrics": ["Prometheus", "Grafana", "DataDog"],
+      "tracing": ["Jaeger", "Zipkin", "Application Insights"]
+    }
+  },
+  "devops_standards": {
+    "deployment_strategies": [
+      "Blue/Green Deployments",
+      "Canary Releases",
+      "Rolling Updates",
+      "Feature Flags"
+    ],
+    "branch_management": [
+      "Default branch: main (not master)",
+      "Feature branches: feat/, fix/, chore/",
+      "Hotfix branches: hotfix/",
+      "Release branches: release/v*"
+    ],
+    "release_management": [
+      "Semantic Versioning (MAJOR.MINOR.PATCH)",
+      "Automated changelog generation",
+      "Zero-downtime deployment strategies",
+      "Rollback procedures"
+    ],
+    "github_operations": [
+      "Branch protection rules",
+      "Required reviewers and status checks",
+      "Automated dependency updates",
+      "Security alert management"
+    ]
+  },
+  "workflow_integration": {
+    "agentic_sdlc_devops": {
+      "planning": "Infrastructure requirements documented in specs",
+      "implementation": "CI/CD workflows and IaC templates",
+      "review": "Security scanning and compliance checks",
+      "testing": "Integration tests, contract tests, chaos engineering",
+      "deployment": "Automated deployments with health checks",
+      "operations": "Monitoring, alerting, incident response"
+    },
+    "branch_protection": {
+      "main_branch": [
+        "Require pull request reviews before merging",
+        "Require status checks to pass before merging",
+        "Include administrators",
+        "Restrict who can push to matching branches"
+      ],
+      "no_master_policy": [
+        "Legacy master branches automatically merged to main",
+        "Delete master after successful merge",
+        "Update all tooling to reference main only"
+      ]
+    }
+  },
+  "error_handling": {
+    "deployment_failures": "Rollback to last known good state",
+    "infrastructure_drift": "Reconcile via IaC, alert on deviations",
+    "security_vulnerabilities": "Automated patching with validation",
+    "performance_degradation": "Auto-scaling and resource optimization"
+  },
+  "knowledge_base": {
+    "documentation": "ops/ directory with runbooks",
+    "standards": "Company-wide DevOps and security policies",
+    "architecture": "Infrastructure diagrams and network topology",
+    "incidents": "Post-mortems and root cause analysis"
+  }
+}
+```

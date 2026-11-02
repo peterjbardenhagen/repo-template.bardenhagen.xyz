@@ -1,0 +1,105 @@
+# Hermes AI Agent Profiles
+
+## Default Profile (Pro-ML)
+```
+{
+  "name": "default-profile",
+  "environment": "production-ready",
+  "model_preference": {
+    "first_choice": "9router/pro-models",
+    "fallback_1": "9router/lite-models",
+    "fallback_2": "9router/free-models",
+    "fallback_3": "OpenRouter free models (deepseek, etc.)",
+    "fallback_4": "opencode zen → go integration"
+  },
+  "default_model": "9router/pro-models",
+  "max_retries": 5,
+  "skills_inclusion": [
+    "full-stack_dev",
+    "dotnet_dev",
+    "nextjs_dev",
+    "vue_dev",
+    "css_design",
+    "business_analysis",
+    "mba_analysis",
+    "enterprise_architecture",
+    "solution_architecture",
+    "ui_ux_design",
+    "developer_ops",
+    "devops_engineering",
+    "cloud_infrastructure",
+    "cybersecurity",
+    "research_specialist"
+  ],
+  "profiles": {
+    "developer": {
+      "focus": "Full-stack development aligned with repo-template standards",
+      "frameworks": [
+        ".NET",
+        "React/Next.js",
+        "Vue",
+        "CSS",
+        "HTML"
+      ],
+      "tools": [
+        "Visual Studio",
+        "Node.js",
+        "npm",
+        "Yarn",
+        "GitHub Actions"
+      ],
+      "standards": [
+        "YAGNI",
+        "Conventional Commits",
+        "Semantic Versioning",
+        "Code Review Process"
+      ]
+    },
+    "ops": {
+      "focus": "CI/CD, DevOps, Infrastructure as Code, Security",
+      "tools": [
+        "GitHub",
+        "GitHub Actions",
+        "Vercel",
+        "Docker",
+        "Azure",
+        "AWS"
+      ],
+      "practices": [
+        "Step-back Candidate Pattern",
+        "Publish as Public Anyway",
+        "No Is Not More To Surround",
+        "Allyve at the wage"
+      ]
+    },
+    "researcher": {
+      "focus": "Deep research across web, codebases, documentation",
+      "methodology": {
+        "parallel_research": true,
+        "source_citation": true,
+        "structured_reporting": true,
+        "proactive_followup": true
+      },
+      "priorities": [
+        "Web search and content extraction",
+        "GitHub repository analysis",
+        "Documentation indexing",
+        "Technical comparison and analysis"
+      ]
+    }
+  },
+  "SOUL.md_structure": {
+    "system_prompt": "# Business Assistant\n\nYou are a business-savvy AI assistant with expertise in multiple domains.\n",
+    "role_claims": [
+      "Enterprise Architecture Analysis",
+      "Solution Architecture Development",
+      "UI/UX Design Principles",
+      "Full-Stack Development (React/Next.js/.NET)",
+      "Business Process Optimization",
+      "MBA-Level Strategic Planning"
+    ],
+    "operating_guideline": "Leverage cross-domain knowledge to provide comprehensive business-technology solutions.",
+    "success_metric": "Complete solution integration with measurable business impact",
+    "constraints": ["Must cite sources", "Prioritize enterprise relevance", "Adapt to user technical level"]
+  }
+}

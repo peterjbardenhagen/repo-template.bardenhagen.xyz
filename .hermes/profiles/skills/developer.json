@@ -1,0 +1,86 @@
+# Developer Skill Profile
+
+```
+{
+  "skill_name": "developer",
+  "specialization": "Full-Stack Development (repo-template aligned)",
+  "expertise_domains": [
+    ".NET Development",
+    "React/Next.js",
+    "Vue.js",
+    "CSS/Design Systems",
+    "TypeScript/JavaScript"
+  ],
+  "core_principles": {
+    "design_philosophy": "YAGNI - Write the minimum code needed",
+    "architecture": "The best code is the code never written",
+    "quality": "Full: the ladder enforced. Stdlib and native first",
+    "standards_compliance": [
+      "Conventional Commits (type(scope): description)",
+      "Semantic Versioning",
+      "Code Review Process",
+      "Test-Driven Development"
+    ]
+  },
+  "tools_and_frameworks": {
+    "frontend": {
+      "primary": ["Next.js", "React", "TypeScript"],
+      "secondary": ["Vue.js", "Tailwind CSS", "CSS Modules"],
+      "tools": ["Vite", "Webpack", "ESLint", "Prettier"]
+    },
+    "backend": {
+      "primary": [".NET 10+", "C#", "Entity Framework"],
+      "secondary": ["Node.js", "Express", "REST APIs"],
+      "tools": ["Visual Studio", "Rider", "dotnet CLI"]
+    },
+    "testing": {
+      "unit": ["xUnit", "Jest", "Vitest"],
+      "integration": ["Playwright", "Cypress"],
+      "linting": ["ESLint", "StyleCop", "SonarQube"]
+    }
+  },
+  "development_standards": {
+    "branching": "feat/, fix/, chore/, docs/ prefixes - main branch only",
+    "commits": "Conventional commits - no fake completion",
+    "code_style": [
+      "Follow existing patterns",
+      "Use meaningful variable/function names",
+      "Write tests for new functionality",
+      "Update documentation alongside code changes"
+    ],
+    "anti_patterns": [
+      "Don't create parallel implementations",
+      "Don't add unnecessary abstractions",
+      "Don't introduce new dependencies for trivial features",
+      "Prefer stdlib/native first"
+    ]
+  },
+  "workflow_integration": {
+    "agentic_sdlc": {
+      "read": "AGENTS.md, CLAUDE.md, AI_CONTEXT.md, .cursorrules",
+      "orient": "git pull --ff-only, check issues/PRs/task",
+      "plan": "State approach before coding, write/update ADR",
+      "execute": "One logical change, run linters, commit",
+      "verify": "Full tests + build, update CHANGELOG.md",
+      "deliver": "Push branch, create PR (if multi-agent) or merge (if solo + CI passing)"
+    },
+    "devops_alignment": {
+      "ci_cd": "GitHub Actions workflow validation",
+      "branch_protection": "main branch only, no master allowed",
+      "auto_merge": "master → main auto-merge if worthwhile changes exist"
+    }
+  },
+  "error_handling": {
+    "merge_conflicts": "Auto-resolve (accept theirs), commit, notify",
+    "build_failures": "Fix, commit, retry (max 3 attempts)",
+    "test_failures": "Fix or roll back, commit, retry",
+    "api_rate_limits": "Backoff and retry with exponential delay"
+  },
+  "knowledge_base": {
+    "documentation": "docs/ directory structure",
+    "conventions": "README and naming standards",
+    "architecture": "docs/decisions/ ADR files",
+    "progress_tracking": "PROGRESS.md and blockers.md"
+  }
+}
+```
