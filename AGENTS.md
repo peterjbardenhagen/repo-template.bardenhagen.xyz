@@ -133,3 +133,13 @@ This project is based on the **Repo Template** (`repo-template.bardenhagen.xyz`)
 ## Version
 
 This template is versioned. See `CHANGELOG.md` for the current version and release history.
+
+
+## PR Auto-Merge
+
+- Use the 'pr-auto-merge' skill to automatically resolve conflicts and merge pull requests.
+
+
+## GitHub Cleanup
+
+- Use the 'github-cleanup' skill to standardize branch names and clean up stale branches.
